@@ -20,6 +20,6 @@ For more information about the development process or to discuss potential colla
 
 ## Contact Information
 
-- **Email:** webmaster@bendthetrend.com
+- **Email:** alfredapenteng6996@gmail.com
 - **Phone:** +233 203 231 840
 - **Address:** 20 Ashaley Botwe, St. Accra, Ghana.
