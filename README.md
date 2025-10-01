@@ -1,25 +1,25 @@
-# Free eCommerce Template for Next.js - NextMerce
+# Bend The Trend Website
 
-The free Next.js eCommerce template is a lite version of the NextMerce Next.js eCommerce boilerplate, designed to streamline the launch and management of your online store.
+Welcome to the **Bend The Trend** website repository! This project is **currently in development** and aims to showcase the unique fashion and lifestyle brand **Bend The Trend**. The website provides a detailed overview of the brand’s products, collections, and vision of redefining modern style.
 
-![NextMerce](https://github.com/user-attachments/assets/57155689-a756-4222-8af7-134e556acae2)
+## Overview
 
+Bend The Trend is a growing fashion and lifestyle brand specializing in innovative, stylish, and customer-focused products. The website highlights the following key areas:
 
-While NextMerce Pro features advanced functionalities, seamless integration, and customizable options, providing all the essential tools needed to build and expand your business, the lite version offers a basic Next.js template specifically crafted for eCommerce websites. Both versions ensure superior performance and flexibility, all powered by Next.js.
+- **Collections**: Showcasing seasonal and timeless fashion collections.
+- **Shop**: A user-friendly shopping experience with secure checkout.
+- **About Us**: Telling the brand’s story, mission, and values.
+- **Customer Experience**: Designed to be visually appealing, responsive, and easy to navigate across all devices.
 
-### NextMerce Free VS NextMerce Pro
+## About the Developer
 
-| ✨ Features                         | 🎁 NextMerce Free                 | 🔥 NextMerce Pro                        |
-|----------------------------------|--------------------------------|--------------------------------------|
-| Next.js Pages                    | Static                         | Dynamic Boilerplate Template         |
-| Components                       | Limited                        | All According to Demo                |
-| eCommerce Functionality          | Included                       | Included                             |
-| Integrations (DB, Auth, etc.)    | Not Included                   | Included                             |
-| Community Support                | Included                       | Included                             |
-| Premium Email Support            | Not Included                   | Included                             |
-| Lifetime Free Updates            | Included                       | Included                             |
+This website was built by [Alfred](https://alfredasante.vercel.app) to enhance the digital presence of **Bend The Trend**.  
+The development focuses on creating a stylish, fast, and user-friendly e-commerce site that reflects the brand’s identity while providing a smooth shopping experience.
 
+For more information about the development process or to discuss potential collaboration, please don’t hesitate to get in touch.
 
-#### [🚀 Live Demo](https://demo.nextmerce.com/)
+## Contact Information
 
-#### [🌐 Visit Website](https://nextmerce.com/)
+- **Email:** webmaster@bendthetrend.com
+- **Phone:** +233 203 231 840
+- **Address:** 20 Ashaley Botwe, St. Accra, Ghana.
