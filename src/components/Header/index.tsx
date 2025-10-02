@@ -134,7 +134,10 @@ const Header = () => {
                   />
                 </Link>
 
-                <Link href="/signin" className="flex items-center gap-2.5">
+                <Link
+                  href="/signin"
+                  className="flex items-center gap-2.5 mt-2 md:mt-0"
+                >
                   <Image
                     src="/icons/person.svg"
                     alt="Support Icon"
@@ -153,7 +156,7 @@ const Header = () => {
 
                 <button
                   onClick={handleOpenCartModal}
-                  className="flex items-center gap-2.5"
+                  className="flex items-center gap-2.5 mt-2 md:mt-0"
                 >
                   <span className="inline-block relative">
                     <Image
@@ -172,7 +175,7 @@ const Header = () => {
                       cart
                     </span>
                     <p className="font-medium text-custom-sm text-dark">
-                      ${totalPrice}
+                      ₵{totalPrice}
                     </p>
                   </div>
                 </button>
