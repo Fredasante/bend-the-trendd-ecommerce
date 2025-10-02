@@ -64,7 +64,7 @@ const Header = () => {
               <Image
                 src="/bend-the-trendd-logo.png"
                 alt="Logo"
-                width={89}
+                width={90}
                 height={20}
               />
             </Link>
@@ -129,7 +129,7 @@ const Header = () => {
                   <Image
                     src="/bend-the-trendd-logo.png"
                     alt="Logo"
-                    width={70}
+                    width={80}
                     height={20}
                   />
                 </Link>
