@@ -11,14 +11,13 @@ export const metadata: Metadata = {
     "online clothing store",
     "lifestyle products",
     "trendy outfits",
-    "Next.js ecommerce",
   ],
   authors: [{ name: "Bend the Trendd" }],
   openGraph: {
     title: "Bend the Trendd | Fashion & Lifestyle Ecommerce",
     description:
       "Shop the latest trends in fashion and lifestyle at Bend the Trendd. Quality apparel and accessories made for you.",
-    url: "https://bendthetrendd.com", // replace with your real domain
+    url: "https://bendthetrendd.com",
     siteName: "Bend the Trendd",
     images: [
       {

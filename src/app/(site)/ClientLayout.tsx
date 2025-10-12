@@ -38,14 +38,12 @@ export default function ClientLayout({
           <PreviewSliderProvider>
             <Header />
             {children}
-
             <QuickViewModal />
             <CartSidebarModal />
             <PreviewSliderModal />
           </PreviewSliderProvider>
         </ModalProvider>
       </CartModalProvider>
-
       <ScrollToTop />
       <Footer />
     </ReduxProvider>

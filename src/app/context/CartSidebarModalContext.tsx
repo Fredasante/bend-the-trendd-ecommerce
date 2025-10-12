@@ -1,5 +1,6 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import { usePathname } from "next/navigation";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface CartModalContextType {
   isCartModalOpen: boolean;
@@ -21,6 +22,7 @@ export const useCartModalContext = () => {
 
 export const CartModalProvider = ({ children }) => {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
+  const pathname = usePathname();
 
   const openCartModal = () => {
     setIsCartModalOpen(true);
@@ -29,6 +31,10 @@ export const CartModalProvider = ({ children }) => {
   const closeCartModal = () => {
     setIsCartModalOpen(false);
   };
+
+  useEffect(() => {
+    setIsCartModalOpen(false);
+  }, [pathname]);
 
   return (
     <CartModalContext.Provider

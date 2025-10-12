@@ -43,7 +43,7 @@ const Header = () => {
   const options = [
     { label: "All Categories", value: "0" },
     { label: "Men's Wear", value: "1" },
-    { label: "Ladies' Wear", value: "2" },
+    { label: "Ladie's Wear", value: "2" },
     { label: "Sneakers", value: "3" },
     { label: "Slippers", value: "4" },
   ];
