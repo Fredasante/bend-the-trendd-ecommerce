@@ -10,6 +10,8 @@ import { selectTotalPrice } from "@/redux/features/cart-slice";
 import { useCartModalContext } from "@/app/context/CartSidebarModalContext";
 import Image from "next/image";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import AuthDropdown from "../Auth/AuthDropdown";
+import { useUser } from "@clerk/nextjs";
 
 const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,6 +21,7 @@ const Header = () => {
 
   const product = useAppSelector((state) => state.cartReducer.items);
   const totalPrice = useSelector(selectTotalPrice);
+  const { user, isSignedIn } = useUser();
 
   const handleOpenCartModal = () => {
     openCartModal();
@@ -134,25 +137,8 @@ const Header = () => {
                   />
                 </Link>
 
-                <Link
-                  href="/signin"
-                  className="flex items-center gap-2.5 mt-2 md:mt-0"
-                >
-                  <Image
-                    src="/icons/person.svg"
-                    alt="Support Icon"
-                    width={25}
-                    height={25}
-                  />
-                  <div>
-                    <span className="block text-2xs text-dark-4 uppercase">
-                      account
-                    </span>
-                    <p className="font-medium text-custom-sm text-dark">
-                      Sign In
-                    </p>
-                  </div>
-                </Link>
+                {/* Auth */}
+                <AuthDropdown user={user} isSignedIn={isSignedIn} />
 
                 <button
                   onClick={handleOpenCartModal}
@@ -185,7 +171,7 @@ const Header = () => {
               <button
                 id="Toggle"
                 aria-label="Toggler"
-                className="xl:hidden block"
+                className="xl:hidden block mt-2 xl:mt-0"
                 onClick={() => setNavigationOpen(!navigationOpen)}
               >
                 <span className="block relative cursor-pointer w-5.5 h-5.5">

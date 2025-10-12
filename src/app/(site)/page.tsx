@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "Bend the Trendd",
     images: [
       {
-        url: "/bend-the-trendd-logo.png", // make sure this file is in /public
+        url: "/bend-the-trendd-logo.png",
         width: 1200,
         height: 630,
         alt: "Bend the Trendd Ecommerce Store",
