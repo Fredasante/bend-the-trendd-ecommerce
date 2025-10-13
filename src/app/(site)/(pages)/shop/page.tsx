@@ -1,5 +1,5 @@
 import React from "react";
-import ShopWithoutSidebar from "@/components/ShopWithoutSidebar";
+import ShopWithSidebar from "@/components/ShopWithSidebar";
 
 import { Metadata } from "next";
 export const metadata: Metadata = {
@@ -8,12 +8,12 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const ShopWithoutSidebarPage = () => {
+const ShopPage = () => {
   return (
     <main>
-      <ShopWithoutSidebar />
+      <ShopWithSidebar />
     </main>
   );
 };
 
-export default ShopWithoutSidebarPage;
+export default ShopPage;
