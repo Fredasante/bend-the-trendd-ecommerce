@@ -25,65 +25,65 @@ const Hero = () => {
 
           <div className="xl:max-w-[393px] w-full">
             <div className="flex flex-col sm:flex-row xl:flex-col gap-5">
+              {/* Box 1 — New Arrivals */}
               <div className="w-full relative rounded-[10px] bg-white p-4 sm:p-7.5">
                 <div className="flex items-center gap-14">
                   <div>
                     <h2 className="max-w-[153px] font-semibold text-dark text-xl mb-20">
-                      <a href="#"> iPhone 14 Plus & 14 Pro Max </a>
+                      New Arrivals
                     </h2>
 
                     <div>
                       <p className="font-medium text-dark-4 text-custom-sm mb-1.5">
-                        limited time offer
+                        Discover the latest trends freshly added to our
+                        collection.
                       </p>
-                      <span className="flex items-center gap-3">
-                        <span className="font-medium text-heading-5 text-red">
-                          $699
-                        </span>
-                        <span className="font-medium text-2xl text-dark-4 line-through">
-                          $999
-                        </span>
-                      </span>
+                      <a
+                        href="/shop"
+                        className="font-medium text-blue text-sm hover:underline"
+                      >
+                        Shop the collection →
+                      </a>
                     </div>
                   </div>
 
                   <div>
                     <Image
-                      src="/images/hero/hero-02.png"
-                      alt="mobile image"
-                      width={123}
+                      src="/images/hero/dress-1.jpg"
+                      alt="New arrivals Ghana fashion"
+                      width={220}
                       height={161}
                     />
                   </div>
                 </div>
               </div>
+
+              {/* Box 2 — Made in Ghana */}
               <div className="w-full relative rounded-[10px] bg-white p-4 sm:p-7.5">
                 <div className="flex items-center gap-14">
                   <div>
                     <h2 className="max-w-[153px] font-semibold text-dark text-xl mb-20">
-                      <a href="#"> Wireless Headphone </a>
+                      Exclusive Drop
                     </h2>
 
                     <div>
                       <p className="font-medium text-dark-4 text-custom-sm mb-1.5">
-                        limited time offer
+                        Limited-edition styles you won’t find anywhere else.{" "}
                       </p>
-                      <span className="flex items-center gap-3">
-                        <span className="font-medium text-heading-5 text-red">
-                          $699
-                        </span>
-                        <span className="font-medium text-2xl text-dark-4 line-through">
-                          $999
-                        </span>
-                      </span>
+                      <a
+                        href="#"
+                        className="font-medium text-blue text-sm hover:underline"
+                      >
+                        Explore now →
+                      </a>
                     </div>
                   </div>
 
                   <div>
                     <Image
-                      src="/images/hero/hero-01.png"
-                      alt="mobile image"
-                      width={123}
+                      src="/images/hero/blue.jpg"
+                      alt="Fashion Wear"
+                      width={220}
                       height={161}
                     />
                   </div>
