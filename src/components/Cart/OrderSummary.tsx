@@ -27,21 +27,28 @@ const OrderSummary = () => {
           </div>
 
           {/* <!-- product item --> */}
-          {cartItems.map((item, key) => (
-            <div
-              key={key}
-              className="flex items-center justify-between py-5 border-b border-gray-3"
-            >
-              <div>
-                <p className="text-dark">{item.name}</p>
+          {cartItems.map((item, key) => {
+            const itemPrice =
+              item.discountPrice && item.discountPrice > 0
+                ? item.discountPrice
+                : item.price;
+
+            return (
+              <div
+                key={key}
+                className="flex items-center justify-between py-5 border-b border-gray-3"
+              >
+                <div>
+                  <p className="text-dark">{item.name}</p>
+                </div>
+                <div>
+                  <p className="text-dark text-right">
+                    ₵{itemPrice * item.quantity}
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="text-dark text-right">
-                  ${item.discountPrice * item.quantity}
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
 
           {/* <!-- total --> */}
           <div className="flex items-center justify-between pt-5">

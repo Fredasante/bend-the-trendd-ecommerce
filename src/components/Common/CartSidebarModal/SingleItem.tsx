@@ -27,19 +27,13 @@ const SingleItem: React.FC<SingleItemProps> = ({ item }) => {
     <div className="flex items-center justify-between gap-5">
       <div className="w-full flex items-center gap-6">
         {/* Product Image */}
-        <div className="flex items-center justify-center rounded-[10px] bg-gray-3 max-w-[90px] w-full h-22.5">
-          {item.mainImageUrl ? (
-            <Image
-              src={item.mainImageUrl}
-              alt={item.name}
-              width={100}
-              height={100}
-            />
-          ) : (
-            <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
-              No Image
-            </div>
-          )}
+        <div className="relative flex items-center justify-center rounded-[8px] bg-gray-2 max-w-[80px] w-full h-20 overflow-hidden p-1.5">
+          <Image
+            src={item.mainImageUrl}
+            alt={item.name}
+            fill
+            className="object-contain rounded-[5px] p-2"
+          />
         </div>
 
         {/* Product Details */}

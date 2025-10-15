@@ -46,15 +46,14 @@ const SingleItem = ({ item }: Props) => {
       <div className="min-w-[387px]">
         <div className="flex items-center justify-between gap-5">
           <div className="w-full flex items-center gap-5.5">
-            <div className="flex items-center justify-center rounded-[5px] max-w-[60px] w-full h-10">
+            <div className="relative flex items-center justify-center rounded-[8px] bg-gray-2 max-w-[80px] w-full h-20 overflow-hidden p-1.5">
               <Image
-                src={item.mainImageUrl || ""}
-                alt="product"
-                width={200}
-                height={100}
+                src={item.mainImageUrl}
+                alt={item.name}
+                fill
+                className="object-contain rounded-[5px] p-2"
               />
             </div>
-
             <div>
               <h3 className="text-dark ease-out duration-200 hover:text-blue line-clamp-1">
                 <a href="#"> {item.name} </a>
