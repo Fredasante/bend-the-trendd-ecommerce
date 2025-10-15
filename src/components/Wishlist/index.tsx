@@ -44,7 +44,7 @@ export const Wishlist = () => {
                   </div>
 
                   <div className="min-w-[150px]">
-                    <p className="text-dark text-right">Action</p>
+                    <p className="text-dark text-center">Action</p>
                   </div>
                 </div>
 

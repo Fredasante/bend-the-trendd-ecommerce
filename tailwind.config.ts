@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
-
-const defaultTheme = require("tailwindcss/defaultTheme");
+import defaultTheme from "tailwindcss/defaultTheme";
+import colors from "tailwindcss/colors";
 
 const config: Config = {
   content: [
@@ -21,7 +21,10 @@ const config: Config = {
         xl: "0",
       },
     },
+
+    // 👇 Merge default Tailwind colors with your custom palette
     colors: {
+      ...colors, // includes gray-900, blue-500, etc.
       current: "currentColor",
       transparent: "transparent",
       white: "#FFFFFF",
@@ -97,12 +100,14 @@ const config: Config = {
         dark: "#E1580E",
       },
     },
+
     screens: {
       xsm: "375px",
       lsm: "425px",
       "3xl": "2000px",
       ...defaultTheme.screens,
     },
+
     extend: {
       fontSize: {
         "2xs": ["10px", "17px"],
@@ -122,6 +127,7 @@ const config: Config = {
         "custom-2": ["32px", "38px"],
         "custom-3": ["35px", "45px"],
       },
+
       spacing: {
         4.5: "1.125rem",
         5.5: "1.375rem",
@@ -217,11 +223,13 @@ const config: Config = {
         203: "50.75rem",
         230: "57.5rem",
       },
+
       maxWidth: {
         30: "7.5rem",
         40: "10rem",
         50: "12.5rem",
       },
+
       zIndex: {
         999999: "999999",
         99999: "99999",
@@ -230,6 +238,7 @@ const config: Config = {
         99: "99",
         1: "1",
       },
+
       boxShadow: {
         1: "0px 1px 2px 0px rgba(166, 175, 195, 0.25)",
         2: "0px 6px 24px 0px rgba(235, 238, 251, 0.40), 0px 2px 4px 0px rgba(148, 163, 184, 0.05)",
@@ -247,4 +256,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
