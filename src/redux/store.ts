@@ -17,7 +17,7 @@ import cartReducer from "./features/cart-slice";
 import wishlistReducer from "./features/wishlist-slice";
 import productDetailsReducer from "./features/product-details";
 
-import { TypedUseSelectorHook, useSelector } from "react-redux";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 // Combine all slices
 const rootReducer = combineReducers({
@@ -56,3 +56,5 @@ export type AppDispatch = typeof store.dispatch;
 
 // Typed selector
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+
+export const useAppDispatch = () => useDispatch<AppDispatch>();

@@ -1,11 +1,17 @@
 "use client";
 import React from "react";
 import Breadcrumb from "../Common/Breadcrumb";
-import { useAppSelector } from "@/redux/store";
+import { useAppSelector, useAppDispatch } from "@/redux/store";
 import SingleItem from "./SingleItem";
+import { removeAllItemsFromWishlist } from "@/redux/features/wishlist-slice";
 
 export const Wishlist = () => {
   const wishlistItems = useAppSelector((state) => state.wishlistReducer.items);
+  const dispatch = useAppDispatch();
+
+  const handleClearWishlist = () => {
+    dispatch(removeAllItemsFromWishlist());
+  };
 
   return (
     <>
@@ -14,13 +20,15 @@ export const Wishlist = () => {
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex flex-wrap items-center justify-between gap-5 mb-7.5">
             <h2 className="font-medium text-dark text-2xl">Your Wishlist</h2>
-            <button className="text-blue">Clear Wishlist Cart</button>
+            <button onClick={handleClearWishlist} className="text-blue">
+              Clear Wishlist Cart
+            </button>
           </div>
 
           <div className="bg-white rounded-[10px] shadow-1">
             <div className="w-full overflow-x-auto">
               <div className="min-w-[1170px]">
-                {/* <!-- table header --> */}
+                {/* table header */}
                 <div className="flex items-center py-5.5 px-10">
                   <div className="min-w-[83px]"></div>
                   <div className="min-w-[387px]">
@@ -32,7 +40,7 @@ export const Wishlist = () => {
                   </div>
 
                   <div className="min-w-[265px]">
-                    <p className="text-dark">Stock Status</p>
+                    <p className="text-dark">Product Status</p>
                   </div>
 
                   <div className="min-w-[150px]">
@@ -40,7 +48,7 @@ export const Wishlist = () => {
                   </div>
                 </div>
 
-                {/* <!-- wish item --> */}
+                {/* wishlist items */}
                 {wishlistItems.map((item, key) => (
                   <SingleItem item={item} key={key} />
                 ))}
