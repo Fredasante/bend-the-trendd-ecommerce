@@ -3,9 +3,9 @@ import { Wishlist } from "@/components/Wishlist";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Wishlist Page | NextCommerce Nextjs E-commerce template",
-  description: "This is Wishlist Page for NextCommerce Template",
-  // other metadata
+  title: "Wishlist | Bend the Trendd",
+  description:
+    "View and manage your favorite products saved on Bend the Trendd.",
 };
 
 const WishlistPage = () => {
