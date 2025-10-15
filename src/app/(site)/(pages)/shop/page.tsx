@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import ShopWithSidebar from "@/components/ShopWithSidebar";
-
 import { Metadata } from "next";
 import LoadingFallback from "@/components/Common/LoadingFallback";
 

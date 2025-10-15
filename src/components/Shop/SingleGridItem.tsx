@@ -49,18 +49,16 @@ const SingleGridItem = ({ item }: { item: Product }) => {
 
   return (
     <div className="group">
-      <div className="relative overflow-hidden flex items-center justify-center rounded-lg bg-white shadow-1 w-full aspect-square sm:aspect-[250/270] mb-4">
-        {/* ✅ Fallback for missing image */}
+      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg bg-white shadow-1 mb-4 flex items-center justify-center">
         <Image
           src={item.mainImageUrl || "/images/placeholder.png"}
           alt={item.name || "Product image"}
           fill
-          className="object-contain"
+          className="object-contain object-center"
         />
 
         {/* Hover buttons */}
         <div className="absolute left-0 bottom-0 translate-y-full w-full flex items-center justify-center gap-2.5 pb-5 ease-linear duration-200 group-hover:translate-y-0">
-          {/* Quick View */}
           <button
             onClick={() => {
               openModal();
@@ -72,7 +70,6 @@ const SingleGridItem = ({ item }: { item: Product }) => {
             <Eye className="w-4 h-4" />
           </button>
 
-          {/* Add to Cart */}
           <button
             onClick={handleAddToCart}
             className="inline-flex font-medium text-custom-sm py-[7px] px-5 rounded-[5px] bg-blue text-white ease-out duration-200 hover:bg-blue-dark"
@@ -80,7 +77,6 @@ const SingleGridItem = ({ item }: { item: Product }) => {
             Add to cart
           </button>
 
-          {/* Add to Wishlist */}
           <button
             onClick={handleItemToWishList}
             aria-label="Add to wishlist"
