@@ -1,7 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ShopWithSidebar from "@/components/ShopWithSidebar";
 
 import { Metadata } from "next";
+import LoadingFallback from "@/components/Common/LoadingFallback";
 
 export const metadata: Metadata = {
   title: "Shop | Bend The Trend",
@@ -32,7 +33,9 @@ export const metadata: Metadata = {
 const ShopPage = () => {
   return (
     <main>
-      <ShopWithSidebar />
+      <Suspense fallback={<LoadingFallback />}>
+        <ShopWithSidebar />
+      </Suspense>
     </main>
   );
 };

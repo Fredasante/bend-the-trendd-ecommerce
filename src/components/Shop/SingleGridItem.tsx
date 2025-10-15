@@ -11,6 +11,7 @@ import { AppDispatch } from "@/redux/store";
 import Link from "next/link";
 import Image from "next/image";
 import { Eye, Heart } from "lucide-react";
+import StarRating from "../Common/StarRating";
 
 const SingleGridItem = ({ item }: { item: Product }) => {
   const { openModal } = useModalContext();
@@ -68,7 +69,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
             aria-label="Quick view product"
             className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue"
           >
-            <Eye />
+            <Eye className="w-4 h-4" />
           </button>
 
           {/* Add to Cart */}
@@ -85,13 +86,15 @@ const SingleGridItem = ({ item }: { item: Product }) => {
             aria-label="Add to wishlist"
             className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue"
           >
-            <Heart />
+            <Heart className="w-4 h-4" />
           </button>
         </div>
       </div>
 
+      <StarRating />
+
       {/* Product title */}
-      <h3 className="font-medium text-dark ease-out duration-200 hover:text-blue mb-1.5">
+      <h3 className="font-medium text-dark ease-out duration-200 hover:text-blue mb-1.5 line-clamp-1">
         <Link href={`/shop/${item.slug?.current || item.slug}`}>
           {item.name}
         </Link>
@@ -99,9 +102,9 @@ const SingleGridItem = ({ item }: { item: Product }) => {
 
       {/* Price */}
       <span className="flex items-center gap-2 font-medium text-lg">
-        <span className="text-dark">${item.discountPrice ?? item.price}</span>
+        <span className="text-dark">₵{item.discountPrice ?? item.price}</span>
         {item.discountPrice && (
-          <span className="text-dark-4 line-through">${item.price}</span>
+          <span className="text-dark-4 line-through">₵{item.price}</span>
         )}
       </span>
     </div>
