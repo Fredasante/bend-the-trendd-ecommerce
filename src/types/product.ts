@@ -1,11 +1,18 @@
 export type Product = {
-  title: string;
-  reviews: number;
+  _id: string;
+  name: string;
+  slug: { current: string };
   price: number;
-  discountedPrice: number;
-  id: number;
-  imgs?: {
-    thumbnails: string[];
-    previews: string[];
-  };
+  discountPrice?: number;
+  category: string;
+  gender?: "men" | "women";
+  status?: "available" | "unavailable" | string;
+  isFeatured?: boolean;
+  isNewArrival?: boolean;
+  mainImageUrl?: string;
+  gallery?: { imageUrl: string }[];
+  description?: string;
+  sizes?: string[];
+  colors?: string[];
+  createdAt?: string;
 };

@@ -6,12 +6,12 @@ export const allProductsQuery = `
     slug,
     price,
     discountPrice,
-    mainImage,
     category,
     gender,
     status,
     isFeatured,
     isNewArrival,
+    "mainImageUrl": mainImage.asset->url
   }
 `;
 
@@ -21,8 +21,6 @@ export const productBySlugQuery = `
     _id,
     name,
     slug,
-    mainImage,
-    gallery,
     price,
     discountPrice,
     category,
@@ -33,61 +31,65 @@ export const productBySlugQuery = `
     status,
     isFeatured,
     isNewArrival,
-    createdAt
+    createdAt,
+    "mainImageUrl": mainImage.asset->url,
+    gallery[] {
+      "imageUrl": asset->url
+    }
   }
 `;
 
-// 👕 Products by Category (e.g. "clothing", "sneakers", "slippers")
+// 👕 Products by Category
 export const productsByCategoryQuery = `
   *[_type == "product" && category == $category && status == "available"] | order(createdAt desc) {
     _id,
     name,
     slug,
-    mainImage,
     price,
     discountPrice,
     category,
     isFeatured,
     isNewArrival,
+    "mainImageUrl": mainImage.asset->url
   }
 `;
 
-// 👩 Products for Women (Available only)
+// 👩 Women
 export const womenProductsQuery = `
   *[_type == "product" && gender == "women" && status == "available"] | order(createdAt desc) {
     _id,
     name,
     slug,
-    mainImage,
     price,
+    discountPrice,
     category,
-    discountPrice
+    "mainImageUrl": mainImage.asset->url
   }
 `;
 
-// 👨 Products for Men (Available only)
+// 👨 Men
 export const menProductsQuery = `
   *[_type == "product" && gender == "men" && status == "available"] | order(createdAt desc) {
     _id,
     name,
     slug,
-    mainImage,
     price,
+    discountPrice,
     category,
-    discountPrice
+    "mainImageUrl": mainImage.asset->url
   }
 `;
 
-// 🌟 Featured products (e.g. for homepage section)
+// 🌟 Featured
 export const featuredProductsQuery = `
   *[_type == "product" && isFeatured == true && status == "available"] | order(createdAt desc) {
     _id,
     name,
     slug,
-    mainImage,
     price,
     discountPrice,
-    category
+    category,
+    "mainImageUrl": mainImage.asset->url
   }
 `;
 
@@ -97,23 +99,23 @@ export const newArrivalsQuery = `
     _id,
     name,
     slug,
-    mainImage,
     price,
     discountPrice,
-    category
+    category,
+    "mainImageUrl": mainImage.asset->url
   }
 `;
 
-// 🔍 Search by name (case insensitive)
+// 🔍 Search by name
 export const searchProductsQuery = `
   *[_type == "product" && name match $search + "*"] | order(createdAt desc) {
     _id,
     name,
     slug,
-    mainImage,
     price,
     discountPrice,
-    category
+    category,
+    "mainImageUrl": mainImage.asset->url
   }
 `;
 
@@ -123,13 +125,13 @@ export const paginatedProductsQuery = `
     _id,
     name,
     slug,
-    mainImage,
     price,
     discountPrice,
     category,
     gender,
     status,
     isFeatured,
-    isNewArrival
+    isNewArrival,
+    "mainImageUrl": mainImage.asset->url
   }
 `;

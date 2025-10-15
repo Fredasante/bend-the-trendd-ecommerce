@@ -2,10 +2,31 @@ import React from "react";
 import ShopWithSidebar from "@/components/ShopWithSidebar";
 
 import { Metadata } from "next";
+
 export const metadata: Metadata = {
-  title: "Shop Page | NextCommerce Nextjs E-commerce template",
-  description: "This is Shop Page for NextCommerce Template",
-  // other metadata
+  title: "Shop | Bend The Trend",
+  description:
+    "Discover the latest fashion, sneakers, slippers, and gadgets at Bend The Trend. Shop our exclusive collection of stylish products at great prices.",
+  keywords: [
+    "Bend The Trend",
+    "Online Shop",
+    "Fashion",
+    "Sneakers",
+    "Slippers",
+    "Clothing",
+    "Gadgets",
+    "Women's Fashion",
+    "Men's Fashion",
+    "Affordable Fashion Ghana",
+  ],
+  openGraph: {
+    title: "Shop | Bend The Trendd",
+    description:
+      "Explore trendy clothing, sneakers, slippers, and more — only at Bend The Trend.",
+    url: "https://bendthetrendd.com/shop", // to be replaced with actual domain
+    siteName: "Bend The Trend",
+    type: "website",
+  },
 };
 
 const ShopPage = () => {

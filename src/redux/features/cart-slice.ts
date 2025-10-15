@@ -1,61 +1,64 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
+// 🛍️ Cart Item Type
+export type CartItem = {
+  _id: string; // Sanity document ID
+  name: string;
+  price: number;
+  discountPrice?: number;
+  quantity: number;
+  mainImageUrl?: string; // flattened main image URL for easy use
+};
+
+// 🧺 State Type
 type InitialState = {
   items: CartItem[];
 };
 
-type CartItem = {
-  id: number;
-  title: string;
-  price: number;
-  discountedPrice: number;
-  quantity: number;
-  imgs?: {
-    thumbnails: string[];
-    previews: string[];
-  };
-};
-
+// 🧩 Initial State
 const initialState: InitialState = {
   items: [],
 };
 
+// 🛠️ Slice
 export const cart = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addItemToCart: (state, action: PayloadAction<CartItem>) => {
-      const { id, title, price, quantity, discountedPrice, imgs } =
+      const { _id, name, price, quantity, discountPrice, mainImageUrl } =
         action.payload;
-      const existingItem = state.items.find((item) => item.id === id);
+
+      const existingItem = state.items.find((item) => item._id === _id);
 
       if (existingItem) {
         existingItem.quantity += quantity;
       } else {
         state.items.push({
-          id,
-          title,
+          _id,
+          name,
           price,
           quantity,
-          discountedPrice,
-          imgs,
+          discountPrice,
+          mainImageUrl,
         });
       }
     },
-    removeItemFromCart: (state, action: PayloadAction<number>) => {
-      const itemId = action.payload;
-      state.items = state.items.filter((item) => item.id !== itemId);
+
+    removeItemFromCart: (state, action: PayloadAction<string>) => {
+      state.items = state.items.filter((item) => item._id !== action.payload);
     },
+
     updateCartItemQuantity: (
       state,
-      action: PayloadAction<{ id: number; quantity: number }>
+      action: PayloadAction<{ _id: string; quantity: number }>
     ) => {
-      const { id, quantity } = action.payload;
-      const existingItem = state.items.find((item) => item.id === id);
-
+      const existingItem = state.items.find(
+        (item) => item._id === action.payload._id
+      );
       if (existingItem) {
-        existingItem.quantity = quantity;
+        existingItem.quantity = action.payload.quantity;
       }
     },
 
@@ -65,13 +68,15 @@ export const cart = createSlice({
   },
 });
 
+// 🧮 Selectors
 export const selectCartItems = (state: RootState) => state.cartReducer.items;
 
-export const selectTotalPrice = createSelector([selectCartItems], (items) => {
-  return items.reduce((total, item) => {
-    return total + item.discountedPrice * item.quantity;
-  }, 0);
-});
+export const selectTotalPrice = createSelector([selectCartItems], (items) =>
+  items.reduce((total, item) => {
+    const priceToUse = item.discountPrice ?? item.price;
+    return total + priceToUse * item.quantity;
+  }, 0)
+);
 
 export const {
   addItemToCart,
@@ -79,4 +84,5 @@ export const {
   updateCartItemQuantity,
   removeAllItemsFromCart,
 } = cart.actions;
+
 export default cart.reducer;
