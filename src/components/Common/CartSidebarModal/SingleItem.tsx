@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import Image from "next/image";
 import { removeItemFromCart } from "@/redux/features/cart-slice";
+import { Trash2 } from "lucide-react";
 
 type SingleItemProps = {
   item: {
@@ -47,7 +48,7 @@ const SingleItem: React.FC<SingleItemProps> = ({ item }) => {
             {item.name}
           </h3>
           <p className="text-custom-sm">
-            Price: ${item.discountPrice ?? item.price}
+            Price: ₵{item.discountPrice ?? item.price}
           </p>
         </div>
       </div>
@@ -58,17 +59,7 @@ const SingleItem: React.FC<SingleItemProps> = ({ item }) => {
         aria-label="Remove product from cart"
         className="flex items-center justify-center rounded-lg max-w-[38px] w-full h-9.5 bg-gray-2 border border-gray-3 text-dark ease-out duration-200 hover:bg-red-light-6 hover:border-red-light-4 hover:text-red"
       >
-        {/* SVG Icon */}
-        <svg
-          className="fill-current"
-          width="22"
-          height="22"
-          viewBox="0 0 22 22"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* ... your existing paths ... */}
-        </svg>
+        <Trash2 className="w-4 h-4" />
       </button>
     </div>
   );
