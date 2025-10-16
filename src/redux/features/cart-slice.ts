@@ -32,18 +32,20 @@ export const cart = createSlice({
 
       const existingItem = state.items.find((item) => item._id === _id);
 
+      // 🛑 If item already exists, do nothing (no duplicate / price increase)
       if (existingItem) {
-        existingItem.quantity += quantity;
-      } else {
-        state.items.push({
-          _id,
-          name,
-          price,
-          quantity,
-          discountPrice,
-          mainImageUrl,
-        });
+        return;
       }
+
+      // ✅ Otherwise, add new item
+      state.items.push({
+        _id,
+        name,
+        price,
+        quantity,
+        discountPrice,
+        mainImageUrl,
+      });
     },
 
     removeItemFromCart: (state, action: PayloadAction<string>) => {
