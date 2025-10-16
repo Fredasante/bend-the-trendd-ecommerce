@@ -6,7 +6,7 @@ import LoadingFallback from "@/components/Common/LoadingFallback";
 export const metadata: Metadata = {
   title: "Shop | Bend The Trend",
   description:
-    "Discover the latest fashion, sneakers, slippers, and gadgets at Bend The Trend. Shop our exclusive collection of stylish products at great prices.",
+    "Discover the latest fashion, sneakers, slippers, and gadgets at Bend The Trendd. Shop our exclusive collection of stylish products at great prices.",
   keywords: [
     "Bend The Trend",
     "Online Shop",
@@ -14,9 +14,7 @@ export const metadata: Metadata = {
     "Sneakers",
     "Slippers",
     "Clothing",
-    "Gadgets",
     "Women's Fashion",
-    "Men's Fashion",
     "Affordable Fashion Ghana",
   ],
   openGraph: {

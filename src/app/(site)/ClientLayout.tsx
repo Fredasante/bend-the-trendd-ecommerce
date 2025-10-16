@@ -14,6 +14,7 @@ import PreviewSliderModal from "@/components/Common/PreviewSlider";
 
 import ScrollToTop from "@/components/Common/ScrollToTop";
 import PreLoader from "@/components/Common/PreLoader";
+import { Toaster } from "sonner";
 
 export default function ClientLayout({
   children,
@@ -44,6 +45,8 @@ export default function ClientLayout({
           </PreviewSliderProvider>
         </ModalProvider>
       </CartModalProvider>
+      <Toaster richColors position="top-right" />
+
       <ScrollToTop />
       <Footer />
     </ReduxProvider>

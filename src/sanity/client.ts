@@ -6,3 +6,6 @@ export const client = createClient({
   apiVersion: "2023-10-01",
   useCdn: true,
 });
+
+export const fetcher = async ([query, params = {}]) =>
+  await client.fetch(query, params);

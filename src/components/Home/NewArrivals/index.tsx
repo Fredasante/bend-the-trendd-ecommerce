@@ -1,12 +1,40 @@
-import React from "react";
-import Link from "next/link";
-import ProductItem from "@/components/Common/ProductItem";
-import { client } from "@/sanity/client";
-import { newArrivalsQuery } from "@/sanity/groq";
+"use client";
 
-const NewArrival = async () => {
-  // Fetch data directly on the server
-  const products = await client.fetch(newArrivalsQuery);
+import { useEffect } from "react";
+import Link from "next/link";
+import useSWR from "swr";
+import { client, fetcher } from "@/sanity/client";
+import { newArrivalsQuery } from "@/sanity/groq";
+import ProductItem from "@/components/Common/ProductItem";
+import LoadingFallback from "@/components/Common/LoadingFallback";
+
+export default function NewArrival() {
+  // Fetch products via SWR
+  const fetchProducts = async () => {
+    return await fetcher([newArrivalsQuery]);
+  };
+
+  const {
+    data: products = [],
+    isLoading,
+    mutate,
+  } = useSWR("new-arrivals", fetchProducts, {
+    revalidateOnFocus: false,
+    fallbackData: [],
+  });
+
+  // Real-time Sanity subscription for instant updates
+  useEffect(() => {
+    const subscription = client
+      .listen('*[_type == "product"]', {}, { includeResult: true })
+      .subscribe((update) => {
+        mutate(); // Refresh data
+      });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [mutate]);
 
   return (
     <section className="overflow-hidden pt-15 bg-[#f3f4f6] pb-5 lg:pb-10">
@@ -50,18 +78,22 @@ const NewArrival = async () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-7.5 gap-y-9">
-          {products.length > 0 ? (
-            products.map((item: any) => (
-              <ProductItem key={item._id} item={item} />
-            ))
-          ) : (
-            <p className="text-center col-span-full">No new arrivals yet.</p>
-          )}
-        </div>
+        {isLoading ? (
+          <LoadingFallback />
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-7.5 gap-y-9">
+            {products.length > 0 ? (
+              products.map((item: any) => (
+                <ProductItem key={item._id} item={item} />
+              ))
+            ) : (
+              <p className="text-center col-span-full py-10">
+                No new arrivals yet.
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </section>
   );
-};
-
-export default NewArrival;
+}

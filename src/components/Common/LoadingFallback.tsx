@@ -1,16 +1,10 @@
+"use client";
 import React from "react";
 
 const LoadingFallback = () => {
   return (
-    <div className="container-fluid pt-10">
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ minHeight: "400px" }}
-      >
-        <div className="spinner-border text-danger" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      </div>
+    <div className="flex items-center justify-center min-h-[400px]">
+      <div className="w-10 h-10 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
     </div>
   );
 };

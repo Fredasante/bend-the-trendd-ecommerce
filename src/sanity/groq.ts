@@ -10,7 +10,6 @@ export const allProductsQuery = `
     gender,
     status,
     isFeatured,
-    isNewArrival,
     "mainImageUrl": mainImage.asset->url
   }
 `;
@@ -30,7 +29,6 @@ export const productBySlugQuery = `
     description,
     status,
     isFeatured,
-    isNewArrival,
     createdAt,
     "mainImageUrl": mainImage.asset->url,
     gallery[] {
@@ -49,7 +47,6 @@ export const productsByCategoryQuery = `
     discountPrice,
     category,
     isFeatured,
-    isNewArrival,
     "mainImageUrl": mainImage.asset->url
   }
 `;
@@ -131,7 +128,6 @@ export const paginatedProductsQuery = `
     gender,
     status,
     isFeatured,
-    isNewArrival,
     "mainImageUrl": mainImage.asset->url
   }
 `;
