@@ -93,9 +93,9 @@ export const featuredProductsQuery = `
   }
 `;
 
-// 🆕 New arrivals
+// ✅ Fetch the 8 most recent available products (New Arrivals)
 export const newArrivalsQuery = `
-  *[_type == "product" && isNewArrival == true && status == "available"] | order(createdAt desc) {
+  *[_type == "product" && status == "available"] | order(_createdAt desc)[0...8]{
     _id,
     name,
     slug,

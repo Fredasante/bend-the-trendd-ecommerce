@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import Link from "next/link";
 import { updateProductDetails } from "@/redux/features/product-details";
+import StarRating from "./StarRating";
 
 const ProductItem = ({ item }: { item: Product }) => {
   const { openModal } = useModalContext();
@@ -47,12 +48,12 @@ const ProductItem = ({ item }: { item: Product }) => {
 
   return (
     <div className="group">
-      <div className="relative overflow-hidden flex items-center justify-center rounded-lg bg-[#F6F7FB] min-h-[270px] mb-4">
+      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg bg-white shadow-1 mb-4 flex items-center justify-center">
         <Image
-          src={item.mainImageUrl || "/placeholder.png"}
-          alt=""
-          width={250}
-          height={250}
+          src={item.mainImageUrl || "/images/placeholder.png"}
+          alt={item.name || "Product image"}
+          fill
+          className="object-contain object-center p-3"
         />
 
         <div className="absolute left-0 bottom-0 translate-y-full w-full flex items-center justify-center gap-2.5 pb-5 ease-linear duration-200 group-hover:translate-y-0">
@@ -120,53 +121,26 @@ const ProductItem = ({ item }: { item: Product }) => {
         </div>
       </div>
 
-      <div className="flex items-center gap-2.5 mb-2">
-        <div className="flex items-center gap-1">
-          <Image
-            src="/images/icons/icon-star.svg"
-            alt="star icon"
-            width={14}
-            height={14}
-          />
-          <Image
-            src="/images/icons/icon-star.svg"
-            alt="star icon"
-            width={14}
-            height={14}
-          />
-          <Image
-            src="/images/icons/icon-star.svg"
-            alt="star icon"
-            width={14}
-            height={14}
-          />
-          <Image
-            src="/images/icons/icon-star.svg"
-            alt="star icon"
-            width={14}
-            height={14}
-          />
-          <Image
-            src="/images/icons/icon-star.svg"
-            alt="star icon"
-            width={14}
-            height={14}
-          />
-        </div>
-
-        {/* <p className="text-custom-sm">({item.reviews})</p> */}
-      </div>
+      <StarRating />
 
       <h3
         className="font-medium text-dark ease-out duration-200 hover:text-blue mb-1.5"
         onClick={() => handleProductDetails()}
       >
-        <Link href="/shop-details"> {item.name} </Link>
+        <Link href="/shop-details" className="line-clamp-1">
+          {item.name}{" "}
+        </Link>
       </h3>
 
       <span className="flex items-center gap-2 font-medium text-lg">
-        <span className="text-dark">₵{item.discountPrice}</span>
-        <span className="text-dark-4 line-through">₵{item.price}</span>
+        {item.discountPrice && item.discountPrice > 0 ? (
+          <>
+            <span className="text-dark">₵{item.discountPrice}</span>
+            <span className="text-dark-4 line-through">₵{item.price}</span>
+          </>
+        ) : (
+          <span className="text-dark">₵{item.price}</span>
+        )}
       </span>
     </div>
   );
