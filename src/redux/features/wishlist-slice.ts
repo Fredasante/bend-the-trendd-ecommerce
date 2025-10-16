@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export type WishListItem = {
-  _id: string; // Sanity document ID
+  _id: string;
   name: string;
   price: number;
   discountPrice?: number;
   quantity?: number;
   status?: string;
-  mainImageUrl?: string; // mainImage.asset->url
+  mainImageUrl?: string;
 };
 
 type InitialState = {
@@ -29,7 +29,7 @@ export const wishlist = createSlice({
       if (!existingItem) {
         state.items.push({
           ...action.payload,
-          quantity: action.payload.quantity ?? 1, // default 1
+          quantity: action.payload.quantity ?? 1,
         });
       }
     },

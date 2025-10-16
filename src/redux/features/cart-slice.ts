@@ -3,12 +3,12 @@ import { RootState } from "../store";
 
 // 🛍️ Cart Item Type
 export type CartItem = {
-  _id: string; // Sanity document ID
+  _id: string;
   name: string;
   price: number;
   discountPrice?: number;
   quantity: number;
-  mainImageUrl?: string; // flattened main image URL for easy use
+  mainImageUrl?: string;
 };
 
 // 🧺 State Type

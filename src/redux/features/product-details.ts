@@ -15,7 +15,6 @@ const initialState: InitialState = {
     category: "",
     status: "available",
     isFeatured: false,
-    isNewArrival: false,
     mainImageUrl: "",
     gallery: [],
     description: "",
