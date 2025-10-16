@@ -11,7 +11,6 @@ const shopData: Product[] = [
     status: "available",
     mainImageUrl: "/images/products/product-1-sm-1.png",
     isFeatured: true,
-    isNewArrival: false,
     description: "High-quality USB gamepad for PC and console gaming.",
     sizes: ["Standard"],
     colors: ["Black"],

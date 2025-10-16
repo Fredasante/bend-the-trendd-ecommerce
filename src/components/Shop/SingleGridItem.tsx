@@ -54,7 +54,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
           src={item.mainImageUrl || "/images/placeholder.png"}
           alt={item.name || "Product image"}
           fill
-          className="object-contain object-center"
+          className="object-contain object-center p-3"
         />
 
         {/* Hover buttons */}

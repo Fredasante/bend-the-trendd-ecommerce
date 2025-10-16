@@ -1,32 +1,15 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import ProductItem from "@/components/Common/ProductItem";
 import { client } from "@/sanity/client";
 import { newArrivalsQuery } from "@/sanity/groq";
 
-const NewArrival = () => {
-  const [products, setProducts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchNewArrivals = async () => {
-      try {
-        const data = await client.fetch(newArrivalsQuery);
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching new arrivals:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchNewArrivals();
-  }, []);
+const NewArrival = async () => {
+  // Fetch data directly on the server
+  const products = await client.fetch(newArrivalsQuery);
 
   return (
-    <section className="overflow-hidden pt-15">
+    <section className="overflow-hidden pt-15 bg-[#f3f4f6] pb-5 lg:pb-10">
       <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
         {/* Section Header */}
         <div className="mb-7 flex items-center justify-between">
@@ -68,10 +51,10 @@ const NewArrival = () => {
 
         {/* Product Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-7.5 gap-y-9">
-          {loading ? (
-            <p className="text-center col-span-full">Loading...</p>
-          ) : products.length > 0 ? (
-            products.map((item) => <ProductItem key={item._id} item={item} />)
+          {products.length > 0 ? (
+            products.map((item: any) => (
+              <ProductItem key={item._id} item={item} />
+            ))
           ) : (
             <p className="text-center col-span-full">No new arrivals yet.</p>
           )}

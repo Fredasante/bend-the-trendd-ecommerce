@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import Breadcrumb from "../Common/Breadcrumb";
 import CustomSelect from "./CustomSelect";
@@ -12,6 +13,7 @@ import SingleListItem from "../Shop/SingleListItem";
 import { ListBulletIcon, TableCellsIcon } from "@heroicons/react/24/solid";
 import { client } from "@/sanity/client";
 import { paginatedProductsQuery } from "@/sanity/groq";
+import LoadingFallback from "../Common/LoadingFallback";
 
 const ShopWithSidebar = () => {
   const [productStyle, setProductStyle] = useState("grid");
@@ -215,9 +217,7 @@ const ShopWithSidebar = () => {
                 }`}
               >
                 {loading ? (
-                  <p className="text-center col-span-full">
-                    Loading products...
-                  </p>
+                  <LoadingFallback />
                 ) : products.length > 0 ? (
                   products.map((item, key) =>
                     productStyle === "grid" ? (
