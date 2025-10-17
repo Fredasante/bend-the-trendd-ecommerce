@@ -5,7 +5,6 @@ import CustomSelect from "./CustomSelect";
 import CategoryDropdown from "./CategoryDropdown";
 import GenderDropdown from "./GenderDropdown";
 import SizeDropdown from "./SizeDropdown";
-import PriceDropdown from "./PriceDropdown";
 import SingleGridItem from "../Shop/SingleGridItem";
 import SingleListItem from "../Shop/SingleListItem";
 import { ListBulletIcon, TableCellsIcon } from "@heroicons/react/24/solid";
@@ -196,7 +195,6 @@ const ShopWithSidebar = () => {
                   <GenderDropdown onGenderChange={handleGenderChange} />
                   <SizeDropdown onSizeChange={handleSizeChange} />
                   <ColorsDropdown onColorChange={handleColorChange} />
-                  <PriceDropdown />
                 </div>
               </form>
             </div>
@@ -279,7 +277,6 @@ const ShopWithSidebar = () => {
                 onPageChange={handlePageChange}
               />
             </div>
-            {/* Content End */}
           </div>
         </div>
       </section>

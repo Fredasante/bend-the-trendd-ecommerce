@@ -19,7 +19,7 @@ const HeroSection = () => {
         </div>
 
         <h1 className="font-semibold text-dark text-2xl sm:text-4xl mb-3 leading-snug">
-          Trendy Styles. Unbeatable Prices.
+          Trendy Styles. Unbeatable Prices. You deserve it!
         </h1>
 
         <p className="text-gray-700 leading-relaxed">
@@ -43,7 +43,7 @@ const HeroSection = () => {
           alt="Bend the Trend Hero"
           width={380}
           height={358}
-          className="rounded-md"
+          className="rounded-md w-64 h-auto sm:w-[380px]"
         />
       </div>
     </div>
