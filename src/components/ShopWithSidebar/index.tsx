@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Breadcrumb from "../Common/Breadcrumb";
 import CustomSelect from "./CustomSelect";
 import CategoryDropdown from "./CategoryDropdown";
@@ -11,20 +10,22 @@ import PriceDropdown from "./PriceDropdown";
 import SingleGridItem from "../Shop/SingleGridItem";
 import SingleListItem from "../Shop/SingleListItem";
 import { ListBulletIcon, TableCellsIcon } from "@heroicons/react/24/solid";
-import { client } from "@/sanity/client";
-import { paginatedProductsQuery } from "@/sanity/groq";
-import LoadingFallback from "../Common/LoadingFallback";
+import { fetchPaginatedProducts } from "@/lib/productUtils";
+import { ClipLoader } from "react-spinners";
+import Pagination from "../Common/Pagination";
 
 const ShopWithSidebar = () => {
   const [productStyle, setProductStyle] = useState("grid");
   const [productSidebar, setProductSidebar] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
-
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(9);
   const [totalCount, setTotalCount] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const [selectedGender, setSelectedGender] = useState<string>("");
+  const productsTopRef = useRef<HTMLDivElement>(null);
 
   const handleStickyMenu = () => {
     setStickyMenu(window.scrollY >= 80);
@@ -32,17 +33,14 @@ const ShopWithSidebar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleStickyMenu);
-
     const handleClickOutside = (event: MouseEvent) => {
       if (!(event.target as HTMLElement).closest(".sidebar-content")) {
         setProductSidebar(false);
       }
     };
-
     if (productSidebar) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       window.removeEventListener("scroll", handleStickyMenu);
@@ -54,36 +52,57 @@ const ShopWithSidebar = () => {
     { label: "Old Products", value: "2" },
   ];
 
-  // 🧠 Fetch products from Sanity with pagination
+  // Fetch products
   useEffect(() => {
-    const fetchProducts = async () => {
+    const loadProducts = async () => {
       setLoading(true);
-      const start = (currentPage - 1) * perPage;
-      const end = start + perPage;
-
-      try {
-        const data = await client.fetch(paginatedProductsQuery, { start, end });
-        setProducts(data);
-
-        const count = await client.fetch(`count(*[_type == "product"])`);
-        setTotalCount(count);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      } finally {
-        setLoading(false);
-      }
+      const { products, totalCount } = await fetchPaginatedProducts({
+        page: currentPage,
+        perPage,
+        category: selectedCategory,
+        gender: selectedGender,
+      });
+      setProducts(products);
+      setTotalCount(totalCount);
+      setLoading(false);
     };
 
-    fetchProducts();
-  }, [currentPage, perPage]);
+    loadProducts();
+  }, [currentPage, perPage, selectedCategory, selectedGender]);
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setCurrentPage(1);
+  };
+
+  const handleGenderChange = (gender: string) => {
+    setSelectedGender(gender);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+
+    // Scroll to top of products section
+    if (productsTopRef.current) {
+      const yOffset = -100; // Offset for sticky header (adjust as needed)
+      const y =
+        productsTopRef.current.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
 
   const totalPages = Math.ceil(totalCount / perPage) || 1;
 
   return (
     <>
       <Breadcrumb title={"Explore All Products"} pages={["shop"]} />
-
-      <section className="overflow-hidden relative pb-20 pt-5 lg:pt-12 bg-[#f3f4f6]">
+      <section
+        className="overflow-hidden relative pb-20 pt-5 lg:pt-12 bg-[#f3f4f6]"
+        ref={productsTopRef}
+      >
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex gap-7.5">
             {/* Sidebar Start */}
@@ -125,6 +144,7 @@ const ShopWithSidebar = () => {
                   />
                 </svg>
               </button>
+
               <form onSubmit={(e) => e.preventDefault()}>
                 <div className="flex flex-col gap-6">
                   <div className="bg-white shadow-1 rounded-lg py-4 px-5">
@@ -134,7 +154,9 @@ const ShopWithSidebar = () => {
                         type="button"
                         className="text-blue"
                         onClick={() => {
-                          // Future: reset filters
+                          setSelectedCategory("");
+                          setSelectedGender("");
+                          setCurrentPage(1);
                         }}
                       >
                         Clean All
@@ -142,21 +164,8 @@ const ShopWithSidebar = () => {
                     </div>
                   </div>
 
-                  <CategoryDropdown
-                    categories={[
-                      { name: "Clothing", products: 0, isRefined: false },
-                      { name: "Sneakers", products: 0, isRefined: false },
-                      { name: "Slippers", products: 0, isRefined: false },
-                      { name: "Gadgets", products: 0, isRefined: false },
-                    ]}
-                  />
-                  <GenderDropdown
-                    genders={[
-                      { name: "Women", products: 0 },
-                      { name: "Men", products: 0 },
-                      { name: "Unisex", products: 0 },
-                    ]}
-                  />
+                  <CategoryDropdown onCategoryChange={handleCategoryChange} />
+                  <GenderDropdown onGenderChange={handleGenderChange} />
                   <SizeDropdown />
                   <ColorsDropdwon />
                   <PriceDropdown />
@@ -217,7 +226,9 @@ const ShopWithSidebar = () => {
                 }`}
               >
                 {loading ? (
-                  <LoadingFallback />
+                  <div className="flex justify-center items-center w-full min-h-[300px] col-span-full">
+                    <ClipLoader size={28} color="#000080" />
+                  </div>
                 ) : products.length > 0 ? (
                   products.map((item, key) =>
                     productStyle === "grid" ? (
@@ -233,32 +244,12 @@ const ShopWithSidebar = () => {
                 )}
               </div>
 
-              {/* Pagination */}
-              <div className="flex justify-center mt-10">
-                <div className="bg-white shadow-1 rounded-md p-2 flex items-center gap-2">
-                  <button
-                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                    disabled={currentPage === 1}
-                    className="px-3 py-1 rounded bg-gray-100 disabled:opacity-50"
-                  >
-                    Prev
-                  </button>
-
-                  <span className="px-3">
-                    Page {currentPage} of {totalPages}
-                  </span>
-
-                  <button
-                    onClick={() =>
-                      setCurrentPage((p) => (p < totalPages ? p + 1 : p))
-                    }
-                    disabled={currentPage >= totalPages}
-                    className="px-3 py-1 rounded bg-gray-100 disabled:opacity-50"
-                  >
-                    Next
-                  </button>
-                </div>
-              </div>
+              {/* pagination */}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
             </div>
             {/* Content End */}
           </div>

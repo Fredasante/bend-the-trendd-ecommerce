@@ -131,3 +131,26 @@ export const paginatedProductsQuery = `
     "mainImageUrl": mainImage.asset->url
   }
 `;
+
+// Count products with optional category filter
+export const productCountQuery = `count(*[_type == "product" $categoryFilter])`;
+
+// Categories with product count
+export const categoriesWithCountQuery = `
+  *[_type == "product"] {
+    category
+  } | {
+    "name": category,
+    "products": count(*[_type == "product" && category == ^.category])
+  }
+`;
+
+// Genders with product count
+export const gendersWithCountQuery = `
+  *[_type == "product"] {
+    gender
+  } | {
+    "name": gender,
+    "products": count(*[_type == "product" && gender == ^.gender])
+  }
+`;
