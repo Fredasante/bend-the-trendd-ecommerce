@@ -5,7 +5,6 @@ import CustomSelect from "./CustomSelect";
 import CategoryDropdown from "./CategoryDropdown";
 import GenderDropdown from "./GenderDropdown";
 import SizeDropdown from "./SizeDropdown";
-import ColorsDropdwon from "./ColorsDropdwon";
 import PriceDropdown from "./PriceDropdown";
 import SingleGridItem from "../Shop/SingleGridItem";
 import SingleListItem from "../Shop/SingleListItem";
@@ -13,6 +12,7 @@ import { ListBulletIcon, TableCellsIcon } from "@heroicons/react/24/solid";
 import { fetchPaginatedProducts } from "@/lib/productUtils";
 import { ClipLoader } from "react-spinners";
 import Pagination from "../Common/Pagination";
+import ColorsDropdown from "./ColorsDropdown";
 
 const ShopWithSidebar = () => {
   const [productStyle, setProductStyle] = useState("grid");
@@ -25,6 +25,8 @@ const ShopWithSidebar = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedGender, setSelectedGender] = useState<string>("");
+  const [selectedSize, setSelectedSize] = useState<string>("");
+  const [selectedColor, setSelectedColor] = useState<string>("");
   const productsTopRef = useRef<HTMLDivElement>(null);
 
   const handleStickyMenu = () => {
@@ -61,6 +63,8 @@ const ShopWithSidebar = () => {
         perPage,
         category: selectedCategory,
         gender: selectedGender,
+        size: selectedSize,
+        color: selectedColor,
       });
       setProducts(products);
       setTotalCount(totalCount);
@@ -68,7 +72,14 @@ const ShopWithSidebar = () => {
     };
 
     loadProducts();
-  }, [currentPage, perPage, selectedCategory, selectedGender]);
+  }, [
+    currentPage,
+    perPage,
+    selectedCategory,
+    selectedGender,
+    selectedSize,
+    selectedColor,
+  ]);
 
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
@@ -77,21 +88,36 @@ const ShopWithSidebar = () => {
 
   const handleGenderChange = (gender: string) => {
     setSelectedGender(gender);
+    scrollToProducts();
     setCurrentPage(1);
   };
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+  const handleSizeChange = (size: string) => {
+    setSelectedSize(size);
+    scrollToProducts();
+    setCurrentPage(1);
+  };
 
-    // Scroll to top of products section
+  const handleColorChange = (color: string) => {
+    setSelectedColor(color);
+    scrollToProducts();
+    setCurrentPage(1);
+  };
+
+  const scrollToProducts = () => {
     if (productsTopRef.current) {
-      const yOffset = -100; // Offset for sticky header (adjust as needed)
+      const yOffset = -150;
       const y =
         productsTopRef.current.getBoundingClientRect().top +
         window.pageYOffset +
         yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    scrollToProducts();
   };
 
   const totalPages = Math.ceil(totalCount / perPage) || 1;
@@ -156,6 +182,8 @@ const ShopWithSidebar = () => {
                         onClick={() => {
                           setSelectedCategory("");
                           setSelectedGender("");
+                          setSelectedSize("");
+                          setSelectedColor("");
                           setCurrentPage(1);
                         }}
                       >
@@ -166,8 +194,8 @@ const ShopWithSidebar = () => {
 
                   <CategoryDropdown onCategoryChange={handleCategoryChange} />
                   <GenderDropdown onGenderChange={handleGenderChange} />
-                  <SizeDropdown />
-                  <ColorsDropdwon />
+                  <SizeDropdown onSizeChange={handleSizeChange} />
+                  <ColorsDropdown onColorChange={handleColorChange} />
                   <PriceDropdown />
                 </div>
               </form>

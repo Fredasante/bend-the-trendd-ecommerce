@@ -111,7 +111,7 @@ const CategoryDropdown = ({ onCategoryChange }) => {
             />
           ))
         ) : (
-          <p className="text-sm text-gray-500">No categories found.</p>
+          <p className="text-sm text-gray-500 py-10">No categories found.</p>
         )}
       </div>
     </div>

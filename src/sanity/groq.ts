@@ -154,3 +154,15 @@ export const gendersWithCountQuery = `
     "products": count(*[_type == "product" && gender == ^.gender])
   }
 `;
+
+export const sizesWithCountQuery = `
+  *[_type == "product" && defined(sizes)] {
+    sizes
+  }
+`;
+
+export const colorsWithCountQuery = `
+  *[_type == "product" && defined(colors)] {
+    colors
+  }
+`;

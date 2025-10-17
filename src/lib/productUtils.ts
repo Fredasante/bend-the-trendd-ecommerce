@@ -6,13 +6,17 @@ interface FetchProductsParams {
   perPage: number;
   category?: string;
   gender?: string;
+  size?: string;
+  color?: string;
 }
 
 export const fetchPaginatedProducts = async ({
   page,
   perPage,
   category,
-  gender, // ✅ Make sure to destructure this
+  gender,
+  size,
+  color,
 }: FetchProductsParams) => {
   const start = (page - 1) * perPage;
   const end = start + perPage;
@@ -21,9 +25,12 @@ export const fetchPaginatedProducts = async ({
   const filters: string[] = [];
   if (category) filters.push(`category == "${category}"`);
   if (gender) filters.push(`gender == "${gender}"`);
+  if (size) filters.push(`"${size}" in sizes`);
+  if (color) filters.push(`"${color}" in colors`);
 
   const filterString = filters.length > 0 ? `&& ${filters.join(" && ")}` : "";
 
+  // products
   const productsQuery = `
     *[_type == "product" ${filterString}] | order(_createdAt desc) [$start...$end] {
       _id,
@@ -54,6 +61,7 @@ export const fetchPaginatedProducts = async ({
   }
 };
 
+// categories
 export const fetchCategories = async () => {
   const query = `
     *[_type == "product"] {
@@ -77,6 +85,7 @@ export const fetchCategories = async () => {
   }
 };
 
+// genders
 export const fetchGenders = async () => {
   const query = `
     *[_type == "product"] {
@@ -98,7 +107,59 @@ export const fetchGenders = async () => {
     }));
     return unique;
   } catch (error) {
-    console.error("Error fetching genders:", error); // ✅ Fixed typo here too
+    console.error("Error fetching genders:", error);
+    return [];
+  }
+};
+
+// sizes
+export const fetchSizes = async () => {
+  const query = `
+    *[_type == "product" && defined(sizes)] {
+      sizes
+    }
+  `;
+
+  try {
+    const data = await client.fetch(query);
+    // Flatten and get unique sizes
+    const allSizes = data.flatMap((item: any) => item.sizes || []);
+    const uniqueSizes = Array.from(new Set(allSizes)).sort(
+      (a, b) => Number(a) - Number(b)
+    );
+
+    // Return with counts
+    return uniqueSizes.map((size: string) => ({
+      name: size,
+      products: data.filter((item: any) => item.sizes?.includes(size)).length,
+    }));
+  } catch (error) {
+    console.error("Error fetching sizes:", error);
+    return [];
+  }
+};
+
+// colors
+export const fetchColors = async () => {
+  const query = `
+    *[_type == "product" && defined(colors)] {
+      colors
+    }
+  `;
+
+  try {
+    const data = await client.fetch(query);
+    // Flatten and get unique colors
+    const allColors = data.flatMap((item: any) => item.colors || []);
+    const uniqueColors = Array.from(new Set(allColors)).sort();
+
+    // Return with counts
+    return uniqueColors.map((color: string) => ({
+      name: color,
+      products: data.filter((item: any) => item.colors?.includes(color)).length,
+    }));
+  } catch (error) {
+    console.error("Error fetching colors:", error);
     return [];
   }
 };

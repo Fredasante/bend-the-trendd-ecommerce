@@ -112,7 +112,7 @@ const GenderDropdown = ({ onGenderChange }) => {
             />
           ))
         ) : (
-          <p className="text-sm text-gray-500">No genders found.</p>
+          <p className="text-sm text-gray-500 py-10">No genders found.</p>
         )}
       </div>
     </div>
