@@ -10,7 +10,7 @@ export type Product = {
   price: number;
   discountPrice?: number;
   colors?: string[];
-  description?: string;
+  description?: string | any[];
   status?: "available" | "sold";
   isFeatured?: boolean;
   createdAt?: string;

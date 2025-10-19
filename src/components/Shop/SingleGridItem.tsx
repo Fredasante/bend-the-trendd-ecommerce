@@ -12,6 +12,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Eye, Heart } from "lucide-react";
 import StarRating from "../Common/StarRating";
+import { toast } from "sonner";
 
 const SingleGridItem = ({ item }: { item: Product }) => {
   const { openModal } = useModalContext();
@@ -34,6 +35,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
         quantity: 1,
       })
     );
+    toast.success("Added to cart!");
   };
 
   // 💖 Add to Wishlist
@@ -45,6 +47,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
         quantity: 1,
       })
     );
+    toast.success("Added to wishlist!");
   };
 
   return (

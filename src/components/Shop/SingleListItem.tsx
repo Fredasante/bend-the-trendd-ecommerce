@@ -11,6 +11,7 @@ import { AppDispatch } from "@/redux/store";
 import Link from "next/link";
 import Image from "next/image";
 import StarRating from "../Common/StarRating";
+import { toast } from "sonner";
 
 const SingleListItem = ({ item }: { item: Product }) => {
   const { openModal } = useModalContext();
@@ -29,6 +30,7 @@ const SingleListItem = ({ item }: { item: Product }) => {
         quantity: 1,
       })
     );
+    toast.success("Added to cart!");
   };
 
   const handleItemToWishList = () => {
@@ -39,6 +41,7 @@ const SingleListItem = ({ item }: { item: Product }) => {
         quantity: 1,
       })
     );
+    toast.success("Added to wishlist!");
   };
 
   return (

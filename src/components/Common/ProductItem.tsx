@@ -12,6 +12,7 @@ import Link from "next/link";
 import { updateProductDetails } from "@/redux/features/product-details";
 import StarRating from "./StarRating";
 import { Eye, Heart } from "lucide-react";
+import { toast } from "sonner";
 
 const ProductItem = ({ item }: { item: Product }) => {
   const { openModal } = useModalContext();
@@ -31,6 +32,7 @@ const ProductItem = ({ item }: { item: Product }) => {
         quantity: 1,
       })
     );
+    toast.success("Added to cart!");
   };
 
   const handleItemToWishList = () => {
@@ -41,6 +43,7 @@ const ProductItem = ({ item }: { item: Product }) => {
         quantity: 1,
       })
     );
+    toast.success("Added to wishlist!");
   };
 
   const handleProductDetails = () => {

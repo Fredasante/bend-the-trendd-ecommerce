@@ -17,7 +17,7 @@ const initialState: InitialState = {
     isFeatured: false,
     mainImageUrl: "",
     gallery: [],
-    description: "",
+    description: [],
     sizes: [],
     colors: [],
     createdAt: "",
