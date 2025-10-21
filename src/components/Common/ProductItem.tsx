@@ -97,8 +97,8 @@ const ProductItem = ({ item }: { item: Product }) => {
         className="font-medium text-dark ease-out duration-200 hover:text-blue mb-1.5"
         onClick={() => handleProductDetails()}
       >
-        <Link href="/shop-details" className="line-clamp-1">
-          {item.name}{" "}
+        <Link href={`/shop/${item.slug.current}`} className="line-clamp-1">
+          {item.name}
         </Link>
       </h3>
 

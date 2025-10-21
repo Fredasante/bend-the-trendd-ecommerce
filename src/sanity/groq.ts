@@ -1,3 +1,6 @@
+import { Product } from "@/types/product";
+import { client } from "./client";
+
 // 🛍️ All products (newest first)
 export const allProductsQuery = `
   *[_type == "product"] | order(createdAt desc) {
@@ -184,4 +187,45 @@ export const testDescriptionQuery = `
     "hasDescription": defined(description),
     "descriptionLength": length(description)
   }
+`;
+
+// Query to fetch a single product by slug
+export const PRODUCT_BY_SLUG_QUERY = `
+  *[_type == "product" && slug.current == $slug][0]{
+    _id,
+    name,
+    slug,
+    "mainImageUrl": mainImage.asset->url,
+    "gallery": gallery[]{
+      "imageUrl": asset->url
+    },
+    category,
+    gender,
+    sizes,
+    price,
+    discountPrice,
+    colors,
+    description,
+    status,
+    isFeatured,
+    createdAt
+  }
+`;
+
+// Function to fetch product by slug
+export async function getProductBySlug(slug: string): Promise<Product | null> {
+  try {
+    const product = await client.fetch<Product>(PRODUCT_BY_SLUG_QUERY, {
+      slug,
+    });
+    return product;
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    return null;
+  }
+}
+
+// Query to get all product slugs (for static generation)
+export const ALL_PRODUCT_SLUGS_QUERY = `
+  *[_type == "product"]{ "slug": slug.current }
 `;
