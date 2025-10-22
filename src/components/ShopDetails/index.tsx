@@ -1,8 +1,14 @@
 "use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import { Product } from "@/types/product";
 import { PortableText } from "@portabletext/react";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "@/redux/features/cart-slice";
+import { toast } from "sonner";
+import { addItemToWishlist } from "@/redux/features/wishlist-slice";
+import { AppDispatch } from "@/redux/store";
 
 interface ShopDetailsProps {
   product: Product;
@@ -13,6 +19,8 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
   const [selectedSize, setSelectedSize] = useState(product.sizes?.[0] || "");
   const [mainImage, setMainImage] = useState(product.mainImageUrl || "");
 
+  const dispatch = useDispatch<AppDispatch>();
+
   const isAvailable = product.status === "available";
   const hasDiscount =
     product.discountPrice && product.discountPrice > product.price;
@@ -22,8 +30,39 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
       )
     : 0;
 
+  // add to cart
+  const handleAddToCart = () => {
+    dispatch(
+      addItemToCart({
+        _id: product._id,
+        name: product.name,
+        price: product.price,
+        discountPrice: product.discountPrice,
+        mainImageUrl: product.mainImageUrl || "",
+        quantity: 1,
+      })
+    );
+    toast.success("Added to cart!");
+  };
+
+  // add to wishlist
+  const handleAddToWishlist = () => {
+    dispatch(
+      addItemToWishlist({
+        _id: product._id,
+        name: product.name,
+        price: product.price,
+        discountPrice: product.discountPrice,
+        mainImageUrl: product.mainImageUrl || "",
+        quantity: 1,
+        status: product.status,
+      })
+    );
+    toast.success("Added to wishlist");
+  };
+
   return (
-    <div className="bg-gray-100 pt-40 xl:pt-50 bg-[#f3f4f6] pb-7 px-3">
+    <div className="bg-gray-100 pt-40 xl:pt-50 bg-[#f3f4f6] pb-7 px-3 lg:min-h-[72vh]">
       <div className="container px-4 py-8 max-w-[1170px] w-full mx-auto">
         <div className="flex flex-wrap -mx-4">
           {/* Product Images */}
@@ -78,7 +117,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
             <h2 className="text-3xl font-bold mb-2 text-dark">
               {product.name}
             </h2>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-600 mb-5">
               Status:{" "}
               <span
                 className={`font-semibold ${
@@ -89,7 +128,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
               </span>
             </p>
 
-            <div className="mb-4">
+            <div className="mb-5">
               <span className="text-2xl font-bold mr-2 text-dark">
                 ₵{product.price.toFixed(2)}
               </span>
@@ -105,18 +144,12 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
               )}
             </div>
 
-            {product.description && Array.isArray(product.description) && (
-              <div className="text-gray-700 mb-6 prose prose-sm max-w-none">
-                <PortableText value={product.description} />
-              </div>
-            )}
-
             {/* Color, Size, and Quantity in flex row */}
-            <div className="flex flex-wrap items-center gap-6 mb-6">
+            <div className="flex flex-wrap items-center gap-6 mb-6 md:mb-8">
               {/* Color Selection */}
               {product.colors && product.colors.length > 0 && (
                 <div className="flex items-center gap-3">
-                  <h3 className="text-lg font-semibold text-dark whitespace-nowrap">
+                  <h3 className="text-lg font-semibold text-slate-500 whitespace-nowrap">
                     Color:
                   </h3>
                   <div className="flex space-x-2">
@@ -137,7 +170,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
               {/* Size Selection */}
               {product.sizes && product.sizes.length > 0 && (
                 <div className="flex items-center gap-3">
-                  <h3 className="text-lg font-semibold text-dark whitespace-nowrap">
+                  <h3 className="text-lg font-semibold text-slate-500 whitespace-nowrap">
                     Size:
                   </h3>
                   <div className="flex flex-wrap gap-2">
@@ -147,7 +180,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
                         onClick={() => setSelectedSize(size)}
                         className={`px-3 py-1 border rounded-md transition-all ${
                           selectedSize === size
-                            ? "bg-blue text-white border-blue"
+                            ? "bg-white text-dark border-slate-100 shadow-sm"
                             : "bg-white text-dark border-gray-300 hover:border-blue"
                         }`}
                       >
@@ -159,14 +192,14 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
               )}
 
               {/* Quantity */}
-              <div className="flex gap-3">
-                <h3 className="text-lg font-semibold text-gray-800">
+              <div className="flex items-center gap-3">
+                <h3 className="text-lg font-semibold text-slate-500">
                   Quantity:
                 </h3>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
-                    className="px-3 py-1 rounded-md border border-slate-100 bg-white text-black font-medium shadow-sm hover:border-blue-400 transition-all cursor-not-allowed"
+                    className="px-3 py-1 rounded-md border border-slate-100 bg-white text-black shadow-sm transition-all cursor-not-allowed"
                     disabled
                   >
                     1
@@ -175,8 +208,78 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
               </div>
             </div>
 
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-5">
+              <button
+                onClick={handleAddToCart}
+                className="inline-flex font-medium text-white bg-blue py-2.5 px-4.5 text-sm sm:text-base rounded-md hover:bg-blue-dark transition-colors"
+              >
+                Add to Cart
+              </button>
+
+              <button
+                onClick={handleAddToWishlist}
+                className="inline-flex items-center gap-2 font-medium text-white bg-dark py-2.5 px-4.5 text-sm sm:text-base rounded-md hover:bg-opacity-95 transition-colors"
+              >
+                Add to Wishlist
+              </button>
+            </div>
+
+            <div className="prose prose-sm max-w-none text-gray-700 mt-6">
+              {Array.isArray(product?.description) &&
+              product.description.length > 0 ? (
+                <PortableText
+                  value={product.description}
+                  components={{
+                    block: {
+                      normal: ({ children }) => (
+                        <p className="mb-4">{children}</p>
+                      ),
+                    },
+                    list: {
+                      bullet: ({ children }) => (
+                        <ul className="list-disc pl-5 space-y-2">{children}</ul>
+                      ),
+                      number: ({ children }) => (
+                        <ol className="list-decimal pl-5 space-y-2">
+                          {children}
+                        </ol>
+                      ),
+                    },
+                    listItem: {
+                      bullet: ({ children }) => <li>{children}</li>,
+                      number: ({ children }) => <li>{children}</li>,
+                    },
+                    marks: {
+                      strong: ({ children }) => (
+                        <strong className="font-semibold">{children}</strong>
+                      ),
+                      em: ({ children }) => (
+                        <em className="italic">{children}</em>
+                      ),
+                      link: ({ children, value }) => (
+                        <a
+                          href={value.href}
+                          className="text-blue hover:underline"
+                        >
+                          {children}
+                        </a>
+                      ),
+                    },
+                  }}
+                />
+              ) : product?.description &&
+                typeof product.description === "string" &&
+                product.description.trim() !== "" ? (
+                <p>{product.description}</p>
+              ) : (
+                <p className="text-gray-500 italic">
+                  No description available.
+                </p>
+              )}
+            </div>
+
             {/* Additional Info */}
-            <div className="border-t pt-6">
+            <div className="border-t mt-3 pt-5">
               <p className="text-sm text-gray-600">
                 Delivery fee not included in total price
               </p>

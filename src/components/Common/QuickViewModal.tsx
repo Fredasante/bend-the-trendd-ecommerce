@@ -18,10 +18,12 @@ const QuickViewModal = () => {
   const { openPreviewModal } = usePreviewSlider();
   const [quantity, setQuantity] = useState(1);
 
-  const dispatch = useDispatch<AppDispatch>();
-
   // get the product data
   const product = useAppSelector((state) => state.quickViewReducer.value);
+
+  const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || "");
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const [activePreview, setActivePreview] = useState(0);
 
@@ -65,6 +67,12 @@ const QuickViewModal = () => {
   };
 
   useEffect(() => {
+    if (product?.sizes && product.sizes.length > 0) {
+      setSelectedSize(product.sizes[0]);
+    }
+  }, [product]);
+
+  useEffect(() => {
     // closing modal while clicking outside
     function handleClickOutside(event) {
       if (!event.target.closest(".modal-content")) {
@@ -97,9 +105,9 @@ const QuickViewModal = () => {
         )
     );
 
-  console.log("Product description:", product?.description);
-  console.log("Description type:", typeof product?.description);
-  console.log("Is array:", Array.isArray(product?.description));
+  console.log("Product:", product);
+  console.log("Product sizes:", product?.sizes);
+  console.log("Has sizes:", product?.sizes && product.sizes.length > 0);
 
   return (
     <div
@@ -143,28 +151,49 @@ const QuickViewModal = () => {
                 {product.name || "Untitled Product"}
               </h3>
 
-              <div className="flex flex-wrap gap-30 mt-6 mb-7.5">
-                <div>
-                  <h4 className="font-semibold text-slate-500 text-lg mb-5">
-                    Price
-                  </h4>
-                  <span className="flex items-center gap-2">
-                    <span className="font-semibold text-dark text-xl xl:text-heading-4">
-                      ₵{product.discountPrice || product.price || "0.00"}
-                    </span>
-                    {product.discountPrice && (
-                      <span className="font-medium text-dark-4 text-lg xl:text-2xl line-through">
-                        ₵{product.price}
-                      </span>
-                    )}
+              <div>
+                <span className="flex items-center gap-2">
+                  <span className="font-semibold text-dark text-xl xl:text-heading-4">
+                    ₵{product.discountPrice || product.price || "0.00"}
                   </span>
-                </div>
+                  {product.discountPrice && (
+                    <span className="font-medium text-dark-4 text-lg xl:text-2xl line-through">
+                      ₵{product.price}
+                    </span>
+                  )}
+                </span>
+              </div>
 
-                <div>
-                  <h4 className="font-semibold text-lg text-slate-500 mb-3.5">
-                    Quantity
-                  </h4>
+              <div className="flex flex-wrap gap-9 md:gap-20 lg:gap-25 mt-6 mb-7.5">
+                {/* Size Selection */}
+                {product.sizes && product.sizes.length > 0 && (
                   <div className="flex items-center gap-3">
+                    <h3 className="text-lg font-semibold text-slate-500 whitespace-nowrap">
+                      Size:
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {product.sizes.map((size, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setSelectedSize(size)}
+                          className={`px-3 py-1 border rounded-md transition-all ${
+                            selectedSize === size
+                              ? "bg-blue text-white border-blue"
+                              : "bg-white text-dark border-gray-300 hover:border-blue"
+                          }`}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex items-center justify-center gap-2">
+                  <h4 className="font-semibold text-lg text-slate-500">
+                    Quantity:
+                  </h4>
+                  <div className="flex gap-3">
                     <span className="flex items-center justify-center w-10 h-10 rounded-[5px] border border-gray-3 bg-white font-medium text-dark">
                       {quantity}
                     </span>
@@ -182,7 +211,7 @@ const QuickViewModal = () => {
 
                 <button
                   onClick={handleAddToWishlist}
-                  className="inline-flex items-center gap-2 font-medium text-white bg-dark py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md hover:bg-opacity-95 transition-colors"
+                  className="inline-flex items-center gap-2 font-medium text-white bg-dark py-2.5 px-4.5 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md hover:bg-opacity-95 transition-colors"
                 >
                   Add to Wishlist
                 </button>

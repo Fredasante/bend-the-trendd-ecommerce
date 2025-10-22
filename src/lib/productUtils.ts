@@ -40,6 +40,7 @@ export const fetchPaginatedProducts = async ({
       description,
       category,
       gender,
+      sizes,
       status,
       isFeatured,
       "mainImageUrl": mainImage.asset->url
