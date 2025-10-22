@@ -1,4 +1,3 @@
-// lib/productUtils.ts or utils/productUtils.ts
 import { client } from "@/sanity/client";
 
 interface FetchProductsParams {
@@ -38,6 +37,7 @@ export const fetchPaginatedProducts = async ({
       slug,
       price,
       discountPrice,
+      description,
       category,
       gender,
       status,

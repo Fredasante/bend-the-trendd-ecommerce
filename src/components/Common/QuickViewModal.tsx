@@ -97,6 +97,10 @@ const QuickViewModal = () => {
         )
     );
 
+  console.log("Product description:", product?.description);
+  console.log("Description type:", typeof product?.description);
+  console.log("Is array:", Array.isArray(product?.description));
+
   return (
     <div
       className={`${
@@ -139,28 +143,9 @@ const QuickViewModal = () => {
                 {product.name || "Untitled Product"}
               </h3>
 
-              <div className="prose prose-sm max-w-none text-gray-700 mb-6">
-                {/* Handle both string and Portable Text array formats */}
-                {Array.isArray(product?.description) &&
-                product.description.length > 0 ? (
-                  // Portable Text format (array of blocks)
-                  <PortableText value={product.description} />
-                ) : product?.description &&
-                  typeof product.description === "string" &&
-                  product.description.trim() !== "" ? (
-                  // Plain text format
-                  <p>{product.description}</p>
-                ) : (
-                  // No description available
-                  <p className="text-gray-500 italic">
-                    No description available.
-                  </p>
-                )}
-              </div>
-
-              <div className="flex flex-wrap justify-between gap-5 mt-6 mb-7.5">
+              <div className="flex flex-wrap gap-30 mt-6 mb-7.5">
                 <div>
-                  <h4 className="font-semibold text-lg text-dark mb-3.5">
+                  <h4 className="font-semibold text-slate-500 text-lg mb-5">
                     Price
                   </h4>
                   <span className="flex items-center gap-2">
@@ -176,21 +161,21 @@ const QuickViewModal = () => {
                 </div>
 
                 <div>
-                  <h4 className="font-semibold text-lg text-dark mb-3.5">
+                  <h4 className="font-semibold text-lg text-slate-500 mb-3.5">
                     Quantity
                   </h4>
                   <div className="flex items-center gap-3">
-                    <span className="flex items-center justify-center w-20 h-10 rounded-[5px] border border-gray-4 bg-white font-medium text-dark">
+                    <span className="flex items-center justify-center w-10 h-10 rounded-[5px] border border-gray-3 bg-white font-medium text-dark">
                       {quantity}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2 sm:gap-4">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-4">
                 <button
                   onClick={handleAddToCart}
-                  className="inline-flex font-medium text-white bg-blue py-2 px-4 sm:py-3 sm:px-7 text-sm sm:text-base rounded-md hover:bg-blue-dark transition-colors"
+                  className="inline-flex font-medium text-white bg-blue py-2.5 px-4.5 sm:py-3 sm:px-7 text-sm sm:text-base rounded-md hover:bg-blue-dark transition-colors"
                 >
                   Add to Cart
                 </button>
@@ -201,6 +186,62 @@ const QuickViewModal = () => {
                 >
                   Add to Wishlist
                 </button>
+              </div>
+
+              <div className="prose prose-sm max-w-none text-gray-700 mt-6">
+                {Array.isArray(product?.description) &&
+                product.description.length > 0 ? (
+                  <PortableText
+                    value={product.description}
+                    components={{
+                      block: {
+                        normal: ({ children }) => (
+                          <p className="mb-4">{children}</p>
+                        ),
+                      },
+                      list: {
+                        bullet: ({ children }) => (
+                          <ul className="list-disc pl-5 space-y-2">
+                            {children}
+                          </ul>
+                        ),
+                        number: ({ children }) => (
+                          <ol className="list-decimal pl-5 space-y-2">
+                            {children}
+                          </ol>
+                        ),
+                      },
+                      listItem: {
+                        bullet: ({ children }) => <li>{children}</li>,
+                        number: ({ children }) => <li>{children}</li>,
+                      },
+                      marks: {
+                        strong: ({ children }) => (
+                          <strong className="font-semibold">{children}</strong>
+                        ),
+                        em: ({ children }) => (
+                          <em className="italic">{children}</em>
+                        ),
+                        link: ({ children, value }) => (
+                          <a
+                            href={value.href}
+                            className="text-blue hover:underline"
+                          >
+                            {children}
+                          </a>
+                        ),
+                      },
+                    }}
+                  />
+                ) : product?.description &&
+                  typeof product.description === "string" &&
+                  product.description.trim() !== "" ? (
+                  <p>{product.description}</p>
+                ) : (
+                  <p className="text-gray-500 italic">
+                    No description available.
+                  </p>
+                )}
               </div>
             </div>
           </div>
