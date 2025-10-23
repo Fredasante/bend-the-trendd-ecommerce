@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import CustomSelect from "./CustomSelect";
 import { menuData } from "./menuData";
 import Dropdown from "./Dropdown";
 import { useAppSelector } from "@/redux/store";
@@ -9,13 +8,12 @@ import { useSelector } from "react-redux";
 import { selectTotalPrice } from "@/redux/features/cart-slice";
 import { useCartModalContext } from "@/app/context/CartSidebarModalContext";
 import Image from "next/image";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import AuthDropdown from "../Auth/AuthDropdown";
 import { useUser } from "@clerk/nextjs";
 import { Heart, RefreshCcw } from "lucide-react";
+import SearchInput from "./SearchInput";
 
 const Header = () => {
-  const [searchQuery, setSearchQuery] = useState("");
   const [navigationOpen, setNavigationOpen] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
   const { openCartModal } = useCartModalContext();
@@ -40,14 +38,6 @@ const Header = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleStickyMenu);
   });
-
-  const options = [
-    { label: "All Categories", value: "0" },
-    { label: "Men's Wear", value: "1" },
-    { label: "Ladie's Wear", value: "2" },
-    { label: "Sneakers", value: "3" },
-    { label: "Slippers", value: "4" },
-  ];
 
   return (
     <header
@@ -74,34 +64,7 @@ const Header = () => {
             </Link>
 
             <div className="max-w-[475px] w-full">
-              <form>
-                <div className="flex items-center">
-                  <CustomSelect options={options} />
-
-                  <div className="relative max-w-[333px] sm:min-w-[333px] w-full">
-                    {/* <!-- divider --> */}
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 inline-block w-px h-5.5 bg-gray-4"></span>
-                    <input
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      value={searchQuery}
-                      type="search"
-                      name="search"
-                      id="search"
-                      placeholder="I am shopping for..."
-                      autoComplete="off"
-                      className="custom-search w-full rounded-r-[5px] bg-gray-1 !border-l-0 border border-gray-3 py-2.5 pl-4 pr-10 outline-none ease-in duration-200"
-                    />
-
-                    <button
-                      id="search-btn"
-                      aria-label="Search"
-                      className="flex items-center justify-center absolute right-3 top-1/2 -translate-y-1/2 ease-in duration-200 hover:text-blue"
-                    >
-                      <MagnifyingGlassIcon className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
-              </form>
+              <SearchInput />
             </div>
           </div>
 
