@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect, useRef } from "react";
 import Breadcrumb from "../Common/Breadcrumb";
 import CustomSelect from "./CustomSelect";
@@ -27,21 +28,40 @@ const ShopWithSidebar = () => {
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
   const productsTopRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   const handleStickyMenu = () => {
     setStickyMenu(window.scrollY >= 80);
   };
 
+  // Close sidebar function
+  const closeSidebar = () => {
+    setProductSidebar(false);
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", handleStickyMenu);
+
     const handleClickOutside = (event: MouseEvent) => {
-      if (!(event.target as HTMLElement).closest(".sidebar-content")) {
-        setProductSidebar(false);
+      const target = event.target as HTMLElement;
+
+      // Close if clicking outside sidebar
+      if (
+        productSidebar &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(target) &&
+        !target.closest(
+          'button[aria-label="button for product sidebar toggle"]'
+        )
+      ) {
+        closeSidebar();
       }
     };
+
     if (productSidebar) {
       document.addEventListener("mousedown", handleClickOutside);
     }
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       window.removeEventListener("scroll", handleStickyMenu);
@@ -83,24 +103,37 @@ const ShopWithSidebar = () => {
   const handleCategoryChange = (category: string) => {
     setSelectedCategory(category);
     setCurrentPage(1);
+    closeSidebar();
   };
 
   const handleGenderChange = (gender: string) => {
     setSelectedGender(gender);
     scrollToProducts();
     setCurrentPage(1);
+    closeSidebar();
   };
 
   const handleSizeChange = (size: string) => {
     setSelectedSize(size);
     scrollToProducts();
     setCurrentPage(1);
+    closeSidebar();
   };
 
   const handleColorChange = (color: string) => {
     setSelectedColor(color);
     scrollToProducts();
     setCurrentPage(1);
+    closeSidebar();
+  };
+
+  const handleClearFilters = () => {
+    setSelectedCategory("");
+    setSelectedGender("");
+    setSelectedSize("");
+    setSelectedColor("");
+    setCurrentPage(1);
+    closeSidebar();
   };
 
   const scrollToProducts = () => {
@@ -132,6 +165,7 @@ const ShopWithSidebar = () => {
           <div className="flex gap-7.5">
             {/* Sidebar Start */}
             <div
+              ref={sidebarRef}
               className={`sidebar-content fixed xl:z-1 z-9999 left-0 top-0 xl:translate-x-0 xl:static max-w-[310px] xl:max-w-[270px] w-full ease-out duration-200 ${
                 productSidebar
                   ? "translate-x-0 bg-white p-5 h-screen overflow-y-auto"
@@ -178,13 +212,7 @@ const ShopWithSidebar = () => {
                       <button
                         type="button"
                         className="text-blue"
-                        onClick={() => {
-                          setSelectedCategory("");
-                          setSelectedGender("");
-                          setSelectedSize("");
-                          setSelectedColor("");
-                          setCurrentPage(1);
-                        }}
+                        onClick={handleClearFilters}
                       >
                         Clean All
                       </button>
