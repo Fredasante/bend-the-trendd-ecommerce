@@ -1,10 +1,11 @@
 import Contact from "@/components/Contact";
 
 import { Metadata } from "next";
+
 export const metadata: Metadata = {
-  title: "Contact Page | NextCommerce Nextjs E-commerce template",
-  description: "This is Contact Page for NextCommerce Template",
-  // other metadata
+  title: "Contact | Bend the Trendd",
+  description:
+    "Get in touch with Bend the Trendd for inquiries, orders, or support. We'd love to hear from you!",
 };
 
 const ContactPage = () => {
