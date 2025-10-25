@@ -26,10 +26,15 @@ const ProductItem = ({ item }: { item: Product }) => {
 
   // add to cart
   const handleAddToCart = () => {
+    const selectedSize = item.sizes?.[0] || null;
+    const selectedColor = item.colors?.[0] || null;
+
     dispatch(
       addItemToCart({
         ...item,
         quantity: 1,
+        size: selectedSize,
+        color: selectedColor,
       })
     );
     toast.success("Added to cart!");
