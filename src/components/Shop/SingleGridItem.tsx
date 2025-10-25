@@ -25,14 +25,15 @@ const SingleGridItem = ({ item }: { item: Product }) => {
 
   // 🛒 Add to Cart
   const handleAddToCart = () => {
+    const selectedSize = item.sizes?.[0] || null;
+    const selectedColor = item.colors?.[0] || null;
+
     dispatch(
       addItemToCart({
-        _id: item._id,
-        name: item.name,
-        price: item.price,
-        discountPrice: item.discountPrice,
-        mainImageUrl: item.mainImageUrl || "",
+        ...item,
         quantity: 1,
+        size: selectedSize,
+        color: selectedColor,
       })
     );
     toast.success("Added to cart!");

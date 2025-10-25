@@ -39,6 +39,8 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
         price: product.price,
         discountPrice: product.discountPrice,
         mainImageUrl: product.mainImageUrl || "",
+        size: product.sizes?.[0] || null,
+        color: product.colors?.[0] || null,
         quantity: 1,
       })
     );

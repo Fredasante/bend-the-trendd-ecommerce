@@ -42,6 +42,8 @@ const QuickViewModal = () => {
         price: product.price,
         discountPrice: product.discountPrice,
         mainImageUrl: product.mainImageUrl || "",
+        size: product.sizes?.[0] || null,
+        color: product.colors?.[0] || null,
         quantity,
       })
     );
@@ -164,7 +166,7 @@ const QuickViewModal = () => {
                 </span>
               </div>
 
-              <div className="flex flex-wrap gap-9 md:gap-20 lg:gap-25 mt-6 mb-7.5">
+              <div className="flex flex-wrap gap-9 md:gap-15 lg:gap-25 mt-6 mb-7.5">
                 {/* Size Selection */}
                 {product.sizes && product.sizes.length > 0 && (
                   <div className="flex items-center gap-3">
