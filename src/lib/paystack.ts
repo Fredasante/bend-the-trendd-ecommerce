@@ -1,4 +1,6 @@
-import { PaystackPop } from "@paystack/inline-js";
+// @ts-ignore - Suppress TypeScript errors for this library
+
+import PaystackPop from "@paystack/inline-js";
 
 interface PaystackPaymentData {
   email: string;
@@ -22,15 +24,14 @@ export const initializePaystackPayment = ({
   onSuccess,
   onCancel,
 }: PaystackPaymentData) => {
-  const paystack = new PaystackPop();
-
-  paystack.newTransaction({
+  // ✅ FIX: Create instance without 'new' keyword
+  const paystack = PaystackPop.setup({
     key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!,
     email,
-    amount: Math.round(amount * 100), // Convert GHS to pesewas (1 GHS = 100 pesewas)
+    amount: Math.round(amount * 100), // Convert GHS to pesewas
     ref: reference,
     currency: "GHS",
-    channels: ["card", "mobile_money"], // Card and Mobile Money for Ghana
+    channels: ["card", "mobile_money"],
     metadata: {
       custom_fields: [
         {
@@ -50,7 +51,7 @@ export const initializePaystackPayment = ({
         },
       ],
     },
-    onSuccess: (transaction) => {
+    onSuccess: (transaction: any) => {
       console.log("Payment successful!", transaction);
       onSuccess(transaction);
     },
@@ -59,6 +60,9 @@ export const initializePaystackPayment = ({
       onCancel();
     },
   });
+
+  // Open the payment modal
+  paystack.openIframe();
 };
 
 // Generate unique payment reference
