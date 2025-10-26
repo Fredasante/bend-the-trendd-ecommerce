@@ -40,6 +40,8 @@ export const newArrivalsQuery = `
     name,
     slug,
     price,
+    sizes,
+    colors,
     discountPrice,
     category,
     description,
@@ -56,6 +58,8 @@ export const searchProductsQuery = `
     price,
     discountPrice,
     category,
+    sizes,
+    colors,
     description,
     "mainImageUrl": mainImage.asset->url
   }
@@ -69,6 +73,8 @@ export const paginatedProductsQuery = `
     slug,
     price,
     discountPrice,
+    sizes,
+    colors,
     category,
     gender,
     status,
