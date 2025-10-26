@@ -20,6 +20,10 @@ import {
 import { CircleCheck } from "lucide-react";
 import { removeAllItemsFromCart } from "@/redux/features/cart-slice";
 
+const generateKey = () => {
+  return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+};
+
 const Checkout = () => {
   const router = useRouter();
   const { isSignedIn, user, isLoaded } = useUser();
@@ -66,9 +70,9 @@ const Checkout = () => {
           region: formData.get("region") as string,
           city: formData.get("city") as string,
           address: formData.get("address") as string,
-          digitalAddress: (formData.get("digitalAddress") as string) || null,
         },
-        items: cartItems.map((item) => ({
+        items: cartItems.map((item, index) => ({
+          _key: generateKey(),
           product: { _ref: item._id, _type: "reference" },
           productSnapshot: {
             name: item.name,
