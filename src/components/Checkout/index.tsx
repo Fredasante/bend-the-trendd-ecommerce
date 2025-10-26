@@ -138,6 +138,12 @@ const Checkout = () => {
             orderData.payment.paidAt = new Date().toISOString();
             orderData.deliveryStatus = "payment_received";
 
+            // Save to sessionStorage FIRST (for success page)
+            sessionStorage.setItem(
+              `order_${orderId}`,
+              JSON.stringify(orderData)
+            );
+
             // Create order in Sanity
             const response = await fetch("/api/orders/create", {
               method: "POST",
