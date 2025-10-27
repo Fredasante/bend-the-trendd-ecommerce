@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Breadcrumb from "../Common/Breadcrumb";
-import PaymentMethod from "./PaymentMethod";
 import Coupon from "./Coupon";
 import Billing from "./Billing";
 import { useAppSelector } from "@/redux/store";
@@ -32,12 +31,8 @@ const Checkout = () => {
   const [discount, setDiscount] = useState(0);
   const [couponCode, setCouponCode] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<"card" | "mobile_money">(
-    "mobile_money"
-  );
   const dispatch = useDispatch();
 
-  // Calculate totals
   const total = itemsTotal - discount;
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -47,14 +42,12 @@ const Checkout = () => {
     try {
       const formData = new FormData(e.target as HTMLFormElement);
 
-      // Generate order ID and payment reference
       const orderId = `ORD-${Date.now()}-${Math.random()
         .toString(36)
         .substr(2, 6)
         .toUpperCase()}`;
       const paymentReference = generatePaymentReference(orderId);
 
-      // Prepare order data
       const orderData = {
         orderId,
         customerInfo: {
@@ -71,7 +64,7 @@ const Checkout = () => {
           city: formData.get("city") as string,
           address: formData.get("address") as string,
         },
-        items: cartItems.map((item, index) => ({
+        items: cartItems.map((item) => ({
           _key: generateKey(),
           product: { _ref: item._id, _type: "reference" },
           productSnapshot: {
@@ -92,7 +85,7 @@ const Checkout = () => {
           couponCode: couponCode || null,
         },
         payment: {
-          method: paymentMethod,
+          method: "paystack",
           status: "pending",
           paystackReference: paymentReference,
           amount: total,
@@ -111,7 +104,6 @@ const Checkout = () => {
         updatedAt: new Date().toISOString(),
       };
 
-      // Initialize Paystack payment
       initializePaystackPayment({
         email: orderData.customerInfo.email || "customer@example.com",
         amount: total,
@@ -128,7 +120,6 @@ const Checkout = () => {
         },
         onSuccess: async (transaction) => {
           try {
-            // Verify payment first
             const verification = await verifyPaystackPayment(
               transaction.reference
             );
@@ -137,18 +128,15 @@ const Checkout = () => {
               throw new Error("Payment verification failed");
             }
 
-            // Update order with successful payment
             orderData.payment.status = "paid";
             orderData.payment.paidAt = new Date().toISOString();
             orderData.deliveryStatus = "payment_received";
 
-            // Save to sessionStorage FIRST (for success page)
             sessionStorage.setItem(
               `order_${orderId}`,
               JSON.stringify(orderData)
             );
 
-            // Create order in Sanity
             const response = await fetch("/api/orders/create", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -160,11 +148,8 @@ const Checkout = () => {
             }
 
             const result = await response.json();
-
-            // Clear cart
             dispatch(removeAllItemsFromCart());
 
-            // Redirect to success page
             router.push(
               `/order-success?orderId=${orderId}&reference=${transaction.reference}`
             );
@@ -191,7 +176,6 @@ const Checkout = () => {
     }
   };
 
-  // Show loading while checking authentication
   if (!isLoaded) {
     return (
       <>
@@ -207,7 +191,6 @@ const Checkout = () => {
     );
   }
 
-  // If cart is empty
   if (cartItems.length === 0) {
     return (
       <>
@@ -239,7 +222,6 @@ const Checkout = () => {
       <Breadcrumb title={"Checkout"} pages={["checkout"]} />
       <section className="overflow-hidden py-10 bg-gray-2">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
-          {/* Account Status Banner */}
           {!isSignedIn && (
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-7.5">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -254,13 +236,13 @@ const Checkout = () => {
                 </div>
                 <div className="flex flex-wrap gap-3">
                   <Link
-                    href="/sign-in?redirect_url=/checkout"
+                    href="/signin?redirect_url=/checkout"
                     className="inline-flex items-center justify-center font-medium text-white bg-blue py-2.5 px-6 rounded-md ease-out duration-200 hover:bg-blue-dark whitespace-nowrap"
                   >
                     Sign In
                   </Link>
                   <Link
-                    href="/sign-up?redirect_url=/checkout"
+                    href="/signup?redirect_url=/checkout"
                     className="inline-flex items-center justify-center font-medium text-blue bg-white border border-blue py-2.5 px-6 rounded-md ease-out duration-200 hover:bg-blue hover:text-white whitespace-nowrap"
                   >
                     Create Account
@@ -270,12 +252,11 @@ const Checkout = () => {
             </div>
           )}
 
-          {/* Signed In User Welcome */}
           {isSignedIn && user && (
-            <div className="bg-green-50 border border-green-200 rounded-lg p-5 mb-7.5">
+            <div className="bg-green-light-6 border border-green-light-4 rounded-lg p-5 mb-7.5">
               <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
-                  <CircleCheck className="w-6 h-6 text-green-600" />
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-light-6 flex items-center justify-center">
+                  <CircleCheck className="w-6 h-6 text-green-dark" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-dark mb-1">
@@ -291,12 +272,10 @@ const Checkout = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col lg:flex-row gap-7.5 xl:gap-11">
-              {/* Checkout Left */}
               <div className="lg:max-w-[670px] w-full">
                 <Billing isGuest={!isSignedIn} />
               </div>
 
-              {/* Checkout Right - Order Summary */}
               <div className="max-w-[455px] w-full mt-20">
                 <div className="bg-white shadow-1 rounded-[10px]">
                   <div className="border-b border-gray-3 py-5 px-4 sm:px-8.5">
@@ -306,7 +285,6 @@ const Checkout = () => {
                   </div>
 
                   <div className="pt-2.5 pb-8.5 px-4 sm:px-8.5">
-                    {/* Cart Items */}
                     {cartItems.map((item) => {
                       const itemPrice = item.discountPrice ?? item.price;
                       const itemTotal = itemPrice * item.quantity;
@@ -343,13 +321,11 @@ const Checkout = () => {
                       );
                     })}
 
-                    {/* Items Subtotal */}
                     <div className="flex items-center justify-between py-4 border-b border-gray-3">
                       <p className="text-dark">Subtotal</p>
                       <p className="text-dark">GH₵{itemsTotal.toFixed(2)}</p>
                     </div>
 
-                    {/* Discount */}
                     {discount > 0 && (
                       <div className="flex items-center justify-between py-4 border-b border-gray-3">
                         <p className="text-green-600">
@@ -361,7 +337,6 @@ const Checkout = () => {
                       </div>
                     )}
 
-                    {/* Total Amount */}
                     <div className="flex items-center justify-between py-4 border-b border-gray-3 bg-blue-50 -mx-4 sm:-mx-8.5 px-4 sm:px-8.5">
                       <div>
                         <p className="font-semibold text-dark">Total Amount</p>
@@ -374,7 +349,6 @@ const Checkout = () => {
                       </p>
                     </div>
 
-                    {/* Delivery Fee Notice */}
                     <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-md">
                       <p className="text-xs text-yellow-800">
                         <strong>Note:</strong> Delivery fee will be collected
@@ -385,11 +359,6 @@ const Checkout = () => {
                 </div>
 
                 <Coupon onApplyCoupon={setDiscount} />
-
-                <PaymentMethod
-                  selectedMethod={paymentMethod}
-                  onMethodChange={setPaymentMethod}
-                />
 
                 <button
                   type="submit"
@@ -410,7 +379,8 @@ const Checkout = () => {
                 </button>
 
                 <p className="text-xs text-center text-gray-600 mt-4">
-                  🔒 Secure payment via Paystack • Delivery fee paid separately
+                  🔒 Secure payment via Paystack • Choose Card or Mobile Money
+                  in checkout
                 </p>
               </div>
             </div>

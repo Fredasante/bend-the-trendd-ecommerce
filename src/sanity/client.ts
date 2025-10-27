@@ -5,6 +5,7 @@ export const client = createClient({
   dataset: "production",
   apiVersion: "2023-10-01",
   useCdn: true,
+  token: process.env.SANITY_API_TOKEN,
 });
 
 export const fetcher = async ([query, params = {}]) =>

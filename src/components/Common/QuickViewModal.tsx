@@ -92,25 +92,6 @@ const QuickViewModal = () => {
     };
   }, [isModalOpen, closeModal]);
 
-  // Check if description exists and has content
-  const hasDescription =
-    product?.description &&
-    Array.isArray(product.description) &&
-    product.description.length > 0 &&
-    product.description.some(
-      (block) =>
-        block._type === "block" &&
-        block.children &&
-        block.children.length > 0 &&
-        block.children.some(
-          (child) => child.text && child.text.trim().length > 0
-        )
-    );
-
-  console.log("Product:", product);
-  console.log("Product sizes:", product?.sizes);
-  console.log("Has sizes:", product?.sizes && product.sizes.length > 0);
-
   return (
     <div
       className={`${
