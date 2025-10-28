@@ -9,9 +9,12 @@ export default defineConfig({
   projectId: "f9rxg371",
   dataset: "production",
   basePath: "/admin",
-  unstable_noAuthBoundary: true,
   plugins: [structureTool(), visionTool()],
   schema: {
     types: schemas,
+  },
+  auth: {
+    mode: "replace",
+    providers: [],
   },
 });
