@@ -9,8 +9,10 @@ import Link from "next/link";
 export default function AdminPage() {
   const { user } = useUser();
 
+  // ✅ Only allow these emails to access /admin
   const allowedEmails = ["kooyaw55@gmail.com"];
 
+  // ❌ If user is signed in but not in allowed list, show Access Denied
   if (
     user &&
     !allowedEmails.includes(user.primaryEmailAddress?.emailAddress || "")
@@ -18,8 +20,8 @@ export default function AdminPage() {
     return (
       <div className="bg-gray-2 flex items-center justify-center px-4 py-20 mt-30 lg:mt-40 mb-auto lg:min-h-[60vh]">
         <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-center">
-          <div className="w-16 h-16 bg-red-light-6 rounded-full flex items-center justify-center mx-auto mb-4">
-            <ShieldX className="w-8 h-8 text-red" />
+          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <ShieldX className="w-8 h-8 text-red-600" />
           </div>
           <h1 className="text-2xl font-bold text-dark mb-3">Access Denied</h1>
           <p className="text-gray-600 mb-6">
@@ -39,10 +41,12 @@ export default function AdminPage() {
 
   return (
     <>
+      {/* ✅ Only logged-in users with allowed emails see the Studio */}
       <SignedIn>
         <NextStudio config={config} />
       </SignedIn>
 
+      {/* 🚫 Redirect others to Clerk login */}
       <SignedOut>
         <RedirectToSignIn />
       </SignedOut>
