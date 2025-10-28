@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
@@ -11,7 +12,6 @@ import QuickViewModal from "@/components/Common/QuickViewModal";
 import CartSidebarModal from "@/components/Common/CartSidebarModal";
 import { PreviewSliderProvider } from "../context/PreviewSliderContext";
 import PreviewSliderModal from "@/components/Common/PreviewSlider";
-
 import ScrollToTop from "@/components/Common/ScrollToTop";
 import PreLoader from "@/components/Common/PreLoader";
 import { Toaster } from "sonner";
@@ -21,12 +21,22 @@ export default function ClientLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const pathname = usePathname();
   const [loading, setLoading] = useState(true);
 
+  const hideLayoutRoutes = ["/studio", "/admin"];
+  const hideLayout = hideLayoutRoutes.some((route) =>
+    pathname.startsWith(route)
+  );
+
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 1000);
-    return () => clearTimeout(timer);
-  }, []);
+    if (!hideLayout) {
+      const timer = setTimeout(() => setLoading(false), 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setLoading(false);
+    }
+  }, [hideLayout]);
 
   if (loading) {
     return <PreLoader />;
@@ -37,18 +47,18 @@ export default function ClientLayout({
       <CartModalProvider>
         <ModalProvider>
           <PreviewSliderProvider>
-            <Header />
+            {!hideLayout && <Header />}
             {children}
+            {!hideLayout && <Footer />}
             <QuickViewModal />
             <CartSidebarModal />
             <PreviewSliderModal />
           </PreviewSliderProvider>
         </ModalProvider>
       </CartModalProvider>
-      <Toaster richColors position="top-right" />
 
-      <ScrollToTop />
-      <Footer />
+      <Toaster richColors position="top-right" />
+      {!hideLayout && <ScrollToTop />}
     </ReduxProvider>
   );
 }
