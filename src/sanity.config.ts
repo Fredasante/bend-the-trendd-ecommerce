@@ -13,8 +13,4 @@ export default defineConfig({
   schema: {
     types: schemas,
   },
-  auth: {
-    mode: "replace",
-    providers: [],
-  },
 });
