@@ -162,7 +162,7 @@ const Header = () => {
               <button
                 id="Toggle"
                 aria-label="Toggler"
-                className="xl:hidden block mt-2 xl:mt-0"
+                className="xl:hidden block mt-2 mr-1.5 xl:mt-0 xl:mr-0"
                 onClick={() => setNavigationOpen(!navigationOpen)}
               >
                 <span className="block relative cursor-pointer w-5.5 h-5.5">

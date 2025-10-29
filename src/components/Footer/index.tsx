@@ -7,24 +7,24 @@ const Footer = () => {
   return (
     <footer className="bg-slate-50 px-4 sm:px-6 pt-12 pb-6">
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        <div className="space-y-6">
-          <h6 className="font-medium">ABOUT US</h6>
-          <p className="text-[13px] text-gray-500 leading-relaxed italic">
+        <div className="space-y-5">
+          <h6 className="font-semibold">ABOUT US</h6>
+          <p className="text-[15px] text-gray-500 leading-relaxed italic">
             “At Bend the Trendd, we believe fashion is more than clothing —
             it&apos;s a reflection of confidence, culture, and creativity. Every
             piece you wear is a statement of who you are and the story
             you&apos;re telling the world.”
           </p>
-          <p className="text-[13px] text-gray-500">— Bend the Trendd</p>
+          <p className="text-[15px] text-gray-500">— Bend the Trendd</p>
         </div>
 
-        <div className="space-y-6">
-          <h6 className="font-medium">SHOP</h6>
+        <div className="space-y-5">
+          <h6 className="font-semibold">SHOP</h6>
           <ul className="space-y-3">
             <li>
               <Link
                 href="/cart"
-                className="text-[13px] text-gray-500 hover:text-gray-600"
+                className="text-[15px] text-gray-500 hover:text-gray-600"
               >
                 Cart
               </Link>
@@ -32,7 +32,7 @@ const Footer = () => {
             <li>
               <Link
                 href="/wishlist"
-                className="text-[13px] text-gray-500 hover:text-gray-600"
+                className="text-[15px] text-gray-500 hover:text-gray-600"
               >
                 Wishlist
               </Link>
@@ -40,15 +40,15 @@ const Footer = () => {
             <li>
               <Link
                 href="/shop"
-                className="text-[13px] text-gray-500 hover:text-gray-600"
+                className="text-[15px] text-gray-500 hover:text-gray-600"
               >
                 Explore All Products
               </Link>
             </li>
             <li>
               <Link
-                href="/shop"
-                className="text-[13px] text-gray-500 hover:text-gray-600"
+                href="/"
+                className="text-[15px] text-gray-500 hover:text-gray-600"
               >
                 Terms & Conditions
               </Link>
@@ -56,13 +56,13 @@ const Footer = () => {
           </ul>
         </div>
 
-        <div className="space-y-6">
-          <h6 className="font-medium">HELPFUL LINKS</h6>
+        <div className="space-y-5">
+          <h6 className="font-semibold">HELPFUL LINKS</h6>
           <ul className="space-y-3">
             <li>
               <Link
                 href="/about"
-                className="text-[13px] text-gray-400 hover:text-white"
+                className="text-[15px] text-gray-400 hover:text-white"
               >
                 About Us
               </Link>
@@ -70,7 +70,7 @@ const Footer = () => {
             <li>
               <Link
                 href="/contact"
-                className="text-[13px] text-gray-400 hover:text-white"
+                className="text-[15px] text-gray-400 hover:text-white"
               >
                 Contact Us
               </Link>
@@ -78,7 +78,7 @@ const Footer = () => {
             <li>
               <Link
                 href="/faq"
-                className="text-[13px] text-gray-400 hover:text-white"
+                className="text-[15px] text-gray-400 hover:text-white"
               >
                 FAQs
               </Link>
@@ -86,16 +86,16 @@ const Footer = () => {
             <li>
               <Link
                 href="/terms"
-                className="text-[13px] text-gray-400 hover:text-white"
+                className="text-[15px] text-gray-400 hover:text-white"
               ></Link>
             </li>
           </ul>
         </div>
 
-        <div className="space-y-6">
-          <h6 className="font-medium">SOCIAL MEDIA</h6>
+        <div className="space-y-5">
+          <h6 className="font-semibold">SOCIAL MEDIA</h6>
           <div className="">
-            <h6 className="text-[13px] text-gray-400 font-medium">
+            <h6 className="text-[15px] text-gray-400">
               Stay connected — follow us on social media for trend updates,
               style tips, and exclusive looks you won&apos;t find anywhere else.
             </h6>
