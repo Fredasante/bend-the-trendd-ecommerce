@@ -1,9 +1,9 @@
 import { Product } from "@/types/product";
 import { client } from "./client";
 
-// 🛍️ All products (newest first)
+// 🛍️ All products (newest first) - AVAILABLE ONLY
 export const allProductsQuery = `
-  *[_type == "product"] | order(createdAt desc) {
+  *[_type == "product" && status == "available"] | order(createdAt desc) {
     _id,
     name,
     slug,
@@ -18,7 +18,7 @@ export const allProductsQuery = `
   }
 `;
 
-// 👕 Products by Category
+// 👕 Products by Category - AVAILABLE ONLY
 export const productsByCategoryQuery = `
   *[_type == "product" && category == $category && status == "available"] | order(createdAt desc) {
     _id,
@@ -33,7 +33,7 @@ export const productsByCategoryQuery = `
   }
 `;
 
-// ✅ Fetch the 8 most recent available products (New Arrivals)
+// ✅ Fetch the 12 most recent available products (New Arrivals)
 export const newArrivalsQuery = `
   *[_type == "product" && status == "available"] | order(_createdAt desc)[0...12]{
     _id,
@@ -49,9 +49,9 @@ export const newArrivalsQuery = `
   }
 `;
 
-// 🔍 Search by name
+// 🔍 Search by name - AVAILABLE ONLY
 export const searchProductsQuery = `
-  *[_type == "product" && name match $search + "*"] | order(createdAt desc) {
+  *[_type == "product" && name match $search + "*" && status == "available"] | order(createdAt desc) {
     _id,
     name,
     slug,
@@ -65,9 +65,9 @@ export const searchProductsQuery = `
   }
 `;
 
-// 🧭 Paginated products
+// 🧭 Paginated products - AVAILABLE ONLY
 export const paginatedProductsQuery = `
-  *[_type == "product"] | order(createdAt desc) [$start...$end] {
+  *[_type == "product" && status == "available"] | order(createdAt desc) [$start...$end] {
     _id,
     name,
     slug,
@@ -84,44 +84,46 @@ export const paginatedProductsQuery = `
   }
 `;
 
-// Count products with optional category filter
-export const productCountQuery = `count(*[_type == "product" $categoryFilter])`;
+// Count available products with optional category filter
+export const productCountQuery = `count(*[_type == "product" && status == "available" $categoryFilter])`;
 
-// Categories with product count
+// Categories with product count - AVAILABLE ONLY
 export const categoriesWithCountQuery = `
-  *[_type == "product"] {
+  *[_type == "product" && status == "available"] {
     category
   } | {
     "name": category,
-    "products": count(*[_type == "product" && category == ^.category])
+    "products": count(*[_type == "product" && category == ^.category && status == "available"])
   }
 `;
 
-// Genders with product count
+// Genders with product count - AVAILABLE ONLY
 export const gendersWithCountQuery = `
-  *[_type == "product"] {
+  *[_type == "product" && status == "available"] {
     gender
   } | {
     "name": gender,
-    "products": count(*[_type == "product" && gender == ^.gender])
+    "products": count(*[_type == "product" && gender == ^.gender && status == "available"])
   }
 `;
 
+// Sizes with count - AVAILABLE ONLY
 export const sizesWithCountQuery = `
-  *[_type == "product" && defined(sizes)] {
+  *[_type == "product" && defined(sizes) && status == "available"] {
     sizes
   }
 `;
 
+// Colors with count - AVAILABLE ONLY
 export const colorsWithCountQuery = `
-  *[_type == "product" && defined(colors)] {
+  *[_type == "product" && defined(colors) && status == "available"] {
     colors
   }
 `;
 
-// Query to fetch a single product by slug
+// Query to fetch a single product by slug - AVAILABLE ONLY
 export const PRODUCT_BY_SLUG_QUERY = `
-  *[_type == "product" && slug.current == $slug][0]{
+  *[_type == "product" && slug.current == $slug && status == "available"][0]{
     _id,
     name,
     slug,
@@ -155,7 +157,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   }
 }
 
-// Query to get all product slugs (for static generation)
+// Query to get all AVAILABLE product slugs (for static generation)
 export const ALL_PRODUCT_SLUGS_QUERY = `
-  *[_type == "product"]{ "slug": slug.current }
+  *[_type == "product" && status == "available"]{ "slug": slug.current }
 `;

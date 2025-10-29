@@ -99,8 +99,7 @@ const MyAccount = () => {
   if (!isLoaded) {
     return (
       <>
-        <Breadcrumb title={"My Account"} pages={["my account"]} />
-        <section className="overflow-hidden py-20 bg-gray-2">
+        <section className="overflow-hidden py-20 bg-gray-2 mt-45 mb-5 md:mt-50 md:mb-10 lg:mb-15">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
             <div className="flex justify-center items-center min-h-[400px]">
               <ClipLoader size={28} color="#000080" />
@@ -118,9 +117,7 @@ const MyAccount = () => {
 
   return (
     <>
-      <Breadcrumb title={"My Account"} pages={["my account"]} />
-
-      <section className="overflow-hidden py-10 lg:py-13 bg-gray-2">
+      <section className="overflow-hidden py-5 sm:py-7 bg-gray-2 mt-45 mb-5 md:mt-50 md:mb-10 lg:mb-15">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex flex-col xl:flex-row gap-5 lg:gap-7.5">
             {/* Sidebar */}
@@ -204,7 +201,7 @@ const MyAccount = () => {
             </div>
 
             {/* Main Content Area */}
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 md:mt-4">
               {/* Dashboard Tab */}
               {activeTab === "dashboard" && (
                 <div className="space-y-5 lg:space-y-6">

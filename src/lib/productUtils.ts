@@ -20,8 +20,9 @@ export const fetchPaginatedProducts = async ({
   const start = (page - 1) * perPage;
   const end = start + perPage;
 
-  // Build filters dynamically
-  const filters: string[] = [];
+  // Build filter for available products
+  const filters: string[] = ['status == "available"'];
+
   if (category) filters.push(`category == "${category}"`);
   if (gender) filters.push(`gender == "${gender}"`);
   if (size) filters.push(`"${size}" in sizes`);
@@ -29,7 +30,7 @@ export const fetchPaginatedProducts = async ({
 
   const filterString = filters.length > 0 ? `&& ${filters.join(" && ")}` : "";
 
-  // products
+  // products query
   const productsQuery = `
     *[_type == "product" ${filterString}] | order(_createdAt desc) [$start...$end] {
       _id,
@@ -62,14 +63,14 @@ export const fetchPaginatedProducts = async ({
   }
 };
 
-// categories
+// categories - only count available products
 export const fetchCategories = async () => {
   const query = `
-    *[_type == "product"] {
+    *[_type == "product" && status == "available"] {
       category
     } | {
       "name": category,
-      "products": count(*[_type == "product" && category == ^.category])
+      "products": count(*[_type == "product" && category == ^.category && status == "available"])
     }
   `;
 
@@ -86,14 +87,14 @@ export const fetchCategories = async () => {
   }
 };
 
-// genders
+// genders - only count available products
 export const fetchGenders = async () => {
   const query = `
-    *[_type == "product"] {
+    *[_type == "product" && status == "available"] {
       gender
     } | {
       "name": gender,
-      "products": count(*[_type == "product" && gender == ^.gender])
+      "products": count(*[_type == "product" && gender == ^.gender && status == "available"])
     }
   `;
 
@@ -113,10 +114,10 @@ export const fetchGenders = async () => {
   }
 };
 
-// sizes
+// sizes - only count available products
 export const fetchSizes = async () => {
   const query = `
-    *[_type == "product" && defined(sizes)] {
+    *[_type == "product" && defined(sizes) && status == "available"] {
       sizes
     }
   `;
@@ -140,10 +141,10 @@ export const fetchSizes = async () => {
   }
 };
 
-// colors
+// colors - only count available products
 export const fetchColors = async () => {
   const query = `
-    *[_type == "product" && defined(colors)] {
+    *[_type == "product" && defined(colors) && status == "available"] {
       colors
     }
   `;

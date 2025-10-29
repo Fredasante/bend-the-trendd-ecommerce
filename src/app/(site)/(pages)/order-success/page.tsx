@@ -95,8 +95,8 @@ export default function OrderSuccessPage() {
   if (loading) {
     return (
       <>
-        <section className="overflow-hidden py-20 bg-gray-2">
-          <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
+        <section className="overflow-hidden mt-28">
+          <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0 rounded-lg">
             <div className="flex justify-center items-center min-h-[400px]">
               <ClipLoader size={32} color="#000080" />
             </div>
@@ -109,9 +109,9 @@ export default function OrderSuccessPage() {
   if (error || !orderDetails) {
     return (
       <>
-        <section className="overflow-hidden py-20 bg-gray-2">
-          <div className="max-w-[800px] w-full mx-auto px-4 sm:px-8 xl:px-0">
-            <div className="bg-white shadow-1 rounded-[10px] p-8 text-center">
+        <section className="overflow-hidden mt-45 mb-5 md:mt-50 md:mb-10 lg:mb-15">
+          <div className="max-w-[800px] w-full mx-auto px-4 sm:px-8 xl:px-0 bg-gray-2 rounded-lg">
+            <div className="shadow-1 rounded-[10px] p-8 text-center">
               <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-3xl">⚠️</span>
               </div>
@@ -134,8 +134,7 @@ export default function OrderSuccessPage() {
 
   return (
     <>
-      <Breadcrumb title="Order Success" pages={["order-success"]} />
-      <section className="overflow-hidden py-10 lg:py-15 bg-gray-2">
+      <section className="overflow-hidden py-5 md:py-10 lg:py-12 bg-gray-2 mt-45 mb-5 md:mt-50 md:mb-10 lg:mb-15">
         <div className="max-w-[900px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           {/* Success Banner */}
           <div className="bg-white shadow-1 rounded-[10px] p-6 sm:p-10 mb-7.5 text-center">
@@ -297,12 +296,6 @@ export default function OrderSuccessPage() {
               className="flex-1 flex justify-center items-center font-medium text-white bg-blue py-3 px-6 rounded-md ease-out duration-200 hover:bg-blue-dark print:hidden"
             >
               Continue Shopping
-            </Link>
-            <Link
-              href="/"
-              className="flex-1 flex justify-center items-center font-medium text-blue bg-white border border-blue py-3 px-6 rounded-md ease-out duration-200 hover:bg-blue hover:text-white print:hidden"
-            >
-              Go to Homepage
             </Link>
           </div>
 

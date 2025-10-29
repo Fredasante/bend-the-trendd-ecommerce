@@ -137,6 +137,7 @@ const Checkout = () => {
               JSON.stringify(orderData)
             );
 
+            // Create the order in Sanity
             const response = await fetch("/api/orders/create", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -148,8 +149,36 @@ const Checkout = () => {
             }
 
             const result = await response.json();
+
+            // Update all products in cart to "sold" status
+            const updatePromises = cartItems.map((item) =>
+              fetch("/api/products/update-status", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  productId: item._id,
+                  status: "sold",
+                }),
+              })
+            );
+
+            // Wait for all product updates to complete
+            const updateResults = await Promise.allSettled(updatePromises);
+
+            // Log any failures (optional)
+            updateResults.forEach((result, index) => {
+              if (result.status === "rejected") {
+                console.error(
+                  `Failed to update product ${cartItems[index]._id}:`,
+                  result.reason
+                );
+              }
+            });
+
+            // Clear the cart
             dispatch(removeAllItemsFromCart());
 
+            // Redirect to success page
             router.push(
               `/order-success?orderId=${orderId}&reference=${transaction.reference}`
             );
