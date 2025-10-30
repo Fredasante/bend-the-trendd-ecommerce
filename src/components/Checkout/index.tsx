@@ -208,8 +208,7 @@ const Checkout = () => {
   if (!isLoaded) {
     return (
       <>
-        <Breadcrumb title={"Checkout"} pages={["checkout"]} />
-        <section className="overflow-hidden py-20 bg-gray-2">
+        <section className="overflow-hidden py-20 bg-gray-2 mt-10">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
             <div className="flex justify-center items-center min-h-[400px]">
               <ClipLoader size={32} color="#000080" />
@@ -223,8 +222,7 @@ const Checkout = () => {
   if (cartItems.length === 0) {
     return (
       <>
-        <Breadcrumb title={"Checkout"} pages={["checkout"]} />
-        <section className="overflow-hidden py-20 bg-gray-2">
+        <section className="overflow-hidden py-20 bg-gray-2 mt-45 md:mt-50">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
             <div className="bg-white shadow-1 rounded-[10px] p-8 text-center">
               <h3 className="text-2xl font-semibold mb-4">
@@ -248,8 +246,7 @@ const Checkout = () => {
 
   return (
     <>
-      <Breadcrumb title={"Checkout"} pages={["checkout"]} />
-      <section className="overflow-hidden py-10 bg-gray-2">
+      <section className="overflow-hidden py-10 bg-gray-2 mt-45 md:mt-50 md:pb-10 lg:pb-18">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           {!isSignedIn && (
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-7.5">
@@ -282,15 +279,12 @@ const Checkout = () => {
           )}
 
           {isSignedIn && user && (
-            <div className="bg-green-light-6 border border-green-light-4 rounded-lg p-5 mb-7.5">
-              <div className="flex items-start gap-3">
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-green-light-6 flex items-center justify-center">
+            <div className="bg-white border-none shadow-sm rounded-lg p-5 mb-7.5">
+              <div className="flex items-center  gap-3">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-white flex items-center justify-center">
                   <CircleCheck className="w-6 h-6 text-green-dark" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-dark mb-1">
-                    Welcome back, {user.firstName || user.username}!
-                  </h3>
                   <p className="text-sm text-gray-600">
                     Your order will be saved to your account for easy tracking
                   </p>
@@ -305,7 +299,7 @@ const Checkout = () => {
                 <Billing isGuest={!isSignedIn} />
               </div>
 
-              <div className="max-w-[455px] w-full mt-20">
+              <div className="max-w-[455px] w-full mt-3 md:mt-5 lg:mt-20">
                 <div className="bg-white shadow-1 rounded-[10px]">
                   <div className="border-b border-gray-3 py-5 px-4 sm:px-8.5">
                     <h3 className="font-medium text-xl text-dark">
@@ -339,7 +333,7 @@ const Checkout = () => {
                                 {item.name}
                               </p>
                               <p className="text-xs text-gray-600">
-                                Qty: {item.quantity} × GH₵{itemPrice.toFixed(2)}
+                                Qty: {item.quantity} x GH₵{itemPrice.toFixed(2)}
                               </p>
                             </div>
                           </div>

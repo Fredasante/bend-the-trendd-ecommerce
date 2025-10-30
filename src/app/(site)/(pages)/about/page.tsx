@@ -1,9 +1,11 @@
 import AboutUs from "@/components/AboutUs/AboutUs";
 
 import { Metadata } from "next";
+
 export const metadata: Metadata = {
-  title: "Contact Page | NextCommerce Nextjs E-commerce template",
-  description: "This is Contact Page for NextCommerce Template",
+  title: "About Us | Bend the Trendd",
+  description:
+    "Discover Bend the Trendd — your go-to fashion destination offering trendy, affordable, and high-quality styles for every occasion.",
 };
 
 const AboutUsPage = () => {

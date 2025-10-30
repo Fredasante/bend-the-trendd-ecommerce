@@ -15,8 +15,7 @@ export const Wishlist = () => {
 
   return (
     <>
-      <Breadcrumb title={"Wishlist"} pages={["Wishlist"]} />
-      <section className="overflow-hidden py-10 bg-gray-2">
+      <section className="overflow-hidden py-10 bg-gray-2 mt-45 md:mt-50 md:pb-10 lg:pb-20">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex flex-wrap items-center justify-between gap-5 mb-7.5">
             <h2 className="font-medium text-dark text-2xl">Your Wishlist</h2>

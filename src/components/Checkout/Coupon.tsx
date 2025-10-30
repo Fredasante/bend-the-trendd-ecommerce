@@ -13,9 +13,7 @@ const Coupon = ({ onApplyCoupon }: CouponProps) => {
 
   // Available coupons - move to Sanity CMS or API in production
   const coupons: Record<string, number> = {
-    SAVE20: 20,
-    FIRST50: 50,
-    GHANA25: 25,
+    SAVE50: 50,
   };
 
   const handleApplyCoupon = () => {
