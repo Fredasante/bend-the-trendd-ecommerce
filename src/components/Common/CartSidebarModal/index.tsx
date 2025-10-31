@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
+
+import React, { useEffect, useRef } from "react";
 import { useCartModalContext } from "@/app/context/CartSidebarModalContext";
 import { useAppSelector } from "@/redux/store";
 import { selectTotalPrice } from "@/redux/features/cart-slice";
@@ -11,6 +12,14 @@ const CartSidebarModal = () => {
   const { isCartModalOpen, closeCartModal } = useCartModalContext();
   const cartItems = useAppSelector((state) => state.cartReducer.items);
   const totalPrice = useAppSelector(selectTotalPrice);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Reset scroll position when modal opens
+  useEffect(() => {
+    if (isCartModalOpen && scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [isCartModalOpen]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -49,14 +58,17 @@ const CartSidebarModal = () => {
             <button
               onClick={closeCartModal}
               aria-label="Close cart modal"
-              className="flex items-center justify-center ease-in duration-150 bg-meta text-dark-5 hover:text-dark"
+              className="flex items-center justify-center ease-in w-6 h-6 p-2 rounded-full duration-150 bg-gray-2 text-slate-400 hover:text-dark"
             >
               ✕
             </button>
           </div>
 
           {/* Cart Items */}
-          <div className="h-[66vh] overflow-y-auto no-scrollbar">
+          <div
+            ref={scrollContainerRef}
+            className="h-[66vh] overflow-y-auto no-scrollbar"
+          >
             <div className="flex flex-col gap-6">
               {cartItems.length > 0 ? (
                 cartItems.map((item, index) => (

@@ -13,7 +13,7 @@ export default function DiscountBanner() {
   };
 
   return (
-    <section className="relative pt-5">
+    <section className="relative pt-5 lg:pt-0">
       <div className="bg-blue-50 w-full h-full absolute top-0 left-0"></div>
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 relative">
         <a
@@ -43,11 +43,11 @@ export default function DiscountBanner() {
           </svg>
         </a>
 
-        <h1 className="mb-4 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl">
+        <h1 className="mb-4 text-3xl font-extrabold tracking-tight leading-none text-gray-900 md:text-4xl lg:text-5xl">
           Save Big on Your Purchase
         </h1>
 
-        <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48">
+        <p className="mb-8 md:text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48">
           Use the exclusive code below at checkout and get an instant discount
           on your order. Dont miss out on this amazing offer!
         </p>
