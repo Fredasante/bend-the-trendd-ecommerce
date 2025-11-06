@@ -60,53 +60,53 @@ const SingleGridItem = ({ item }: { item: Product }) => {
           fill
           className="object-contain object-center p-3"
         />
-
-        {/* Hover buttons */}
-        <div className="absolute left-0 bottom-0 translate-y-full w-full flex items-center justify-center gap-2.5 pb-5 ease-linear duration-200 group-hover:translate-y-0">
-          <button
-            onClick={() => {
-              openModal();
-              handleQuickViewUpdate();
-            }}
-            aria-label="Quick view product"
-            className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue"
-          >
-            <Eye className="w-4 h-4" />
-          </button>
-
-          <button
-            onClick={handleAddToCart}
-            className="inline-flex font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] bg-blue text-white ease-out duration-200 hover:bg-blue-dark"
-          >
-            Add to cart
-          </button>
-
-          <button
-            onClick={handleItemToWishList}
-            aria-label="Add to wishlist"
-            className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue"
-          >
-            <Heart className="w-4 h-4" />
-          </button>
-        </div>
       </div>
 
       <StarRating />
 
       {/* Product title */}
-      <h3 className="font-medium text-dark ease-out duration-200 hover:text-blue mb-1.5 line-clamp-1">
+      <h3 className="font-medium text-center text-dark ease-out duration-200 hover:text-blue mb-1.5 line-clamp-1">
         <Link href={`/shop/${item.slug?.current || item.slug}`}>
           {item.name}
         </Link>
       </h3>
 
       {/* Price */}
-      <span className="flex items-center gap-2 font-medium text-lg">
+      <span className="flex items-center justify-center gap-2 font-medium">
         <span className="text-dark">₵{item.discountPrice ?? item.price}</span>
         {item.discountPrice && (
           <span className="text-dark-4 line-through">₵{item.price}</span>
         )}
       </span>
+
+      {/* Hover buttons */}
+      <div className="w-full flex items-center justify-center gap-2.5 pt-3 pb-2 ease-linear duration-200 group-hover:translate-y-0">
+        <button
+          onClick={() => {
+            openModal();
+            handleQuickViewUpdate();
+          }}
+          aria-label="Quick view product"
+          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue"
+        >
+          <Eye className="w-4 h-4" />
+        </button>
+
+        <button
+          onClick={handleAddToCart}
+          className="inline-flex font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] bg-blue text-white ease-out duration-200 hover:bg-blue-dark"
+        >
+          Add to cart
+        </button>
+
+        <button
+          onClick={handleItemToWishList}
+          aria-label="Add to wishlist"
+          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue"
+        >
+          <Heart className="w-4 h-4" />
+        </button>
+      </div>
     </div>
   );
 };
