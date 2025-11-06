@@ -10,7 +10,6 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import Link from "next/link";
 import { updateProductDetails } from "@/redux/features/product-details";
-import StarRating from "./StarRating";
 import { Eye, Heart } from "lucide-react";
 import { toast } from "sonner";
 
@@ -64,42 +63,10 @@ const ProductItem = ({ item }: { item: Product }) => {
           fill
           className="object-contain object-center p-3"
         />
-
-        <div className="absolute left-0 bottom-0 translate-y-full w-full flex items-center justify-center gap-2.5 pb-5 ease-linear duration-200 group-hover:translate-y-0">
-          <button
-            onClick={() => {
-              openModal();
-              handleQuickViewUpdate();
-            }}
-            id="newOne"
-            aria-label="button for quick view"
-            className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue"
-          >
-            <Eye className="w-4 h-4" />
-          </button>
-
-          <button
-            onClick={() => handleAddToCart()}
-            className="inline-flex font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] bg-blue text-white ease-out duration-200 hover:bg-blue-dark"
-          >
-            Add to cart
-          </button>
-
-          <button
-            onClick={() => handleItemToWishList()}
-            aria-label="button for favorite select"
-            id="favOne"
-            className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue"
-          >
-            <Heart className="w-4 h-4" />
-          </button>
-        </div>
       </div>
 
-      <StarRating />
-
       <h3
-        className="font-medium text-dark ease-out duration-200 hover:text-blue mb-1.5"
+        className="font-semibold text-dark text-center ease-out duration-200 hover:text-blue mb-1.5"
         onClick={() => handleProductDetails()}
       >
         <Link href={`/shop/${item.slug.current}`} className="line-clamp-1">
@@ -107,7 +74,7 @@ const ProductItem = ({ item }: { item: Product }) => {
         </Link>
       </h3>
 
-      <span className="flex items-center gap-2 font-medium text-lg">
+      <span className="flex items-center justify-center gap-2 font-medium">
         {item.discountPrice && item.discountPrice > 0 ? (
           <>
             <span className="text-dark">₵{item.discountPrice}</span>
@@ -117,6 +84,36 @@ const ProductItem = ({ item }: { item: Product }) => {
           <span className="text-dark">₵{item.price}</span>
         )}
       </span>
+
+      <div className="w-full flex items-center gap-2.5 pt-3 pb-3 border-b border-gray-3 mb-2">
+        <button
+          onClick={() => {
+            openModal();
+            handleQuickViewUpdate();
+          }}
+          id="newOne"
+          aria-label="button for quick view"
+          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue flex-shrink-0"
+        >
+          <Eye className="w-4 h-4" />
+        </button>
+
+        <button
+          onClick={() => handleAddToCart()}
+          className="inline-flex items-center justify-center font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] bg-blue-dark text-white ease-out duration-200 hover:bg-opacity-95 flex-1"
+        >
+          Add to cart
+        </button>
+
+        <button
+          onClick={() => handleItemToWishList()}
+          aria-label="button for favorite select"
+          id="favOne"
+          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue flex-shrink-0"
+        >
+          <Heart className="w-4 h-4" />
+        </button>
+      </div>
     </div>
   );
 };
