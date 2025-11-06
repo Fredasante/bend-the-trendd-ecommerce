@@ -85,7 +85,7 @@ const ProductItem = ({ item }: { item: Product }) => {
         )}
       </span>
 
-      <div className="w-full flex items-center gap-2.5 pt-3 pb-3 border-b border-gray-3 mb-2">
+      <div className="w-full flex items-center justify-center gap-2.5 pt-3 pb-2 border-b border-gray-3">
         <button
           onClick={() => {
             openModal();
@@ -100,7 +100,7 @@ const ProductItem = ({ item }: { item: Product }) => {
 
         <button
           onClick={() => handleAddToCart()}
-          className="inline-flex items-center justify-center font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] bg-blue-dark text-white ease-out duration-200 hover:bg-opacity-95 flex-1"
+          className="flex items-center justify-center bg-[#e57c26] font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] text-white ease-out duration-200 hover:bg-blue-dark"
         >
           Add to cart
         </button>
