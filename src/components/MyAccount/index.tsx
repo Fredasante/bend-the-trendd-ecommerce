@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Breadcrumb from "../Common/Breadcrumb";
 import Image from "next/image";
 import Orders from "../Orders";
 import { useUser, useClerk } from "@clerk/nextjs";
@@ -17,7 +16,6 @@ import {
   Truck,
   Mail,
   Phone,
-  User,
 } from "lucide-react";
 
 interface Order {
@@ -40,6 +38,18 @@ const MyAccount = () => {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);
+
+  // Scroll to top when switching tabs
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [activeTab]);
+
+  // Handle redirect in useEffect instead of during render
+  useEffect(() => {
+    if (isLoaded && !user) {
+      router.push("/signin");
+    }
+  }, [isLoaded, user, router]);
 
   useEffect(() => {
     if (!user) return;
@@ -96,13 +106,14 @@ const MyAccount = () => {
   // Get recent orders (last 3)
   const recentOrders = orders.slice(0, 3);
 
+  // Show loading state while checking authentication
   if (!isLoaded) {
     return (
       <>
         <section className="overflow-hidden py-20 bg-gray-2 mt-45 mb-5 md:mt-50 md:mb-10 lg:mb-15">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
             <div className="flex justify-center items-center min-h-[400px]">
-              <ClipLoader size={28} color="#000080" />
+              <ClipLoader size={26} color="#000080" />
             </div>
           </div>
         </section>
@@ -110,14 +121,24 @@ const MyAccount = () => {
     );
   }
 
+  // Show loading state while redirecting
   if (!user) {
-    router.push("/signin");
-    return null;
+    return (
+      <>
+        <section className="overflow-hidden py-20 bg-gray-2 mt-45 mb-5 md:mt-50 md:mb-10 lg:mb-15">
+          <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
+            <div className="flex justify-center items-center min-h-[400px]">
+              <ClipLoader size={26} color="#000080" />
+            </div>
+          </div>
+        </section>
+      </>
+    );
   }
 
   return (
     <>
-      <section className="overflow-hidden py-5 sm:py-7 bg-gray-2 mt-45 mb-5 md:mt-50 md:mb-10 lg:mb-15">
+      <section className="overflow-hidden py-5 sm:py-7 bg-gray-2 mt-45 mb-5 md:mt-48 md:mb-10 lg:mb-15">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex flex-col xl:flex-row gap-5 lg:gap-7.5">
             {/* Sidebar */}
@@ -184,7 +205,7 @@ const MyAccount = () => {
                     <button
                       onClick={handleLogout}
                       disabled={isLoggingOut}
-                      className="w-full flex items-center justify-center gap-3 rounded-lg py-3 px-4 text-sm font-medium text-gray-700 bg-gray-1 hover:bg-red hover:text-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full flex items-center justify-center gap-3 rounded-lg py-3 px-4 text-sm font-medium text-gray-700 bg-gray-1 hover:bg-gray-2 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isLoggingOut ? (
                         <ClipLoader size={18} color="#ffffff" />

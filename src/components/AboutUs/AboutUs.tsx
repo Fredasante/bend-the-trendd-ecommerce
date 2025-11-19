@@ -4,7 +4,9 @@ import Breadcrumb from "../Common/Breadcrumb";
 const AboutUs = () => {
   return (
     <>
-      <section className="overflow-hidden py-10 bg-gray-2 mt-45 md:mt-50 md:pb-10 lg:pb-20">
+      <Breadcrumb title={"About Us"} pages={["about"]} />
+
+      <section className="overflow-hidden py-10 bg-gray-2 md:pb-10 lg:pb-20">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           {/* Hero Section */}
           <div className="text-center mb-12">
@@ -12,7 +14,7 @@ const AboutUs = () => {
               Welcome to Bend the Trendd
             </h1>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Where fashion meets individuality. We do not just follow trends –
+              Where fashion meets individuality. We do not just follow trends -
               we bend them to create unique styles that empower you to express
               yourself.
             </p>
