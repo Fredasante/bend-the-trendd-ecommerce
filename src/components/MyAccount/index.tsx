@@ -1,9 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import Breadcrumb from "../Common/Breadcrumb";
 import Image from "next/image";
 import Orders from "../Orders";
 import { useUser, useClerk } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ClipLoader } from "react-spinners";
 import {
   LayoutDashboard,
@@ -16,6 +17,7 @@ import {
   Truck,
   Mail,
   Phone,
+  User,
 } from "lucide-react";
 
 interface Order {
@@ -34,7 +36,9 @@ const MyAccount = () => {
   const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
+  const [activeTab, setActiveTab] = useState(tabParam || "dashboard");
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loadingOrders, setLoadingOrders] = useState(true);

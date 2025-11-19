@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { SignOutButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface AuthDropdownProps {
   user: any;
@@ -13,6 +14,7 @@ interface AuthDropdownProps {
 export default function AuthDropdown({ user, isSignedIn }: AuthDropdownProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -28,6 +30,11 @@ export default function AuthDropdown({ user, isSignedIn }: AuthDropdownProps) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Close dropdown when navigating
+  useEffect(() => {
+    setIsDropdownOpen(false);
+  }, [pathname]);
 
   // Truncate long names
   const truncateName = (name: string, maxLength: number = 12) => {
@@ -102,7 +109,29 @@ export default function AuthDropdown({ user, isSignedIn }: AuthDropdownProps) {
             </p>
           </div>
 
-          <div className="pt-2">
+          <div className="py-2">
+            <Link
+              href="/my-account?tab=orders"
+              className="flex items-center gap-2 w-full px-4 py-2 text-sm text-dark hover:bg-gray-1 transition-colors"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                />
+              </svg>
+              Orders
+            </Link>
+          </div>
+
+          <div className="pt-2 border-t border-gray-3">
             <SignOutButton>
               <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red hover:bg-gray-1 transition-colors text-left">
                 <svg
