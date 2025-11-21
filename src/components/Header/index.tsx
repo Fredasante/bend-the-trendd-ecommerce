@@ -87,6 +87,7 @@ const Header = () => {
                 alt="Logo"
                 width={90}
                 height={20}
+                className="py-1"
               />
             </Link>
 
@@ -101,8 +102,8 @@ const Header = () => {
               <Image
                 src="/icons/support-icon.svg"
                 alt="Support Icon"
-                width={25}
-                height={25}
+                width={20}
+                height={20}
               />
               <div>
                 <span className="block text-2xs text-dark-4 uppercase">
@@ -142,7 +143,7 @@ const Header = () => {
                       width={25}
                       height={25}
                     />
-                    <span className="flex items-center justify-center font-medium text-2xs absolute -right-2 -top-2.5 bg-blue w-4.5 h-4.5 rounded-full text-white">
+                    <span className="flex items-center justify-center font-medium text-2xs absolute -right-2 -top-2.5 bg-[#007782] w-4.5 h-4.5 rounded-full text-white">
                       {product.length}
                     </span>
                   </span>
@@ -220,12 +221,12 @@ const Header = () => {
                   {menuData.map((menuItem, i) => (
                     <li
                       key={i}
-                      className="group relative before:w-0 before:h-[3px] before:bg-blue before:absolute before:left-0 before:top-0 before:rounded-b-[3px] before:ease-out before:duration-200 hover:before:w-full "
+                      className="group relative before:w-0 before:h-[3px] before:bg-[#007782] before:absolute before:left-0 before:top-0 before:rounded-b-[3px] before:ease-out before:duration-200 hover:before:w-full "
                     >
                       <Link
                         href={menuItem.path}
                         onClick={closeNavigation}
-                        className={`hover:text-blue text-custom-sm font-medium text-dark flex ${
+                        className={`hover:text-[#007782] text-custom-sm font-medium text-dark flex ${
                           stickyMenu ? "xl:py-4" : "xl:py-6"
                         }`}
                       >
@@ -243,7 +244,7 @@ const Header = () => {
                 <li className="py-4">
                   <a
                     href="#"
-                    className="flex items-center gap-1.5 font-medium text-custom-sm text-dark hover:text-blue"
+                    className="flex items-center gap-1.5 font-medium text-custom-sm text-dark hover:text-[#007782]"
                   >
                     <RefreshCcw className="w-4 h-4" />
                     Recently Viewed
@@ -253,7 +254,7 @@ const Header = () => {
                 <li className="py-4">
                   <Link
                     href="/wishlist"
-                    className="flex items-center gap-1.5 font-medium text-custom-sm text-dark hover:text-blue"
+                    className="flex items-center gap-1.5 font-medium text-custom-sm text-dark hover:text-[#007782]"
                   >
                     <Heart className="w-4 h-4" />
                     Wishlist

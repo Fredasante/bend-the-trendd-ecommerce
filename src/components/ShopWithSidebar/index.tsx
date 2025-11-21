@@ -211,7 +211,7 @@ const ShopWithSidebar = () => {
                       <p>Filters:</p>
                       <button
                         type="button"
-                        className="text-blue"
+                        className="text-[#007782] font-medium"
                         onClick={handleClearFilters}
                       >
                         Clean All
@@ -249,9 +249,9 @@ const ShopWithSidebar = () => {
                       aria-label="grid view"
                       className={`${
                         productStyle === "grid"
-                          ? "bg-blue border-blue text-white"
+                          ? "bg-[#007782] border-[#007782] text-white"
                           : "text-dark bg-gray-1 border-gray-3"
-                      } flex items-center justify-center w-10.5 h-9 rounded-[5px] border ease-out duration-200 hover:bg-blue hover:border-blue hover:text-white`}
+                      } flex items-center justify-center w-10.5 h-9 rounded-[5px] border ease-out duration-200 hover:bg-[#007782] hover:border-[#007782] hover:text-white`}
                     >
                       <TableCellsIcon width={20} height={20} />
                     </button>
@@ -261,9 +261,9 @@ const ShopWithSidebar = () => {
                       aria-label="list view"
                       className={`${
                         productStyle === "list"
-                          ? "bg-blue border-blue text-white"
+                          ? "bg-[#007782] border-[#007782] text-white"
                           : "text-dark bg-gray-1 border-gray-3"
-                      } flex items-center justify-center w-10.5 h-9 rounded-[5px] border ease-out duration-200 hover:bg-blue hover:border-blue hover:text-white`}
+                      } flex items-center justify-center w-10.5 h-9 rounded-[5px] border ease-out duration-200 hover:bg-[#007782] hover:border-[#007782] hover:text-white`}
                     >
                       <ListBulletIcon width={20} height={20} />
                     </button>
@@ -281,7 +281,7 @@ const ShopWithSidebar = () => {
               >
                 {loading ? (
                   <div className="flex justify-center items-center w-full min-h-[300px] col-span-full">
-                    <ClipLoader size={28} color="#000080" />
+                    <ClipLoader size={28} color="#007782" />
                   </div>
                 ) : products.length > 0 ? (
                   products.map((item, key) =>

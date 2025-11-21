@@ -74,8 +74,8 @@ const SizeDropdown = ({ onSizeChange }) => {
               onClick={() => handleSizeClick(size.name)}
               className={`cursor-pointer select-none text-custom-sm py-[5px] px-3.5 rounded-[5px] transition-all duration-200 ${
                 selectedSize === size.name
-                  ? "bg-blue text-white"
-                  : "bg-gray-100 text-dark hover:bg-blue hover:text-white"
+                  ? "bg-[#007782] text-white"
+                  : "bg-gray-100 text-dark hover:bg-[#007782] hover:text-white"
               }`}
             >
               {size.name}

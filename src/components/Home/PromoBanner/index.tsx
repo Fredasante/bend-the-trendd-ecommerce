@@ -18,9 +18,9 @@ export default function DiscountBanner() {
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 relative">
         <a
           href="#"
-          className="inline-flex justify-between items-center py-1 px-1 pe-4 mb-7 text-sm text-blue-dark bg-gray-1 shadow-md rounded-full"
+          className="inline-flex justify-between items-center py-1 px-1 pe-4 mb-7 text-sm text-[#007782] bg-gray-1 shadow-md rounded-full"
         >
-          <span className="text-xs bg-blue rounded-full text-white px-4 py-1.5 me-3">
+          <span className="text-xs bg-[#007782] rounded-full text-white px-4 py-1.5 me-3">
             LIMITED
           </span>
           <span className="text-sm font-medium">
@@ -53,7 +53,7 @@ export default function DiscountBanner() {
         </p>
 
         <div className="w-full max-w-md mx-auto">
-          <div className="bg-blue rounded-2xl p-6 shadow-2xl">
+          <div className="bg-[#007782] rounded-2xl p-6 shadow-2xl">
             <p className="text-white text-sm font-semibold mb-2 uppercase tracking-wide">
               Your Discount Code
             </p>

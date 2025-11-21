@@ -7,25 +7,25 @@ const GenderItem = ({ gender, selected, onToggle }) => {
     <button
       onClick={() => onToggle(gender.name)}
       className={`${
-        selected ? "text-blue" : "text-dark"
-      } group flex items-center justify-between ease-out duration-200 hover:text-blue`}
+        selected ? "text-[#007782]" : "text-dark"
+      } group flex items-center justify-between ease-out duration-200 hover:text-[#007782]`}
     >
       <div className="flex items-center gap-2">
         {/* Radio button style - only one can be selected */}
         <div
           className={`cursor-pointer flex items-center justify-center rounded-full w-4 h-4 border ${
-            selected ? "border-blue" : "border-gray-3"
+            selected ? "border-[#007782]" : "border-gray-3"
           }`}
         >
-          {selected && <div className="w-2 h-2 rounded-full bg-blue" />}
+          {selected && <div className="w-2 h-2 rounded-full bg-[#007782]" />}
         </div>
         <span>{gender.name}</span>
       </div>
 
       <span
         className={`${
-          selected ? "text-white bg-blue" : "bg-gray-2 text-dark"
-        } inline-flex rounded-[30px] text-custom-xs px-2 ease-out duration-200 group-hover:text-white group-hover:bg-blue`}
+          selected ? "text-white bg-[#007782]" : "bg-gray-2 text-dark"
+        } inline-flex rounded-[30px] text-custom-xs px-2 ease-out duration-200 group-hover:text-white group-hover:bg-[#007782]`}
       >
         {gender.products}
       </span>

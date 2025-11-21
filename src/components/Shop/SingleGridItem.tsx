@@ -65,7 +65,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
       <StarRating />
 
       {/* Product title */}
-      <h3 className="font-medium text-center text-dark ease-out duration-200 hover:text-blue mb-1.5 line-clamp-1">
+      <h3 className="font-medium text-center text-dark ease-out duration-200 hover:text-[#007782] mb-1.5 line-clamp-1">
         <Link href={`/shop/${item.slug?.current || item.slug}`}>
           {item.name}
         </Link>
@@ -87,14 +87,14 @@ const SingleGridItem = ({ item }: { item: Product }) => {
             handleQuickViewUpdate();
           }}
           aria-label="Quick view product"
-          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue"
+          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-[#007782]"
         >
           <Eye className="w-4 h-4" />
         </button>
 
         <button
           onClick={handleAddToCart}
-          className="inline-flex font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] bg-blue text-white ease-out duration-200 hover:bg-blue-dark"
+          className="inline-flex font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] bg-[#007782] text-white ease-out duration-200 hover:bg-opacity-90"
         >
           Add to cart
         </button>
@@ -102,7 +102,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
         <button
           onClick={handleItemToWishList}
           aria-label="Add to wishlist"
-          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue"
+          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-[#007782]"
         >
           <Heart className="w-4 h-4" />
         </button>

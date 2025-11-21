@@ -64,7 +64,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
   };
 
   return (
-    <div className="bg-gray-100 pt-40 xl:pt-50 bg-[#f3f4f6] pb-7 px-3 lg:min-h-[72vh]">
+    <div className="bg-gray-100 pt-40 xl:pt-46 bg-[#f3f4f6] pb-7 px-3 lg:min-h-[72vh]">
       <div className="container px-4 py-8 max-w-[1170px] w-full mx-auto">
         <div className="flex flex-wrap -mx-4">
           {/* Product Images */}
@@ -89,7 +89,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
                   height={80}
                   className={`size-16 sm:size-20 object-cover rounded-md cursor-pointer transition duration-300 ${
                     mainImage === product.mainImageUrl
-                      ? "opacity-100 ring-2 ring-blue"
+                      ? "opacity-100 ring-2 ring-[#007782]"
                       : "opacity-60 hover:opacity-100"
                   }`}
                   onClick={() => setMainImage(product.mainImageUrl || "")}
@@ -104,7 +104,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
                     height={80}
                     className={`size-16 sm:size-20 object-cover rounded-md cursor-pointer transition duration-300 ${
                       mainImage === img.imageUrl
-                        ? "opacity-100 ring-2 ring-blue"
+                        ? "opacity-100 ring-2 ring-[#007782]"
                         : "opacity-60 hover:opacity-100"
                     }`}
                     onClick={() => setMainImage(img.imageUrl)}
@@ -183,7 +183,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
                         className={`px-3 py-1 border rounded-md transition-all ${
                           selectedSize === size
                             ? "bg-white text-dark border-slate-100 shadow-sm"
-                            : "bg-white text-dark border-gray-300 hover:border-blue"
+                            : "bg-white text-dark border-gray-300 hover:border-[#007782]"
                         }`}
                       >
                         {size}
@@ -213,14 +213,14 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-5">
               <button
                 onClick={handleAddToCart}
-                className="inline-flex font-medium text-white bg-blue py-2.5 px-4.5 text-sm sm:text-base rounded-md hover:bg-blue-dark transition-colors"
+                className="inline-flex font-medium text-white bg-[#007782] py-2.5 px-4.5 text-sm sm:text-base rounded-md hover:bg-opacity-90 transition-colors"
               >
                 Add to Cart
               </button>
 
               <button
                 onClick={handleAddToWishlist}
-                className="inline-flex items-center gap-2 font-medium text-white bg-dark py-2.5 px-4.5 text-sm sm:text-base rounded-md hover:bg-opacity-95 transition-colors"
+                className="inline-flex items-center gap-2 font-medium text-white bg-dark py-2.5 px-4.5 text-sm sm:text-base rounded-md hover:bg-opacity-90 transition-colors"
               >
                 Add to Wishlist
               </button>
@@ -261,7 +261,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
                       link: ({ children, value }) => (
                         <a
                           href={value.href}
-                          className="text-blue hover:underline"
+                          className="text-[#007782] hover:underline"
                         >
                           {children}
                         </a>

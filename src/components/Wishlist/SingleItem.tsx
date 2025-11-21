@@ -55,7 +55,7 @@ const SingleItem = ({ item }: Props) => {
               />
             </div>
             <div>
-              <h3 className="text-dark ease-out duration-200 hover:text-blue line-clamp-1">
+              <h3 className="text-dark ease-out duration-200 hover:text-[#007782] line-clamp-1">
                 <a href="#"> {item.name} </a>
               </h3>
             </div>
@@ -84,7 +84,7 @@ const SingleItem = ({ item }: Props) => {
       <div className="min-w-[150px] flex justify-end">
         <button
           onClick={handleAddToCart}
-          className="inline-flex text-dark hover:text-white bg-gray-1 border border-gray-3 py-2.5 px-6 rounded-md ease-out duration-200 hover:bg-blue hover:border-gray-3"
+          className="inline-flex text-dark hover:text-white bg-gray-1 border border-gray-3 py-2.5 px-6 rounded-md ease-out duration-200 hover:bg-[#007782] hover:border-gray-3"
         >
           Add to Cart
         </button>

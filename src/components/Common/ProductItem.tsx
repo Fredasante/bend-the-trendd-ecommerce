@@ -69,7 +69,7 @@ const ProductItem = ({ item }: { item: Product }) => {
       <StarRating />
 
       <h3
-        className="font-semibold text-dark text-center ease-out duration-200 hover:text-blue mb-1.5"
+        className="font-semibold text-dark text-center ease-out duration-200 hover:text-[#007782] mb-1.5"
         onClick={() => handleProductDetails()}
       >
         <Link href={`/shop/${item.slug.current}`} className="line-clamp-1">
@@ -96,14 +96,14 @@ const ProductItem = ({ item }: { item: Product }) => {
           }}
           id="newOne"
           aria-label="button for quick view"
-          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue flex-shrink-0"
+          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-[#007782] flex-shrink-0"
         >
           <Eye className="w-4 h-4" />
         </button>
 
         <button
           onClick={() => handleAddToCart()}
-          className="flex items-center justify-center bg-blue font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] text-white ease-out duration-200 hover:bg-opacity-90"
+          className="flex items-center justify-center bg-[#007782] font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] text-white ease-out duration-200 hover:bg-opacity-90"
         >
           Add to cart
         </button>
@@ -112,7 +112,7 @@ const ProductItem = ({ item }: { item: Product }) => {
           onClick={() => handleItemToWishList()}
           aria-label="button for favorite select"
           id="favOne"
-          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-blue flex-shrink-0"
+          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-[#007782] flex-shrink-0"
         >
           <Heart className="w-4 h-4" />
         </button>

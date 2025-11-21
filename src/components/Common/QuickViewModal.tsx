@@ -161,8 +161,8 @@ const QuickViewModal = () => {
                           onClick={() => setSelectedSize(size)}
                           className={`px-3 py-1 border rounded-md transition-all ${
                             selectedSize === size
-                              ? "bg-blue text-white border-blue"
-                              : "bg-white text-dark border-gray-300 hover:border-blue"
+                              ? "bg-[#007782] text-white border-[#007782]"
+                              : "bg-white text-dark border-gray-300 hover:border-[#007782]"
                           }`}
                         >
                           {size}
@@ -187,7 +187,7 @@ const QuickViewModal = () => {
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-4">
                 <button
                   onClick={handleAddToCart}
-                  className="inline-flex font-medium text-white bg-blue py-2.5 px-4.5 sm:py-3 sm:px-7 text-sm sm:text-base rounded-md hover:bg-blue-dark transition-colors"
+                  className="inline-flex font-medium text-white bg-[#007782] py-2.5 px-4.5 sm:py-3 sm:px-7 text-sm sm:text-base rounded-md hover:bg-opacity-90 transition-colors"
                 >
                   Add to Cart
                 </button>
@@ -237,7 +237,7 @@ const QuickViewModal = () => {
                         link: ({ children, value }) => (
                           <a
                             href={value.href}
-                            className="text-blue hover:underline"
+                            className="text-[#007782] hover:underline"
                           >
                             {children}
                           </a>

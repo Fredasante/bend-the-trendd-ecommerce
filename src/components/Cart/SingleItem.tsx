@@ -37,7 +37,7 @@ const SingleItem: React.FC<SingleItemProps> = ({ item }) => {
         </div>
 
         <div>
-          <h3 className="text-dark ease-out duration-200 hover:text-blue">
+          <h3 className="text-dark ease-out duration-200 hover:text-[#007782]">
             {item.name}
           </h3>
         </div>
