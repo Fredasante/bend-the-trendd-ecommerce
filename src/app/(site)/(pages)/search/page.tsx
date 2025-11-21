@@ -6,6 +6,10 @@ import { ClipLoader } from "react-spinners";
 export const metadata = {
   title: "Search Products | Your Store Name",
   description: "Search for products in our store",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function Page() {

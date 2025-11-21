@@ -117,7 +117,7 @@ const MyAccount = () => {
         <section className="overflow-hidden py-20 bg-gray-2 mt-45 mb-5 md:mt-50 md:mb-10 lg:mb-15">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
             <div className="flex justify-center items-center min-h-[400px]">
-              <ClipLoader size={26} color="#000080" />
+              <ClipLoader size={26} color="#007782" />
             </div>
           </div>
         </section>
@@ -132,7 +132,7 @@ const MyAccount = () => {
         <section className="overflow-hidden py-20 bg-gray-2 mt-45 mb-5 md:mt-50 md:mb-10 lg:mb-15">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
             <div className="flex justify-center items-center min-h-[400px]">
-              <ClipLoader size={26} color="#000080" />
+              <ClipLoader size={26} color="#007782" />
             </div>
           </div>
         </section>
@@ -142,7 +142,7 @@ const MyAccount = () => {
 
   return (
     <>
-      <section className="overflow-hidden py-5 sm:py-7 bg-gray-2 mt-45 mb-5 md:mt-48 md:mb-10 lg:mb-15">
+      <section className="overflow-hidden py-5 sm:py-7 bg-gray-2 mt-33 mb-5 md:mt-45 md:mb-10 lg:mb-15">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex flex-col xl:flex-row gap-5 lg:gap-7.5">
             {/* Sidebar */}
@@ -160,7 +160,7 @@ const MyAccount = () => {
                         className="object-cover w-full h-full"
                       />
                     ) : (
-                      <span className="text-xl sm:text-2xl font-bold text-blue">
+                      <span className="text-xl sm:text-2xl font-bold text-[#007782]">
                         {user.firstName?.charAt(0) ||
                           user.username?.charAt(0) ||
                           "U"}
@@ -186,7 +186,7 @@ const MyAccount = () => {
                       onClick={() => setActiveTab("dashboard")}
                       className={`w-full flex items-center gap-3 rounded-lg py-3 px-4 text-sm font-medium transition-all duration-200 ${
                         activeTab === "dashboard"
-                          ? "text-white bg-blue shadow-sm"
+                          ? "text-white bg-[#007782] shadow-sm"
                           : "text-gray-700 bg-gray-1 hover:bg-gray-2 hover:text-dark"
                       }`}
                     >
@@ -198,7 +198,7 @@ const MyAccount = () => {
                       onClick={() => setActiveTab("orders")}
                       className={`w-full flex items-center gap-3 rounded-lg py-3 px-4 text-sm font-medium transition-all duration-200 ${
                         activeTab === "orders"
-                          ? "text-white bg-blue shadow-sm"
+                          ? "text-white bg-[#007782] shadow-sm"
                           : "text-gray-700 bg-gray-1 hover:bg-gray-2 hover:text-dark"
                       }`}
                     >
@@ -244,7 +244,7 @@ const MyAccount = () => {
                   <div className="bg-white rounded-xl shadow-1 p-5 sm:p-6 lg:p-8">
                     {loadingOrders ? (
                       <div className="flex justify-center py-12">
-                        <ClipLoader size={32} color="#000080" />
+                        <ClipLoader size={28} color="#007782" />
                       </div>
                     ) : (
                       <>
@@ -330,7 +330,7 @@ const MyAccount = () => {
                               </h3>
                               <button
                                 onClick={() => setActiveTab("orders")}
-                                className="text-xs sm:text-sm text-blue hover:text-blue-dark font-medium transition-colors"
+                                className="text-xs sm:text-sm text-[#007782] hover:text-opacity-95 font-medium transition-colors"
                               >
                                 View All →
                               </button>
@@ -343,7 +343,7 @@ const MyAccount = () => {
                                 >
                                   <div className="flex items-center gap-3 flex-1 min-w-0">
                                     <div className="w-10 h-10 bg-blue-light-6 rounded-lg flex items-center justify-center flex-shrink-0">
-                                      <Truck className="w-5 h-5 text-blue" />
+                                      <Truck className="w-5 h-5 text-[#007782]" />
                                     </div>
                                     <div className="flex-1 min-w-0">
                                       <p className="text-sm font-medium text-dark truncate">
@@ -378,14 +378,14 @@ const MyAccount = () => {
                           <div className="flex flex-col sm:flex-row gap-3">
                             <button
                               onClick={() => setActiveTab("orders")}
-                              className="flex items-center justify-center gap-2 font-medium text-white bg-blue py-3 px-6 rounded-lg transition-all duration-200 hover:bg-blue-dark text-sm sm:text-base"
+                              className="flex items-center justify-center gap-2 font-medium text-white bg-[#007782] py-3 px-6 rounded-lg transition-all duration-200 hover:bg-opacity-90 text-sm sm:text-base"
                             >
                               <ShoppingBag className="w-4 h-4" />
                               <span>View All Orders</span>
                             </button>
                             <button
                               onClick={() => router.push("/shop")}
-                              className="flex items-center justify-center gap-2 font-medium text-blue bg-blue-light-6 py-3 px-6 rounded-lg transition-all duration-200 hover:bg-blue-light-5 border border-blue-light-3 text-sm sm:text-base"
+                              className="flex items-center justify-center gap-2 font-medium text-[#007782] bg-white py-3 px-6 rounded-lg transition-all duration-200 hover:bg-gray-1 border border-green-light-5 text-sm sm:text-base"
                             >
                               <Package className="w-4 h-4" />
                               <span>Continue Shopping</span>

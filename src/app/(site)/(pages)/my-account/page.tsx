@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: "My Account | Bend the Trendd",
   description:
     "Access and manage your Bend the Trendd account. Track orders, update your details, and view your purchase history all in one place.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const MyAccountPage = () => {

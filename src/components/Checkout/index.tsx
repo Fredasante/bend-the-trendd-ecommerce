@@ -211,7 +211,7 @@ const Checkout = () => {
         <section className="overflow-hidden py-20 bg-gray-2 mt-10">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
             <div className="flex justify-center items-center min-h-[400px]">
-              <ClipLoader size={32} color="#000080" />
+              <ClipLoader size={28} color="#007782" />
             </div>
           </div>
         </section>
@@ -233,7 +233,7 @@ const Checkout = () => {
               </p>
               <Link
                 href="/shop"
-                className="inline-block font-medium text-white bg-blue py-3 px-8 rounded-md ease-out duration-200 hover:bg-blue-dark"
+                className="inline-block font-medium text-white bg-[#007782] py-3 px-8 rounded-md ease-out duration-200 hover:bg-opacity-90"
               >
                 Continue Shopping
               </Link>
@@ -246,7 +246,7 @@ const Checkout = () => {
 
   return (
     <>
-      <section className="overflow-hidden py-10 bg-gray-2 mt-45 md:mt-50 md:pb-10 lg:pb-18">
+      <section className="overflow-hidden py-10 bg-gray-2 mt-33 md:mt-40 md:pb-10 lg:pb-18">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           {!isSignedIn && (
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-7.5">
@@ -263,13 +263,13 @@ const Checkout = () => {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href="/signin?redirect_url=/checkout"
-                    className="inline-flex items-center justify-center font-medium text-white bg-blue py-2.5 px-6 rounded-md ease-out duration-200 hover:bg-blue-dark whitespace-nowrap"
+                    className="inline-flex items-center justify-center font-medium text-white bg-[#007782] py-2.5 px-6 rounded-md ease-out duration-200 hover:bg-opacity-90 whitespace-nowrap"
                   >
                     Sign In
                   </Link>
                   <Link
                     href="/signup?redirect_url=/checkout"
-                    className="inline-flex items-center justify-center font-medium text-blue bg-white border border-blue py-2.5 px-6 rounded-md ease-out duration-200 hover:bg-blue hover:text-white whitespace-nowrap"
+                    className="inline-flex items-center justify-center font-medium text-[#007782] bg-white border border-[#007782] py-2.5 px-6 rounded-md ease-out duration-200 hover:bg-gray-1 whitespace-nowrap"
                   >
                     Create Account
                   </Link>
@@ -367,7 +367,7 @@ const Checkout = () => {
                           Payment for items only
                         </p>
                       </div>
-                      <p className="font-semibold text-lg text-blue">
+                      <p className="font-semibold text-lg text-[#007782]">
                         GH₵{total.toFixed(2)}
                       </p>
                     </div>
@@ -386,7 +386,7 @@ const Checkout = () => {
                 <button
                   type="submit"
                   disabled={isProcessing}
-                  className="w-full flex justify-center items-center gap-2 font-medium text-white bg-blue py-3.5 px-6 rounded-md ease-out duration-200 hover:bg-blue-dark mt-7.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full flex justify-center items-center gap-2 font-medium text-white bg-[#007782] py-3.5 px-6 rounded-md ease-out duration-200 hover:bg-opacity-90 mt-7.5 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isProcessing ? (
                     <>

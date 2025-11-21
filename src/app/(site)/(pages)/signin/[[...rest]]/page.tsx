@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: "Sign In | Bend the Trendd",
   description:
     "Access your Bend the Trendd account to track orders, manage your wishlist, and enjoy a personalized shopping experience.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const SigninPage = () => {

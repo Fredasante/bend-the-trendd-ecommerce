@@ -69,7 +69,7 @@ const ProductItem = ({ item }: { item: Product }) => {
       <StarRating />
 
       <h3
-        className="font-semibold text-dark text-center ease-out duration-200 hover:text-[#007782] mb-1.5"
+        className="font-medium text-dark text-center ease-out duration-200 hover:text-[#007782] mb-1.5"
         onClick={() => handleProductDetails()}
       >
         <Link href={`/shop/${item.slug.current}`} className="line-clamp-1">
@@ -77,14 +77,14 @@ const ProductItem = ({ item }: { item: Product }) => {
         </Link>
       </h3>
 
-      <span className="flex items-center justify-center gap-2 font-medium">
+      <span className="flex items-center justify-center gap-2 font-semibold text-lg">
         {item.discountPrice && item.discountPrice > 0 ? (
           <>
-            <span className="text-dark">₵{item.discountPrice}</span>
-            <span className="text-dark-4 line-through">₵{item.price}</span>
+            <span className="text-dark"> GH₵ {item.discountPrice}</span>
+            <span className="text-dark-4 line-through">GH₵ {item.price}</span>
           </>
         ) : (
-          <span className="text-dark">₵{item.price}</span>
+          <span className="text-dark">GH₵ {item.price}</span>
         )}
       </span>
 

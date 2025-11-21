@@ -72,10 +72,12 @@ const SingleGridItem = ({ item }: { item: Product }) => {
       </h3>
 
       {/* Price */}
-      <span className="flex items-center justify-center gap-2 font-medium">
-        <span className="text-dark">₵{item.discountPrice ?? item.price}</span>
+      <span className="flex items-center justify-center gap-2 font-semibold text-lg">
+        <span className="text-dark">
+          GH₵ {item.discountPrice ?? item.price}
+        </span>
         {item.discountPrice && (
-          <span className="text-dark-4 line-through">₵{item.price}</span>
+          <span className="text-dark-4 line-through">GH₵ {item.price}</span>
         )}
       </span>
 

@@ -8,7 +8,7 @@ const Hero = () => {
     <>
       <div className="overflow-hidden pb-10 lg:pb-12.5 pt-40 lg:pt-45 bg-[#ECEFF1]">
         <div className="max-w-[1170px] w-full mx-auto px-2 sm:px-8 xl:px-0">
-          <div className="relative bg-white py-5 px-2 md:p-8 lg:p-10 rounded-lg shadow-sm overflow-hidden">
+          <div className="relative bg-white py-7 px-2 md:p-8 lg:p-10 rounded-lg shadow-sm overflow-hidden">
             {/* Background image spanning the white container */}
             <div className="absolute inset-0 z-0">
               <Image

@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: "Cart | Bend the Trendd",
   description:
     "View and manage the items in your shopping cart on Bend the Trendd.",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const CartPage = () => {

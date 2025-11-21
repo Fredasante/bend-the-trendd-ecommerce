@@ -87,7 +87,7 @@ const Orders = () => {
   if (!isLoaded || loading) {
     return (
       <div className="flex justify-center items-center min-h-[400px]">
-        <ClipLoader size={26} color="#000080" />
+        <ClipLoader size={28} color="#007782" />
       </div>
     );
   }
@@ -97,7 +97,7 @@ const Orders = () => {
       <div className="flex justify-center items-center min-h-[400px] px-4">
         <div className="max-w-md w-full bg-white shadow-lg rounded-xl p-8 text-center">
           <div className="w-16 h-16 bg-blue-light-6 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Package className="w-8 h-8 text-blue" />
+            <Package className="w-8 h-8 text-[#007782]" />
           </div>
           <h3 className="text-xl font-semibold text-dark mb-3">
             Sign In Required
@@ -123,7 +123,7 @@ const Orders = () => {
           <p className="text-red-600 mb-4">{error}</p>
           <button
             onClick={() => window.location.reload()}
-            className="inline-block font-medium text-white bg-blue py-2.5 px-6 rounded-lg ease-out duration-200 hover:bg-blue-dark"
+            className="inline-block font-medium text-white bg-[#007782] py-2.5 px-6 rounded-lg ease-out duration-200 hover:bg-opacity-90"
           >
             Try Again
           </button>
@@ -148,7 +148,7 @@ const Orders = () => {
           </p>
           <Link
             href="/shop"
-            className="inline-block font-medium text-white bg-blue py-3 px-8 rounded-lg ease-out duration-200 hover:bg-blue-dark"
+            className="inline-block font-medium text-white bg-[#007782] py-3 px-8 rounded-lg ease-out duration-200 hover:bg-opacity-90"
           >
             Start Shopping
           </Link>

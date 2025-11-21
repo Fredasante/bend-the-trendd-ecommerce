@@ -38,11 +38,11 @@ const SingleItem: React.FC<SingleItemProps> = ({ item }) => {
 
         {/* Product Details */}
         <div>
-          <h3 className="font-medium text-dark mb-1 ease-out duration-200 hover:text-blue">
+          <h3 className="font-medium text-dark mb-1 ease-out duration-200 hover:text-[#007782]">
             {item.name}
           </h3>
           <p className="text-custom-sm">
-            Price: ₵{item.discountPrice ?? item.price}
+            Price: GH₵ {item.discountPrice ?? item.price}
           </p>
         </div>
       </div>

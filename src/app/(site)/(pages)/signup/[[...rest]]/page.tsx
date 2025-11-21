@@ -5,6 +5,10 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Signup | Bend the Trendd",
   description: "Create your account to start shopping with Bend the Trendd",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const SignupPage = () => {

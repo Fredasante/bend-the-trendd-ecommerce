@@ -125,7 +125,7 @@ const SingleOrder = ({ order, isLast }: { order: Order; isLast: boolean }) => {
       {/* Desktop View */}
       <div className="hidden lg:grid lg:grid-cols-12 gap-4 py-5 px-6 items-center hover:bg-gray-1 transition-colors">
         <div className="col-span-2">
-          <p className="text-sm font-semibold text-blue">
+          <p className="text-sm font-semibold text-blue-dark">
             #{order.orderId.slice(-8).toUpperCase()}
           </p>
         </div>
@@ -164,7 +164,7 @@ const SingleOrder = ({ order, isLast }: { order: Order; isLast: boolean }) => {
         <div className="col-span-2">
           <button
             onClick={() => setShowDetails(!showDetails)}
-            className="flex items-center gap-2 text-blue hover:text-blue-dark transition-colors text-sm font-medium"
+            className="flex items-center gap-2 text-[#007782] hover:text-opacity-95 transition-colors text-sm font-medium"
           >
             <Eye className="w-4 h-4" />
             <span>Details</span>
@@ -210,7 +210,7 @@ const SingleOrder = ({ order, isLast }: { order: Order; isLast: boolean }) => {
 
         <button
           onClick={() => setShowDetails(!showDetails)}
-          className="w-full flex items-center justify-center gap-2 text-blue hover:text-blue-dark transition-colors text-sm font-medium py-2 border border-blue rounded-lg hover:bg-blue-light-6"
+          className="w-full flex items-center justify-center gap-2 text-[#007782] hover:text-opacity-95 transition-colors text-sm font-medium py-2 border border-[#007782] rounded-lg hover:bg-gray-1"
         >
           <Eye className="w-4 h-4" />
           <span>{showDetails ? "Hide" : "View"} Details</span>
@@ -269,21 +269,21 @@ const SingleOrder = ({ order, isLast }: { order: Order; isLast: boolean }) => {
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-600">Subtotal</span>
                   <span className="text-dark">
-                    GH₵{order.pricing.subtotal.toFixed(2)}
+                    GH₵ {order.pricing.subtotal.toFixed(2)}
                   </span>
                 </div>
                 {order.pricing.discount > 0 && (
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-600">Discount</span>
                     <span className="text-green">
-                      -GH₵{order.pricing.discount.toFixed(2)}
+                      -GH₵ {order.pricing.discount.toFixed(2)}
                     </span>
                   </div>
                 )}
                 <div className="flex justify-between text-base font-semibold pt-2 border-t border-gray-3">
                   <span className="text-dark">Total</span>
-                  <span className="text-blue">
-                    GH₵{order.pricing.total.toFixed(2)}
+                  <span className="text-teal-dark">
+                    GH₵ {order.pricing.total.toFixed(2)}
                   </span>
                 </div>
               </div>
@@ -351,7 +351,7 @@ const SingleOrder = ({ order, isLast }: { order: Order; isLast: boolean }) => {
                   <div className="flex justify-between">
                     <span className="text-gray-600">Amount</span>
                     <span className="text-dark font-medium">
-                      GH₵{order.payment.amount.toFixed(2)}
+                      GH₵ {order.payment.amount.toFixed(2)}
                     </span>
                   </div>
                 </div>
