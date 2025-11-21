@@ -67,7 +67,7 @@ const OrderSummary = () => {
           <Link
             href="/checkout"
             type="button"
-            className="w-full flex justify-center font-medium text-white bg-blue py-3 px-6 rounded-md ease-out duration-200 hover:bg-blue-dark mt-7.5"
+            className="w-full flex justify-center font-medium text-white bg-[#007782] py-3 px-6 rounded-md ease-out duration-200 hover:bg-opacity-90 mt-7.5"
           >
             Proceed to Checkout
           </Link>

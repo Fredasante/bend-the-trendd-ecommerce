@@ -47,9 +47,14 @@ export default function ClientLayout({
       <CartModalProvider>
         <ModalProvider>
           <PreviewSliderProvider>
-            {!hideLayout && <Header />}
-            {children}
-            {!hideLayout && <Footer />}
+            <div className="min-h-screen flex flex-col">
+              {!hideLayout && <Header />}
+
+              <main className="flex-1">{children}</main>
+
+              {!hideLayout && <Footer />}
+            </div>
+
             <QuickViewModal />
             <CartSidebarModal />
             <PreviewSliderModal />

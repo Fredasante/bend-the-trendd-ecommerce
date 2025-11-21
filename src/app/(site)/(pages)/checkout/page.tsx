@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: "Checkout | Bend the Trendd",
   description:
     "Complete your purchase securely and effortlessly on Bend the Trendd. Review your items and finalize your order today!",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 const CheckoutPage = () => {

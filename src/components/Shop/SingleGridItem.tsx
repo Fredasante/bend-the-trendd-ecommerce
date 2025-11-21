@@ -77,7 +77,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
           GH₵ {item.discountPrice ?? item.price}
         </span>
         {item.discountPrice && (
-          <span className="text-dark-4 line-through">GH₵ {item.price}</span>
+          <span className="text-dark-4 line-through">GH₵{item.price}</span>
         )}
       </span>
 

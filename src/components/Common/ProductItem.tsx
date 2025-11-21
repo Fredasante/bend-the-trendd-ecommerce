@@ -81,7 +81,7 @@ const ProductItem = ({ item }: { item: Product }) => {
         {item.discountPrice && item.discountPrice > 0 ? (
           <>
             <span className="text-dark"> GH₵ {item.discountPrice}</span>
-            <span className="text-dark-4 line-through">GH₵ {item.price}</span>
+            <span className="text-dark-4 line-through">GH₵{item.price}</span>
           </>
         ) : (
           <span className="text-dark">GH₵ {item.price}</span>

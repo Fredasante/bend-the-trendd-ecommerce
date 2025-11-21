@@ -16,12 +16,12 @@ const Cart = () => {
   return (
     <>
       {cartItems.length > 0 ? (
-        <section className="overflow-hidden py-10 bg-gray-2 mt-45 md:mt-50 md:pb-10 lg:pb-24">
+        <section className="overflow-hidden py-10 bg-gray-2 mt-33 mb-5 md:mt-45 lg:mt-30 xl:mt-45 md:pb-10 lg:pb-24">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
             <div className="flex flex-wrap items-center justify-between gap-5 mb-7.5">
               <h2 className="font-medium text-dark text-2xl">Your Cart</h2>
               <button
-                className="text-blue"
+                className="text-[#007782] font-medium"
                 onClick={() => dispatch(removeAllItemsFromCart())}
               >
                 Clear Shopping Cart
@@ -71,7 +71,7 @@ const Cart = () => {
         </section>
       ) : (
         <>
-          <div className="text-center py-10 mt-45 md:mt-50 md:pb-10 lg:pb-24">
+          <div className="text-center py-10 mt-40 md:mt-40 lg:mt-35 xl:mt-45 md:pb-10 lg:pb-24">
             <div className="mx-auto flex items-center justify-center pb-7.5">
               <div className="flex items-center justify-center w-17 h-17 rounded-full bg-slate-100">
                 <ShoppingCart className="w-6 h-6 text-gray-700" />

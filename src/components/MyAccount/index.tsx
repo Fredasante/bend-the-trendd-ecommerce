@@ -142,7 +142,7 @@ const MyAccount = () => {
 
   return (
     <>
-      <section className="overflow-hidden py-5 sm:py-7 bg-gray-2 mt-33 mb-5 md:mt-45 md:mb-10 lg:mb-15">
+      <section className="overflow-hidden py-5 sm:py-7 bg-gray-2 mt-33 mb-5 md:mt-45 lg:mt-30 xl:mt-45 md:mb-10 lg:mb-15">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex flex-col xl:flex-row gap-5 lg:gap-7.5">
             {/* Sidebar */}
