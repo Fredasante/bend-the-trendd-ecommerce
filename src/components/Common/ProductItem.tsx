@@ -66,7 +66,7 @@ const ProductItem = ({ item }: { item: Product }) => {
         />
       </div>
 
-      <StarRating />
+      {/* <StarRating /> */}
 
       <h3
         className="font-medium text-dark text-center ease-out duration-200 hover:text-[#ffaaaa] mb-1.5"

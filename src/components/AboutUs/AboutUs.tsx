@@ -6,7 +6,7 @@ const AboutUs = () => {
     <>
       <Breadcrumb title={"About Us"} pages={["about"]} />
 
-      <section className="overflow-hidden py-10 bg-gray-2 md:pb-10 lg:pb-20">
+      <section className="overflow-hidden py-10 bg-[#fef4f4] md:pb-10 lg:pb-20">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           {/* Hero Section */}
           <div className="text-center mb-12">

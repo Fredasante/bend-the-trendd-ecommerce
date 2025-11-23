@@ -62,7 +62,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
         />
       </div>
 
-      <StarRating />
+      {/* <StarRating /> */}
 
       {/* Product title */}
       <h3 className="font-medium text-center text-dark ease-out duration-200 hover:text-[#007782] mb-1.5 line-clamp-1">
