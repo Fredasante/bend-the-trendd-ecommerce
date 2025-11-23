@@ -96,7 +96,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
 
         <button
           onClick={handleAddToCart}
-          className="inline-flex font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] bg-[#007782] text-white ease-out duration-200 hover:bg-opacity-90"
+          className="inline-flex font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] bg-[#382423] text-white ease-out duration-200 hover:bg-opacity-90"
         >
           Add to cart
         </button>
