@@ -64,7 +64,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
   };
 
   return (
-    <div className="bg-gray-100 pt-40 xl:pt-46 bg-[#f3f4f6] pb-7 px-3 lg:min-h-[72vh]">
+    <div className="bg-gray-100 pt-25 xl:pt-35 bg-[#fef4f4] pb-7 px-3 lg:min-h-[72vh]">
       <div className="container px-4 py-8 max-w-[1170px] w-full mx-auto">
         <div className="flex flex-wrap -mx-4">
           {/* Product Images */}
@@ -220,7 +220,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
 
               <button
                 onClick={handleAddToWishlist}
-                className="inline-flex items-center gap-2 font-medium text-white bg-dark py-2.5 px-4.5 text-sm sm:text-base rounded-md hover:bg-opacity-90 transition-colors"
+                className="inline-flex items-center gap-2 font-medium text-white bg-[#382423] py-2.5 px-4.5 text-sm sm:text-base rounded-md hover:bg-opacity-90 transition-colors"
               >
                 Add to Wishlist
               </button>

@@ -68,18 +68,18 @@ const CartSidebarModal = () => {
     >
       <div className="flex items-center justify-end h-full">
         <div
-          className="w-full max-w-[500px] shadow-1 bg-white relative modal-content flex flex-col"
+          className="w-full max-w-[500px] bg-[#fef4f4] shadow-1 relative modal-content flex flex-col"
           style={{ height: viewportHeight || "100vh" }}
         >
           {/* Header */}
-          <div className="flex-shrink-0 bg-white flex items-center justify-between pb-7 pt-4 sm:pt-7.5 lg:pt-11 px-4 sm:px-7.5 lg:px-11 border-b border-gray-3">
+          <div className="flex-shrink-0 bg-[#fef4f4] flex items-center justify-between pb-7 pt-4 sm:pt-7.5 lg:pt-11 px-4 sm:px-7.5 lg:px-11 border-b border-gray-3">
             <h2 className="font-medium text-dark text-lg sm:text-2xl">
               Cart View
             </h2>
             <button
               onClick={closeCartModal}
               aria-label="Close cart modal"
-              className="flex items-center justify-center ease-in w-6 h-6 p-2 rounded-full duration-150 bg-gray-2 text-slate-400 hover:text-dark"
+              className="flex items-center justify-center ease-in w-6 h-6 p-2 rounded-full duration-150 bg-white text-slate-400 hover:text-dark"
             >
               ✕
             </button>
@@ -102,7 +102,7 @@ const CartSidebarModal = () => {
           </div>
 
           {/* Footer */}
-          <div className="flex-shrink-0 border-t border-gray-3 bg-white pt-5 pb-4 sm:pb-7.5 lg:pb-11 px-4 sm:px-7.5 lg:px-11">
+          <div className="flex-shrink-0 border-t border-gray-3 bg-[#fef4f4] pt-5 pb-4 sm:pb-7.5 lg:pb-11 px-4 sm:px-7.5 lg:px-11">
             <div className="flex items-center justify-between gap-5 mb-6">
               <p className="font-medium text-xl text-dark">Subtotal:</p>
               <p className="font-medium text-xl text-dark">
@@ -121,7 +121,7 @@ const CartSidebarModal = () => {
 
               <Link
                 href="/checkout"
-                className="w-full flex justify-center font-medium text-white bg-dark py-[13px] px-6 rounded-md ease-out duration-200 hover:bg-opacity-90"
+                className="w-full flex justify-center font-medium text-white bg-[#382423] py-[13px] px-6 rounded-md ease-out duration-200 hover:bg-opacity-90"
               >
                 Checkout
               </Link>
