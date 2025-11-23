@@ -57,19 +57,19 @@ const ProductItem = ({ item }: { item: Product }) => {
 
   return (
     <div className="group">
-      <div className="relative w-full aspect-square md:aspect-[4/3] overflow-hidden rounded-lg bg-white shadow-1 mb-4 flex items-center justify-center">
+      <div className="relative w-full bg-white aspect-square md:aspect-[4/3] overflow-hidden rounded-lg shadow-1 mb-4 flex items-center justify-center">
         <Image
           src={item.mainImageUrl || "/images/placeholder.png"}
           alt={item.name || "Product image"}
           fill
-          className="object-contain object-center p-2"
+          className="object-contain object-center"
         />
       </div>
 
       {/* <StarRating /> */}
 
       <h3
-        className="font-medium text-dark text-center ease-out duration-200 hover:text-[#ffaaaa] mb-1.5"
+        className="font-medium text-dark text-center ease-out duration-200 hover:text-[#382423] mb-1.5"
         onClick={() => handleProductDetails()}
       >
         <Link href={`/shop/${item.slug.current}`} className="line-clamp-1">
