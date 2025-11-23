@@ -78,7 +78,7 @@ const Footer = () => {
           <div>
             <h6 className="text-[15px]">
               Stay connected — follow us on social media for trend updates,
-              style tips, and exclusive looks you won't find anywhere else.
+              style tips, and exclusive looks you won&apos;t find anywhere else.
             </h6>
           </div>
           <ul className="flex space-x-4">
