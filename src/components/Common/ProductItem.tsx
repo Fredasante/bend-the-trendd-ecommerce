@@ -57,12 +57,12 @@ const ProductItem = ({ item }: { item: Product }) => {
 
   return (
     <div className="group">
-      <div className="relative w-full aspect-square md:aspect-[4/3] overflow-hidden border border-gray-4 rounded-lg shadow-1 mb-4 flex items-center justify-center">
+      <div className="relative w-full aspect-square md:aspect-[4/3] overflow-hidden rounded-lg bg-white shadow-1 mb-4 flex items-center justify-center">
         <Image
           src={item.mainImageUrl || "/images/placeholder.png"}
           alt={item.name || "Product image"}
           fill
-          className="object-contain object-center"
+          className="object-contain object-center p-2"
         />
       </div>
 
