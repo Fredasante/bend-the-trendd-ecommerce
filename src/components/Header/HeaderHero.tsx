@@ -230,7 +230,7 @@ const HeaderNew = () => {
                     const input = searchRef.current?.querySelector("input");
                     const query = input?.value;
                     if (query?.trim()) {
-                      window.location.href = `/shop?search=${encodeURIComponent(query)}`;
+                      window.location.href = `/search?q=${encodeURIComponent(query)}`;
                     }
                   }}
                   className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#382423] text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-colors text-sm font-medium"
