@@ -111,7 +111,7 @@ const HeaderNew = () => {
 
       {/* Main Navigation */}
       <div className="max-w-[1440px] mx-auto px-4 sm:px-7.5 xl:px-8">
-        <div className="flex items-center justify-between py-4 sm:py-5">
+        <div className="flex items-center justify-between py-5">
           {/* Left: Search Icon + Left Menu Items (Desktop) */}
           <div className="flex items-center gap-6 lg:gap-8">
             {/* Search Icon */}
@@ -214,7 +214,7 @@ const HeaderNew = () => {
                 <input
                   type="text"
                   placeholder="Search for products..."
-                  className="w-full px-6 py-4 border-2 border-gray-300 rounded-full text-base focus:outline-none focus:border-[#007782] transition-colors"
+                  className="w-full px-6 py-4 border-2 border-gray-300 rounded-full text-base focus:outline-none focus:border-[#382423] transition-colors"
                   autoFocus
                   onKeyDown={(e) => {
                     if (e.key === "Enter") {
@@ -233,7 +233,7 @@ const HeaderNew = () => {
                       window.location.href = `/shop?search=${encodeURIComponent(query)}`;
                     }
                   }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#007782] text-white px-6 py-2 rounded-full hover:bg-[#006670] transition-colors text-sm font-medium"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#382423] text-white px-6 py-2 rounded-full hover:bg-opacity-90 transition-colors text-sm font-medium"
                 >
                   Search
                 </button>

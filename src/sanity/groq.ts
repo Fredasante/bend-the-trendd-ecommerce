@@ -35,7 +35,7 @@ export const productsByCategoryQuery = `
 
 // ✅ Fetch the 12 most recent available products (New Arrivals)
 export const newArrivalsQuery = `
-  *[_type == "product" && status == "available"] | order(_createdAt desc)[0...12]{
+  *[_type == "product" && status == "available"] | order(_createdAt desc)[0...16]{
     _id,
     name,
     slug,
