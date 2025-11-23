@@ -13,11 +13,12 @@ export const menuData: Menu[] = [
     newTab: false,
     path: "/shop",
   },
+
   {
     id: 3,
-    title: "Wishlist",
+    title: "My Account",
     newTab: false,
-    path: "/wishlist",
+    path: "/my-account",
   },
   {
     id: 4,
@@ -33,8 +34,8 @@ export const menuData: Menu[] = [
   },
   {
     id: 6,
-    title: "My Account",
+    title: "Wishlist",
     newTab: false,
-    path: "/my-account",
+    path: "/wishlist",
   },
 ];

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import Header from "../../components/Header";
+// import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 import { ModalProvider } from "../context/QuickViewModalContext";
@@ -15,6 +15,7 @@ import PreviewSliderModal from "@/components/Common/PreviewSlider";
 import ScrollToTop from "@/components/Common/ScrollToTop";
 import PreLoader from "@/components/Common/PreLoader";
 import { Toaster } from "sonner";
+import HeaderNew from "@/components/Header/HeaderHero";
 
 export default function ClientLayout({
   children,
@@ -48,7 +49,7 @@ export default function ClientLayout({
         <ModalProvider>
           <PreviewSliderProvider>
             <div className="min-h-screen flex flex-col">
-              {!hideLayout && <Header />}
+              {!hideLayout && <HeaderNew />}
 
               <main className="flex-1">{children}</main>
 

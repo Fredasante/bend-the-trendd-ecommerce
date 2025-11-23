@@ -53,8 +53,8 @@ export default function AuthDropdown({ user, isSignedIn }: AuthDropdownProps) {
           height={25}
         />
         <div>
-          <span className="block text-2xs text-dark-4 uppercase">account</span>
-          <p className="font-medium text-custom-sm text-dark">Sign In</p>
+          <span className="block text-2xs text-white uppercase">account</span>
+          <p className="font-medium text-custom-sm text-white/90">Sign In</p>
         </div>
       </Link>
     );
