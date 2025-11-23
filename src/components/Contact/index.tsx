@@ -10,7 +10,7 @@ const Contact = () => {
 
   return (
     <>
-      <section className="overflow-hidden py-10 bg-gray-2 mt-33 mb-5 md:mt-45 lg:mt-30 xl:mt-45 md:pb-10 lg:pb-20">
+      <section className="overflow-hidden py-10 bg-[#fef4f4] mt-22 pb-5 md:mt-25 lg:mt-25 xl:mt-28 md:pb-10 lg:pb-20">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           <div className="flex flex-col xl:flex-row gap-7.5">
             <div className="xl:max-w-[370px] w-full bg-white rounded-xl shadow-1">
@@ -140,7 +140,7 @@ const Contact = () => {
                 <button
                   type="button"
                   onClick={handleSubmit}
-                  className="inline-flex font-medium text-white bg-[#007782] py-3 px-7 rounded-md ease-out duration-200 hover:bg-opacity-90"
+                  className="inline-flex font-medium text-white bg-[#382423] py-3 px-7 rounded-md ease-out duration-200 hover:bg-opacity-90"
                 >
                   Send Message
                 </button>

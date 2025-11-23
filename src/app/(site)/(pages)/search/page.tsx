@@ -17,7 +17,7 @@ export default function Page() {
     <Suspense
       fallback={
         <div className="flex justify-center items-center min-h-screen">
-          <ClipLoader size={40} color="#000080" />
+          <ClipLoader size={40} color="#382423" />
         </div>
       }
     >

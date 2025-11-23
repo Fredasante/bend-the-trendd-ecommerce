@@ -208,7 +208,7 @@ const Checkout = () => {
   if (!isLoaded) {
     return (
       <>
-        <section className="overflow-hidden py-20 bg-gray-2 mt-10">
+        <section className="overflow-hidden py-20 bg-[#fef4f4] mt-10">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
             <div className="flex justify-center items-center min-h-[400px]">
               <ClipLoader size={28} color="#007782" />
@@ -222,7 +222,7 @@ const Checkout = () => {
   if (cartItems.length === 0) {
     return (
       <>
-        <section className="overflow-hidden py-20 bg-gray-2 mt-45 md:mt-50">
+        <section className="overflow-hidden py-20 bg-[#fef4f4] mt-45 md:mt-50">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
             <div className="bg-white shadow-1 rounded-[10px] p-8 text-center">
               <h3 className="text-2xl font-semibold mb-4">
@@ -246,7 +246,7 @@ const Checkout = () => {
 
   return (
     <>
-      <section className="overflow-hidden py-10 bg-gray-2 mt-33 md:mt-40 lg:mt-30 xl:mt-40 md:pb-10 lg:pb-18">
+      <section className="overflow-hidden py-10 bg-[#fef4f4] mt-24 md:mt-40 lg:mt-30 md:pb-10 lg:pb-18">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           {!isSignedIn && (
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-5 mb-7.5">
@@ -386,7 +386,7 @@ const Checkout = () => {
                 <button
                   type="submit"
                   disabled={isProcessing}
-                  className="w-full flex justify-center items-center gap-2 font-medium text-white bg-[#007782] py-3.5 px-6 rounded-md ease-out duration-200 hover:bg-opacity-90 mt-7.5 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full flex justify-center items-center gap-2 font-medium text-white bg-[#382423] py-3.5 px-6 rounded-md ease-out duration-200 hover:bg-opacity-90 mt-7.5 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isProcessing ? (
                     <>

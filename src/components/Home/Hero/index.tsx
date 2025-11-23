@@ -23,10 +23,10 @@ const Hero = () => {
 
         {/* Content Container - Centered */}
         <div className="relative z-10 flex items-center justify-center h-full px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-5xl mx-auto">
+          <div className="text-center max-w-5xl mx-auto pt-15">
             {/* Main Heading - Large, Bold, Centered */}
             <h1 className="mb-8 text-white">
-              <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-none">
+              <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-none">
                 The Curated Luxe Edit
               </span>
             </h1>

@@ -4,7 +4,7 @@ import { SignUp } from "@clerk/nextjs";
 
 export default function SignUpPage() {
   return (
-    <main className="mt-45 mb-5 md:mt-50 md:mb-10 lg:mb-15 ml-5">
+    <main className="pt-40 pb-15 md:pt-45 md:pb-10 lg:pb-15 pl-5 bg-[#fef4f4]">
       <div className="w-full max-w-md mx-auto">
         <SignUp path="/signup" routing="path" signInUrl="/signin" />
       </div>

@@ -51,7 +51,7 @@ export default function ClientLayout({
             <div className="min-h-screen flex flex-col">
               {!hideLayout && <HeaderNew />}
 
-              <main className="flex-1">{children}</main>
+              <main className="flex-1 bg-[#fef4f4]">{children}</main>
 
               {!hideLayout && <Footer />}
             </div>

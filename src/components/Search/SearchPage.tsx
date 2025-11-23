@@ -234,7 +234,7 @@ export default function SearchPage() {
                       <p>Filters:</p>
                       <button
                         type="button"
-                        className="text-blue"
+                        className="text-#007782 font-semibold"
                         onClick={handleClearFilters}
                       >
                         Clean All
@@ -271,9 +271,9 @@ export default function SearchPage() {
                       aria-label="grid view"
                       className={`${
                         productStyle === "grid"
-                          ? "bg-blue border-blue text-white"
+                          ? "bg-[#007782] border-[#007782] text-white"
                           : "text-dark bg-gray-1 border-gray-3"
-                      } flex items-center justify-center w-10.5 h-9 rounded-[5px] border ease-out duration-200 hover:bg-blue hover:border-blue hover:text-white`}
+                      } flex items-center justify-center w-10.5 h-9 rounded-[5px] border ease-out duration-200 hover:bg-[#007782] hover:border-[#007782] hover:text-white`}
                     >
                       <TableCellsIcon width={20} height={20} />
                     </button>
@@ -283,9 +283,9 @@ export default function SearchPage() {
                       aria-label="list view"
                       className={`${
                         productStyle === "list"
-                          ? "bg-blue border-blue text-white"
+                          ? "bg-[#007782] border-[#007782] text-white"
                           : "text-dark bg-gray-1 border-gray-3"
-                      } flex items-center justify-center w-10.5 h-9 rounded-[5px] border ease-out duration-200 hover:bg-blue hover:border-blue hover:text-white`}
+                      } flex items-center justify-center w-10.5 h-9 rounded-[5px] border ease-out duration-200 hover:bg-[#007782] hover:border-[#007782] hover:text-white`}
                     >
                       <ListBulletIcon width={20} height={20} />
                     </button>

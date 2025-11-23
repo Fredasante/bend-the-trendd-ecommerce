@@ -98,7 +98,7 @@ export default function OrderSuccessPage() {
         <section className="overflow-hidden mt-28">
           <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0 rounded-lg">
             <div className="flex justify-center items-center min-h-[400px]">
-              <ClipLoader size={32} color="#000080" />
+              <ClipLoader size={28} color="#382423" />
             </div>
           </div>
         </section>
@@ -110,7 +110,7 @@ export default function OrderSuccessPage() {
     return (
       <>
         <section className="overflow-hidden mt-45 mb-5 md:mt-50 md:mb-10 lg:mb-15">
-          <div className="max-w-[800px] w-full mx-auto px-4 sm:px-8 xl:px-0 bg-gray-2 rounded-lg">
+          <div className="max-w-[800px] w-full mx-auto px-4 sm:px-8 xl:px-0 bg-white rounded-lg">
             <div className="shadow-1 rounded-[10px] p-8 text-center">
               <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-3xl">⚠️</span>
@@ -121,7 +121,7 @@ export default function OrderSuccessPage() {
               <p className="text-gray-600 mb-6">{error || "Order not found"}</p>
               <Link
                 href="/"
-                className="inline-block font-medium text-white bg-blue py-3 px-8 rounded-md ease-out duration-200 hover:bg-blue-dark"
+                className="inline-block font-medium text-white bg-[#382423] py-3 px-8 rounded-md ease-out duration-200 hover:bg-opacity-90"
               >
                 Go to Homepage
               </Link>
@@ -134,7 +134,7 @@ export default function OrderSuccessPage() {
 
   return (
     <>
-      <section className="overflow-hidden py-5 md:py-10 lg:py-12 bg-gray-2 mt-33 mb-5 md:mt-45 md:mb-10 lg:mb-15">
+      <section className="overflow-hidden py-5 md:py-10 lg:py-12 bg-[#fef4f4] mt-33 mb-5 md:mt-45 md:mb-10 lg:mb-15">
         <div className="max-w-[900px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           {/* Success Banner */}
           <div className="bg-white shadow-1 rounded-[10px] p-6 mt-2 sm:mt-0 sm:p-8 mb-7.5 text-center">
@@ -150,7 +150,7 @@ export default function OrderSuccessPage() {
             </p>
             <p className="text-sm text-gray-500 mt-3">
               Order ID:{" "}
-              <span className="font-mono font-semibold text-blue-dark">
+              <span className="font-mono font-semibold text-[#007782]">
                 {orderId}
               </span>
             </p>

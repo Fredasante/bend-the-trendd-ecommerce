@@ -3,7 +3,7 @@ import React from "react";
 
 const Breadcrumb = ({ title, pages }) => {
   return (
-    <div className="overflow-hidden shadow-breadcrumb pt-[190px] sm:pt-[155px] lg:pt-[95px] xl:pt-[155px]">
+    <div className="overflow-hidden bg-[#fef4f4] shadow-breadcrumb pt-[130px] sm:pt-[155px] lg:pt-[95px] xl:pt-[155px]">
       <div className="border-t border-gray-3">
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0 py-5 xl:py-7">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">

@@ -75,13 +75,13 @@ export default function AuthDropdown({ user, isSignedIn }: AuthDropdownProps) {
           className="rounded-full object-cover"
         />
         <div className="text-left">
-          <span className="block text-2xs text-dark-4 uppercase">account</span>
-          <p className="font-medium text-custom-sm text-dark">
+          <span className="block text-2xs text-white uppercase">account</span>
+          <p className="font-medium text-custom-sm text-white/90">
             {truncateName(user?.firstName || "My Account")}
           </p>
         </div>
         <svg
-          className={`w-4 h-4 text-dark transition-transform ${
+          className={`w-4 h-4 text-white/90 transition-transform ${
             isDropdownOpen ? "rotate-180" : ""
           }`}
           fill="none"
