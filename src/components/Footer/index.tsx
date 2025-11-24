@@ -39,11 +39,6 @@ const Footer = () => {
                 Explore All Products
               </Link>
             </li>
-            <li>
-              <Link href="/" className="text-[15px] hover:text-gray-600">
-                Terms & Conditions
-              </Link>
-            </li>
           </ul>
         </div>
 
@@ -63,11 +58,6 @@ const Footer = () => {
             <li>
               <Link href="/faq" className="text-[15px] hover:text-gray-600">
                 FAQs
-              </Link>
-            </li>
-            <li>
-              <Link href="/terms" className="text-[15px] hover:text-gray-600">
-                Terms
               </Link>
             </li>
           </ul>
