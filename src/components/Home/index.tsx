@@ -1,14 +1,14 @@
 import React from "react";
 import Hero from "./Hero";
 import NewArrival from "./NewArrivals";
-import PromoBanner from "./PromoBanner";
+import NewsletterPopup from "./NewsLetterPopup";
 
 const Home = () => {
   return (
     <main>
+      <NewsletterPopup />
       <Hero />
       <NewArrival />
-      {/* <PromoBanner /> */}
     </main>
   );
 };
