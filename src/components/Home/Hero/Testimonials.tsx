@@ -85,7 +85,7 @@ const TestimonialsSection = () => {
             What Our Customers Say
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Don't just take our word for it - hear from our happy customers
+            Don&apos;t just take our word for it - hear from our happy customers
           </p>
         </div>
 
