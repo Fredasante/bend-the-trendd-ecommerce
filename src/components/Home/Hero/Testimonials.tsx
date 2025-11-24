@@ -10,41 +10,32 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Mary Inkoom",
-      image: "/images/review-5.jpg",
+      name: "Jane Louisa",
+      image: "/images/review-1.jpg",
       message:
         "“Bend the trendd????? Omg!!!!! love the dress so much, looks so much prettier than the one in the video, omg, thanks a lot.",
       rating: 5,
     },
     {
       id: 2,
-      name: "Jennifer Ayittey",
+      name: "Yolly",
       image: "/images/review-4.jpg",
+      message: "The dress is very beautiful, thank you very much.",
+      rating: 5,
+    },
+    {
+      id: 3,
+      name: "Adwoa Ofosua",
+      image: "/images/review-3.jpg",
       message:
         "Hello dear, I just received the items and they are sooo beautiful — the quality is amazing, you never disappoint.",
       rating: 5,
     },
     {
-      id: 3,
-      name: "Jacqueline Asamoah",
-      image: "/images/review-3.jpg",
-      message:
-        "Best online shopping experience I've had! The products exceeded my expectations and the prices are unbeatable. A+ service!",
-      rating: 5,
-    },
-    {
       id: 4,
-      name: "Joyce Mensah",
+      name: "Ama",
       image: "/images/review-2.jpg",
       message: "You always deliver the quality and exactly what we order.",
-      rating: 5,
-    },
-    {
-      id: 5,
-      name: "Diana Somuah",
-      image: "/images/review-1.jpg",
-      message:
-        "Wow, bend the trendd thank you. I'm obsessed with my new purchases!",
       rating: 5,
     },
   ];
