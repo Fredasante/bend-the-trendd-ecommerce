@@ -182,7 +182,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
                         onClick={() => setSelectedSize(size)}
                         className={`px-3 py-1 border rounded-md transition-all ${
                           selectedSize === size
-                            ? "bg-white text-dark border-slate-100 shadow-sm"
+                            ? "bg-[#007782] text-white border-[#007782] shadow-sm"
                             : "bg-white text-dark border-gray-300 hover:border-[#007782]"
                         }`}
                       >
