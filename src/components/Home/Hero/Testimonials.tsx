@@ -75,7 +75,7 @@ const TestimonialsSection = () => {
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
             What Our Customers Say
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
             Don&apos;t just take our word for it - hear from our happy customers
           </p>
         </div>

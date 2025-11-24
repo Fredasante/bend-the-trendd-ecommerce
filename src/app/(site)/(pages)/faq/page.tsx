@@ -69,7 +69,7 @@ const FAQ = () => {
             <h1 className="font-bold text-2xl md:text-4xl text-dark mb-4">
               Frequently Asked Questions
             </h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto">
               Have questions? We&apos;ve got answers! Find everything you need
               to know about Bend the Trendd.
             </p>
