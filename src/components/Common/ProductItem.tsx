@@ -57,14 +57,16 @@ const ProductItem = ({ item }: { item: Product }) => {
 
   return (
     <div className="group">
-      <div className="relative w-full bg-white aspect-square md:aspect-[4/3] overflow-hidden rounded-lg shadow-1 mb-4 flex items-center justify-center">
-        <Image
-          src={item.mainImageUrl || "/images/placeholder.png"}
-          alt={item.name || "Product image"}
-          fill
-          className="object-contain object-center"
-        />
-      </div>
+      <Link href={`/shop/${item.slug.current}`}>
+        <div className="relative w-full bg-white aspect-square md:aspect-[4/3] overflow-hidden rounded-lg shadow-1 mb-4 flex items-center justify-center">
+          <Image
+            src={item.mainImageUrl || "/images/placeholder.png"}
+            alt={item.name || "Product image"}
+            fill
+            className="object-contain object-center"
+          />
+        </div>
+      </Link>
 
       {/* <StarRating /> */}
 

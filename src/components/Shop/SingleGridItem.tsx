@@ -53,14 +53,16 @@ const SingleGridItem = ({ item }: { item: Product }) => {
 
   return (
     <div className="group">
-      <div className="relative w-full aspect-square md:aspect-[4/3] overflow-hidden rounded-lg bg-white shadow-1 mb-4 flex items-center justify-center">
-        <Image
-          src={item.mainImageUrl || "/images/placeholder.png"}
-          alt={item.name || "Product image"}
-          fill
-          className="object-contain object-center p-3"
-        />
-      </div>
+      <Link href={`/shop/${item.slug.current}`}>
+        <div className="relative w-full aspect-square md:aspect-[4/3] overflow-hidden rounded-lg bg-white shadow-1 mb-4 flex items-center justify-center">
+          <Image
+            src={item.mainImageUrl || "/images/placeholder.png"}
+            alt={item.name || "Product image"}
+            fill
+            className="object-contain object-center p-3"
+          />
+        </div>
+      </Link>
 
       {/* <StarRating /> */}
 
