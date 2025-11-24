@@ -70,8 +70,8 @@ const FAQ = () => {
               Frequently Asked Questions
             </h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Have questions? We've got answers! Find everything you need to
-              know about Bend the Trendd.
+              Have questions? We&apos;ve got answers! Find everything you need
+              to know about Bend the Trendd.
             </p>
           </div>
 
