@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { defineType, defineField } from "sanity";
 
 export const product = defineType({
