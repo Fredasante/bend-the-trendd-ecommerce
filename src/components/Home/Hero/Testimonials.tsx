@@ -81,7 +81,7 @@ const TestimonialsSection = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
             What Our Customers Say
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -152,20 +152,17 @@ const TestimonialsSection = () => {
           {/* Navigation Arrows */}
           <button
             onClick={prevTestimonial}
-            disabled={isAnimating}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 bg-white hover:bg-[#f79898] text-gray-800 hover:text-white rounded-full p-3 shadow-lg transition-all duration-300 disabled:opacity-50 group"
+            className="absolute left-2 md:left-3 lg:-left-5 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 md:p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
             aria-label="Previous testimonial"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-gray-800" />
           </button>
-
           <button
             onClick={nextTestimonial}
-            disabled={isAnimating}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 bg-white hover:bg-[#f79898] text-gray-800 hover:text-white rounded-full p-3 shadow-lg transition-all duration-300 disabled:opacity-50 group"
+            className="absolute right-2 md:right-3 lg:-right-5 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white p-2 md:p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-10"
             aria-label="Next testimonial"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-gray-800" />
           </button>
         </div>
 
