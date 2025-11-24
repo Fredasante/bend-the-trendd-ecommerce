@@ -132,8 +132,8 @@ const FAQ = () => {
               Still have questions?
             </h3>
             <p className="text-gray-600 mb-6">
-              Can't find the answer you're looking for? Our customer support
-              team is here to help!
+              Can&apos;t find the answer you&apos;re looking for? Our customer
+              support team is here to help!
             </p>
             <button className="bg-[#202020] text-white font-medium px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
               Contact Support
