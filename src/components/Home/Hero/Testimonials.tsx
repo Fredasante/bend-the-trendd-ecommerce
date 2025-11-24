@@ -133,7 +133,7 @@ const TestimonialsSection = () => {
 
                     {/* Message */}
                     <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed italic">
-                      "{testimonials[currentIndex].message}"
+                      &quot;{testimonials[currentIndex].message}&quot;
                     </p>
 
                     {/* Name */}
