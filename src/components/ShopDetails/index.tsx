@@ -132,14 +132,14 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
 
             <div className="mb-5">
               <span className="text-2xl font-bold mr-2 text-dark">
-                ₵{product.price.toFixed(2)}
+                GH₵ {product.price.toFixed(2)}
               </span>
               {hasDiscount && (
                 <>
                   <span className="text-gray-500 line-through">
-                    ₵{product.discountPrice?.toFixed(2)}
+                    GH₵ {product.discountPrice?.toFixed(2)}
                   </span>
-                  <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-blue text-white">
+                  <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-[#007782] text-white">
                     {Math.abs(discountPercentage)}% OFF
                   </span>
                 </>
@@ -147,7 +147,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
             </div>
 
             {/* Color, Size, and Quantity in flex row */}
-            <div className="flex flex-wrap items-center gap-6 mb-6 md:mb-8">
+            <div className="flex flex-wrap items-center gap-6 mb-8">
               {/* Color Selection */}
               {product.colors && product.colors.length > 0 && (
                 <div className="flex items-center gap-3">
@@ -195,9 +195,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
 
               {/* Quantity */}
               <div className="flex items-center gap-3">
-                <h3 className="text-lg font-semibold text-slate-500">
-                  Quantity:
-                </h3>
+                <h3 className="text-lg font-semibold text-slate-500">Qty:</h3>
                 <div className="flex items-center gap-2">
                   <button
                     type="button"
