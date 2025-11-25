@@ -3,6 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
 
+// Track if popup has been shown this session (outside component)
+let hasShownPopup = false;
+
 const NewsletterPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -20,10 +23,9 @@ const NewsletterPopup = () => {
     }
   }, [isOpen]);
 
-  // Show popup if user hasn't seen it
+  // Show popup once per page load
   useEffect(() => {
-    const hasSeenPopup = localStorage.getItem("hasSeenNewsletterPopup");
-    if (!hasSeenPopup) {
+    if (!hasShownPopup) {
       const timer = setTimeout(() => setIsOpen(true), 2000);
       return () => clearTimeout(timer);
     }
@@ -35,7 +37,7 @@ const NewsletterPopup = () => {
 
   const handleClose = () => {
     setIsOpen(false);
-    localStorage.setItem("hasSeenNewsletterPopup", "true");
+    hasShownPopup = true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
