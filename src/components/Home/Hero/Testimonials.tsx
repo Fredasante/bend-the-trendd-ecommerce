@@ -72,7 +72,7 @@ const TestimonialsSection = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
+          <h2 className="text-[26px] md:text-3xl lg:text-4xl font-bold text-dark mb-2.5">
             What Our Customers Say
           </h2>
           <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
