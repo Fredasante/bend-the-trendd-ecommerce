@@ -72,15 +72,6 @@ const SingleGridItem = ({ item }: { item: Product }) => {
             fill
             className="object-contain object-center"
           />
-
-          {/* Sold Out Badge */}
-          {isSoldOut && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="bg-red-600 border text-white font-bold px-4 py-2 rounded-lg shadow-lg transform -rotate-12">
-                SOLD OUT
-              </span>
-            </div>
-          )}
         </div>
       </Link>
 
@@ -95,7 +86,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
 
       {/* Price */}
       <span className="flex items-center justify-center gap-2 font-semibold text-lg">
-        <span className={isSoldOut ? "text-dark-4" : "text-dark"}>
+        <span className="text-dark">
           GH₵ {item.discountPrice ?? item.price}
         </span>
         {item.discountPrice && (
@@ -126,7 +117,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
           disabled={isSoldOut}
           className={`inline-flex font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] text-white ease-out duration-200 ${
             isSoldOut
-              ? "bg-gray-6 cursor-not-allowed opacity-60"
+              ? "bg-gray-7 cursor-not-allowed opacity-60"
               : "bg-[#382423] hover:bg-opacity-90"
           }`}
         >

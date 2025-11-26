@@ -66,15 +66,6 @@ const SingleListItem = ({ item }: { item: Product }) => {
             fill
             className="object-contain object-center"
           />
-
-          {/* Sold Out Badge */}
-          {isSoldOut && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="bg-red-600 border text-white font-bold px-4 py-2 rounded-lg shadow-lg transform -rotate-12">
-                SOLD OUT
-              </span>
-            </div>
-          )}
         </div>
 
         <div className="w-full flex flex-col gap-5 sm:flex-row sm:items-center justify-center sm:justify-between py-5 px-4 sm:px-7.5 lg:pl-11 lg:pr-12">

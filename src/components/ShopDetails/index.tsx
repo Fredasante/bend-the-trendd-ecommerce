@@ -79,15 +79,6 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
                 height={400}
                 className="w-full h-auto rounded-lg object-contain"
               />
-
-              {/* Sold Out Badge */}
-              {isSoldOut && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="bg-red-600 border text-white font-bold px-4 py-2 rounded-lg shadow-lg transform -rotate-12">
-                    SOLD OUT
-                  </span>
-                </div>
-              )}
             </div>
 
             {product.gallery && product.gallery.length > 0 && (
