@@ -133,12 +133,16 @@ const ShopWithSidebar = () => {
 
   const scrollToProducts = () => {
     if (productsTopRef.current) {
-      const yOffset = -150;
-      const y =
-        productsTopRef.current.getBoundingClientRect().top +
-        window.pageYOffset +
-        yOffset;
-      window.scrollTo({ top: y, behavior: "smooth" });
+      const isMobile = window.innerWidth < 768;
+      const yOffset = isMobile ? -120 : -150;
+
+      const element = productsTopRef.current;
+      const offsetPosition = element.offsetTop + yOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   };
 
