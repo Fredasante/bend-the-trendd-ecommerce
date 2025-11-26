@@ -110,8 +110,13 @@ const SingleGridItem = ({ item }: { item: Product }) => {
             openModal();
             handleQuickViewUpdate();
           }}
+          disabled={isSoldOut}
           aria-label="Quick view product"
-          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-[#007782]"
+          className={`flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 ${
+            isSoldOut
+              ? "text-gray-400 bg-gray-100 cursor-not-allowed opacity-60"
+              : "text-dark bg-white hover:text-[#007782]"
+          }`}
         >
           <Eye className="w-4 h-4" />
         </button>
