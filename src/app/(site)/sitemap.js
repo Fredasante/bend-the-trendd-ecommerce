@@ -1,5 +1,5 @@
 import { groq } from "next-sanity";
-import { client } from "@/sanity/lib/client";
+import { client } from "@/sanity/client";
 
 export default async function sitemap() {
   const baseUrl = "https://www.bendthetrendd.com";
