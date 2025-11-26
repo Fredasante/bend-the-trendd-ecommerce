@@ -21,7 +21,7 @@ const ShopWithSidebar = () => {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(9);
+  const [perPage] = useState(15);
   const [totalCount, setTotalCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedGender, setSelectedGender] = useState<string>("");
@@ -130,27 +130,45 @@ const ShopWithSidebar = () => {
     setCurrentPage(1);
     closeSidebar();
   };
-
   const scrollToProducts = () => {
     if (productsTopRef.current) {
-      const isMobile = window.innerWidth < 768;
-      const yOffset = isMobile ? -110 : -150;
+      // Close sidebar first on mobile to remove scroll interference
+      if (window.innerWidth < 1280) {
+        // xl breakpoint
+        setProductSidebar(false);
+      }
 
-      const element = productsTopRef.current;
-      const targetPosition = element.offsetTop + yOffset;
-      const maxScroll =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const finalPosition = Math.max(0, Math.min(targetPosition, maxScroll));
+      // Small delay to let sidebar close animation complete
+      setTimeout(
+        () => {
+          const isMobile = window.innerWidth < 768;
+          const yOffset = isMobile ? -110 : -150;
 
-      // Triple approach for stubborn iOS
-      // 1. Scroll body
-      document.body.scrollTop = finalPosition;
+          const element = productsTopRef.current;
+          if (!element) return;
 
-      // 2. Scroll document element
-      document.documentElement.scrollTop = finalPosition;
+          // Get the actual position after sidebar closes
+          const rect = element.getBoundingClientRect();
+          const scrollTop =
+            window.pageYOffset || document.documentElement.scrollTop;
+          const targetPosition = rect.top + scrollTop + yOffset;
 
-      // 3. Scroll window
-      window.scrollTo(0, finalPosition);
+          const maxScroll =
+            document.documentElement.scrollHeight - window.innerHeight;
+          const finalPosition = Math.max(
+            0,
+            Math.min(targetPosition, maxScroll)
+          );
+
+          // iOS-friendly scroll
+          window.scrollTo({
+            top: finalPosition,
+            left: 0,
+            behavior: "smooth",
+          });
+        },
+        productSidebar ? 250 : 0
+      ); // Wait for sidebar animation if it's open
     }
   };
 
