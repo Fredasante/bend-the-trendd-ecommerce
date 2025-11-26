@@ -3,6 +3,9 @@ import ShopDetails from "@/components/ShopDetails";
 import { getProductBySlug } from "@/sanity/groq";
 import { client } from "@/sanity/client";
 
+// Revalidate every 60 seconds - page will regenerate with fresh data
+export const revalidate = 60;
+
 // Generate static params for all products (for better performance)
 export async function generateStaticParams() {
   const products = await client.fetch<{ slug: string }[]>(
