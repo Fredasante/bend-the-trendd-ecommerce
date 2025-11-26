@@ -68,11 +68,6 @@ const ShopWithSidebar = () => {
     };
   }, [productSidebar]);
 
-  const options = [
-    { label: "Latest Products", value: "1" },
-    { label: "Old Products", value: "2" },
-  ];
-
   // Fetch products
   useEffect(() => {
     const loadProducts = async () => {
@@ -233,7 +228,6 @@ const ShopWithSidebar = () => {
               <div className="rounded-lg bg-white shadow-1 pl-3 pr-2.5 py-2.5 mb-6">
                 <div className="flex items-center justify-between">
                   <div className="flex flex-wrap items-center gap-4">
-                    <CustomSelect options={options} />
                     <p>
                       Showing{" "}
                       <span className="text-dark">

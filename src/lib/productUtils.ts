@@ -21,7 +21,7 @@ export const fetchPaginatedProducts = async ({
   const end = start + perPage;
 
   // Build filter for available products
-  const filters: string[] = ['status == "available"'];
+  const filters: string[] = [];
 
   if (category) filters.push(`category == "${category}"`);
   if (gender) filters.push(`gender == "${gender}"`);

@@ -123,7 +123,7 @@ export const colorsWithCountQuery = `
 
 // Query to fetch a single product by slug - AVAILABLE ONLY
 export const PRODUCT_BY_SLUG_QUERY = `
-  *[_type == "product" && slug.current == $slug && status == "available"][0]{
+  *[_type == "product" && slug.current == $slug][0]{
     _id,
     name,
     slug,

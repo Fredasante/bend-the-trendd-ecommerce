@@ -27,6 +27,8 @@ const QuickViewModal = () => {
 
   const [activePreview, setActivePreview] = useState(0);
 
+  const isSoldOut = product?.status === "sold";
+
   // preview modal
   const handlePreviewSlider = () => {
     dispatch(updateProductDetails(product));
@@ -113,13 +115,23 @@ const QuickViewModal = () => {
             <div className="max-w-[526px] w-full">
               <div className="relative z-1 overflow-hidden flex items-center justify-center w-full h-[300px] sm:h-[400px] lg:h-[508px] bg-gray-1 rounded-lg border border-gray-3">
                 {product?.mainImageUrl ? (
-                  <Image
-                    src={product.mainImageUrl}
-                    alt={product.name}
-                    width={400}
-                    height={400}
-                    className="object-contain w-full h-full max-h-[280px] sm:max-h-[380px] lg:max-h-[480px]"
-                  />
+                  <>
+                    <Image
+                      src={product.mainImageUrl}
+                      alt={product.name}
+                      width={400}
+                      height={400}
+                      className="object-contain w-full h-full max-h-[280px] sm:max-h-[380px] lg:max-h-[480px]"
+                    />
+                    {/* Sold Out Badge */}
+                    {isSoldOut && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="bg-red-600 text-white border font-bold px-4 py-2 rounded-lg text-xl shadow-lg transform -rotate-12">
+                          SOLD OUT
+                        </span>
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gray-200 rounded">
                     <span>No Image</span>
@@ -187,16 +199,26 @@ const QuickViewModal = () => {
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-4">
                 <button
                   onClick={handleAddToCart}
-                  className="inline-flex font-medium text-white bg-[#007782] py-2.5 px-4.5 sm:py-3 sm:px-7 text-sm sm:text-base rounded-md hover:bg-opacity-90 transition-colors"
+                  disabled={isSoldOut}
+                  className={`inline-flex font-medium text-white py-2.5 px-4.5 sm:py-3 sm:px-7 text-sm sm:text-base rounded-md transition-colors ${
+                    isSoldOut
+                      ? "bg-gray-6 cursor-not-allowed opacity-60"
+                      : "bg-[#007782] hover:bg-opacity-90"
+                  }`}
                 >
-                  Add to Cart
+                  {isSoldOut ? "Sold Out" : "Add to Cart"}
                 </button>
 
                 <button
                   onClick={handleAddToWishlist}
-                  className="inline-flex items-center gap-2 font-medium text-white bg-dark py-2.5 px-4.5 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md hover:bg-opacity-95 transition-colors"
+                  disabled={isSoldOut}
+                  className={`inline-flex items-center gap-2 font-medium text-white py-2.5 px-4.5 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md transition-colors ${
+                    isSoldOut
+                      ? "bg-gray-6 cursor-not-allowed opacity-60"
+                      : "bg-dark hover:bg-opacity-95"
+                  }`}
                 >
-                  Add to Wishlist
+                  {isSoldOut ? "Unavailable" : "Add to Wishlist"}
                 </button>
               </div>
 

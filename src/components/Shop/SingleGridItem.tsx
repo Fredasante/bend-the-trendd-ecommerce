@@ -11,12 +11,13 @@ import { AppDispatch } from "@/redux/store";
 import Link from "next/link";
 import Image from "next/image";
 import { Eye, Heart } from "lucide-react";
-import StarRating from "../Common/StarRating";
 import { toast } from "sonner";
 
 const SingleGridItem = ({ item }: { item: Product }) => {
   const { openModal } = useModalContext();
   const dispatch = useDispatch<AppDispatch>();
+
+  const isSoldOut = item.status === "sold";
 
   // 🟢 Update QuickView
   const handleQuickViewUpdate = () => {
@@ -25,6 +26,11 @@ const SingleGridItem = ({ item }: { item: Product }) => {
 
   // 🛒 Add to Cart
   const handleAddToCart = () => {
+    if (isSoldOut) {
+      toast.error("This item is sold out");
+      return;
+    }
+
     const selectedSize = item.sizes?.[0] || null;
     const selectedColor = item.colors?.[0] || null;
 
@@ -41,6 +47,11 @@ const SingleGridItem = ({ item }: { item: Product }) => {
 
   // 💖 Add to Wishlist
   const handleItemToWishList = () => {
+    if (isSoldOut) {
+      toast.error("Cannot add sold out items to wishlist");
+      return;
+    }
+
     dispatch(
       addItemToWishlist({
         ...item,
@@ -59,8 +70,17 @@ const SingleGridItem = ({ item }: { item: Product }) => {
             src={item.mainImageUrl || "/images/placeholder.png"}
             alt={item.name || "Product image"}
             fill
-            className="object-contain object-center p-3"
+            className="object-contain object-center"
           />
+
+          {/* Sold Out Badge */}
+          {isSoldOut && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="bg-red-600 border text-white font-bold px-4 py-2 rounded-lg shadow-lg transform -rotate-12">
+                SOLD OUT
+              </span>
+            </div>
+          )}
         </div>
       </Link>
 
@@ -75,7 +95,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
 
       {/* Price */}
       <span className="flex items-center justify-center gap-2 font-semibold text-lg">
-        <span className="text-dark">
+        <span className={isSoldOut ? "text-dark-4" : "text-dark"}>
           GH₵ {item.discountPrice ?? item.price}
         </span>
         {item.discountPrice && (
@@ -98,15 +118,25 @@ const SingleGridItem = ({ item }: { item: Product }) => {
 
         <button
           onClick={handleAddToCart}
-          className="inline-flex font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] bg-[#382423] text-white ease-out duration-200 hover:bg-opacity-90"
+          disabled={isSoldOut}
+          className={`inline-flex font-medium text-custom-sm py-[4px] md:py-[7px] px-1.5 md:px-5 rounded-[5px] text-white ease-out duration-200 ${
+            isSoldOut
+              ? "bg-gray-6 cursor-not-allowed opacity-60"
+              : "bg-[#382423] hover:bg-opacity-90"
+          }`}
         >
-          Add to cart
+          {isSoldOut ? "Sold Out" : "Add to cart"}
         </button>
 
         <button
           onClick={handleItemToWishList}
+          disabled={isSoldOut}
           aria-label="Add to wishlist"
-          className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-[#007782]"
+          className={`flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 ${
+            isSoldOut
+              ? "text-gray-400 bg-gray-100 cursor-not-allowed opacity-60"
+              : "text-dark bg-white hover:text-[#007782]"
+          }`}
         >
           <Heart className="w-4 h-4" />
         </button>

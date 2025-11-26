@@ -30,6 +30,8 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
       )
     : 0;
 
+  const isSoldOut = product?.status === "sold";
+
   // add to cart
   const handleAddToCart = () => {
     dispatch(
@@ -77,6 +79,15 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
                 height={400}
                 className="w-full h-auto rounded-lg object-contain"
               />
+
+              {/* Sold Out Badge */}
+              {isSoldOut && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="bg-red-600 border text-white font-bold px-4 py-2 rounded-lg shadow-lg transform -rotate-12">
+                    SOLD OUT
+                  </span>
+                </div>
+              )}
             </div>
 
             {product.gallery && product.gallery.length > 0 && (
@@ -211,16 +222,26 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-5">
               <button
                 onClick={handleAddToCart}
-                className="inline-flex font-medium text-white bg-[#007782] py-2.5 px-4.5 text-sm sm:text-base rounded-md hover:bg-opacity-90 transition-colors"
+                disabled={isSoldOut}
+                className={`inline-flex font-medium text-white py-2.5 px-4.5 sm:py-3 sm:px-7 text-sm sm:text-base rounded-md transition-colors ${
+                  isSoldOut
+                    ? "bg-gray-6 cursor-not-allowed opacity-60"
+                    : "bg-[#007782] hover:bg-opacity-90"
+                }`}
               >
-                Add to Cart
+                {isSoldOut ? "Sold Out" : "Add to Cart"}
               </button>
 
               <button
                 onClick={handleAddToWishlist}
-                className="inline-flex items-center gap-2 font-medium text-white bg-[#382423] py-2.5 px-4.5 text-sm sm:text-base rounded-md hover:bg-opacity-90 transition-colors"
+                disabled={isSoldOut}
+                className={`inline-flex items-center gap-2 font-medium text-white py-2.5 px-4.5 sm:py-3 sm:px-6 text-sm sm:text-base rounded-md transition-colors ${
+                  isSoldOut
+                    ? "bg-gray-6 cursor-not-allowed opacity-60"
+                    : "bg-dark hover:bg-opacity-95"
+                }`}
               >
-                Add to Wishlist
+                {isSoldOut ? "Unavailable" : "Add to Wishlist"}
               </button>
             </div>
 

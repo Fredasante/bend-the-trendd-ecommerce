@@ -17,6 +17,8 @@ const SingleListItem = ({ item }: { item: Product }) => {
   const { openModal } = useModalContext();
   const dispatch = useDispatch<AppDispatch>();
 
+  const isSoldOut = item.status === "sold";
+
   // update the QuickView state
   const handleQuickViewUpdate = () => {
     dispatch(updateQuickView({ ...item }));
@@ -24,6 +26,11 @@ const SingleListItem = ({ item }: { item: Product }) => {
 
   // add to cart
   const handleAddToCart = () => {
+    if (isSoldOut) {
+      toast.error("This item is sold out");
+      return;
+    }
+
     dispatch(
       addItemToCart({
         ...item,
@@ -34,6 +41,11 @@ const SingleListItem = ({ item }: { item: Product }) => {
   };
 
   const handleItemToWishList = () => {
+    if (isSoldOut) {
+      toast.error("Cannot add sold out items to wishlist");
+      return;
+    }
+
     dispatch(
       addItemToWishlist({
         ...item,
@@ -52,26 +64,41 @@ const SingleListItem = ({ item }: { item: Product }) => {
             src={item.mainImageUrl || "/images/placeholder.png"}
             alt={item.name || "Product image"}
             fill
-            className="object-contain object-center p-3"
+            className="object-contain object-center"
           />
+
+          {/* Sold Out Badge */}
+          {isSoldOut && (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="bg-red-600 border text-white font-bold px-4 py-2 rounded-lg shadow-lg transform -rotate-12">
+                SOLD OUT
+              </span>
+            </div>
+          )}
         </div>
 
         <div className="w-full flex flex-col gap-5 sm:flex-row sm:items-center justify-center sm:justify-between py-5 px-4 sm:px-7.5 lg:pl-11 lg:pr-12">
           <div>
             <h3 className="font-medium text-dark ease-out duration-200 hover:text-[#007782] mb-1.5 line-clamp-1">
-              <Link href="/shop-details"> {item.name} </Link>
+              <Link href={`/shop/${item.slug?.current || item.slug}`}>
+                {item.name}
+              </Link>
             </h3>
 
             <span className="flex items-center gap-2 font-medium text-lg mb-4">
               {item.discountPrice ? (
                 <>
-                  <span className="text-dark">₵{item.discountPrice}</span>
+                  <span className={isSoldOut ? "text-dark-4" : "text-dark"}>
+                    ₵{item.discountPrice}
+                  </span>
                   <span className="text-dark-4 line-through">
                     ₵{item.price}
                   </span>
                 </>
               ) : (
-                <span className="text-dark">₵{item.price}</span>
+                <span className={isSoldOut ? "text-dark-4" : "text-dark"}>
+                  ₵{item.price}
+                </span>
               )}
             </span>
 
@@ -109,15 +136,25 @@ const SingleListItem = ({ item }: { item: Product }) => {
 
               <button
                 onClick={() => handleAddToCart()}
-                className="inline-flex font-medium text-custom-sm py-[7px] px-5 rounded-[5px] bg-[#382423] text-white ease-out duration-200 hover:bg-opacity-90"
+                disabled={isSoldOut}
+                className={`inline-flex font-medium text-custom-sm py-[7px] px-5 rounded-[5px] text-white ease-out duration-200 ${
+                  isSoldOut
+                    ? "bg-gray-6 cursor-not-allowed opacity-60"
+                    : "bg-[#382423] hover:bg-opacity-90"
+                }`}
               >
-                Add to cart
+                {isSoldOut ? "Sold Out" : "Add to cart"}
               </button>
 
               <button
                 onClick={() => handleItemToWishList()}
+                disabled={isSoldOut}
                 aria-label="button for favorite select"
-                className="flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 text-dark bg-white hover:text-[#007782]"
+                className={`flex items-center justify-center w-9 h-9 rounded-[5px] shadow-1 ease-out duration-200 ${
+                  isSoldOut
+                    ? "text-gray-400 bg-gray-100 cursor-not-allowed opacity-60"
+                    : "text-dark bg-white hover:text-[#007782]"
+                }`}
               >
                 <svg
                   className="fill-current"

@@ -1,4 +1,3 @@
-// app/shop/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import ShopDetails from "@/components/ShopDetails";
 import { getProductBySlug } from "@/sanity/groq";
