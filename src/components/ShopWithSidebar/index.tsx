@@ -134,22 +134,23 @@ const ShopWithSidebar = () => {
   const scrollToProducts = () => {
     if (productsTopRef.current) {
       const isMobile = window.innerWidth < 768;
-      const yOffset = isMobile ? -80 : -150;
+      const yOffset = isMobile ? -110 : -150;
 
       const element = productsTopRef.current;
       const targetPosition = element.offsetTop + yOffset;
-
-      // Maximum possible scroll position
       const maxScroll =
         document.documentElement.scrollHeight - window.innerHeight;
-
-      // Don't scroll past the max (prevents footer from showing)
       const finalPosition = Math.max(0, Math.min(targetPosition, maxScroll));
 
-      window.scrollTo({
-        top: finalPosition,
-        behavior: "smooth",
-      });
+      // Triple approach for stubborn iOS
+      // 1. Scroll body
+      document.body.scrollTop = finalPosition;
+
+      // 2. Scroll document element
+      document.documentElement.scrollTop = finalPosition;
+
+      // 3. Scroll window
+      window.scrollTo(0, finalPosition);
     }
   };
 
