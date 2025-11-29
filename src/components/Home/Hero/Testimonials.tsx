@@ -26,8 +26,8 @@ const TestimonialsSection = () => {
     },
     {
       id: 3,
-      name: "Adwoa Ofosua",
-      image: "/images/review-3.jpg",
+      name: "Maami K.",
+      image: "/images/review-6.jpg",
       message:
         "Hello dear, I just received the items and they are sooo beautiful — the quality is amazing, you never disappoint.",
       rating: 5,
