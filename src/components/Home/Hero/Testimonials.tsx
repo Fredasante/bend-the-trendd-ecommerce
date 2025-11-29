@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import Image from "next/image";
 
 const TestimonialsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -61,11 +62,12 @@ const TestimonialsSection = () => {
     return () => clearTimeout(timer);
   }, [currentIndex]);
 
-  // Auto-scroll every 5 seconds
   useEffect(() => {
-    const interval = setInterval(nextTestimonial, 5000);
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [testimonials.length]);
 
   return (
     <div className="w-full bg-[#fef4f4] py-5 lg:py-8 px-4 sm:px-6 lg:px-8">
@@ -95,11 +97,13 @@ const TestimonialsSection = () => {
                   {/* Image */}
                   <div className="flex-shrink-0">
                     <div className="relative">
-                      <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden ring-4 ring-[#f79898] ring-offset-4">
-                        <img
+                      <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden ring-4 ring-[#f79898] ring-offset-4">
+                        <Image
                           src={testimonials[currentIndex].image}
                           alt={testimonials[currentIndex].name}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 96px, 128px"
                         />
                       </div>
                       <div className="absolute -bottom-2 -right-2 bg-[#f79898] text-white rounded-full p-2 shadow-lg">

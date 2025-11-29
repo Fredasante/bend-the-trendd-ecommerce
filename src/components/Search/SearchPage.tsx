@@ -181,7 +181,7 @@ export default function SearchPage() {
     <>
       <Breadcrumb title={getPageTitle()} pages={["search"]} />
       <section
-        className="overflow-hidden relative pb-20 pt-5 lg:pt-12 bg-[#f3f4f6]"
+        className="overflow-hidden relative pb-20 pt-5 lg:pt-12 bg-[#fef4f4]"
         ref={productsTopRef}
       >
         <div className="max-w-[1170px] w-full mx-auto px-4 sm:px-8 xl:px-0">

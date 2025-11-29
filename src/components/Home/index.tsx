@@ -1,15 +1,15 @@
 import React from "react";
 import Hero from "./Hero";
-import NewArrival from "./NewArrivals";
 import NewsletterPopup from "./NewsLetterPopup";
 import TestimonialsSection from "./Hero/Testimonials";
+import CategoryGrid from "./CategoryGrid";
 
 const Home = () => {
   return (
     <main>
       <NewsletterPopup />
       <Hero />
-      <NewArrival />
+      <CategoryGrid />
       <TestimonialsSection />
     </main>
   );

@@ -4,7 +4,7 @@ import SearchPage from "@/components/Search/SearchPage";
 import { ClipLoader } from "react-spinners";
 
 export const metadata = {
-  title: "Search Products | Your Store Name",
+  title: "Search Products | Bend the Trendd",
   description: "Search for products in our store",
   robots: {
     index: false,
