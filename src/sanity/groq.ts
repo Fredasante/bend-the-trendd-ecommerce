@@ -1,31 +1,32 @@
 import { Product } from "@/types/product";
 import { client } from "./client";
 
-// 🛍️ All products (newest first) - AVAILABLE ONLY
+// 🛍️ All products (newest first) - IN STOCK ONLY
 export const allProductsQuery = `
-  *[_type == "product" && status == "available"] | order(createdAt desc) {
+  *[_type == "product" && stockQuantity > 0] | order(createdAt desc) {
     _id,
     name,
     slug,
     price,
     discountPrice,
+    stockQuantity,
     category,
     description,
     gender,
-    status,
     isFeatured,
     "mainImageUrl": mainImage.asset->url
   }
 `;
 
-// 👕 Products by Category - AVAILABLE ONLY
+// 👕 Products by Category - IN STOCK ONLY
 export const productsByCategoryQuery = `
-  *[_type == "product" && category == $category && status == "available"] | order(createdAt desc) {
+  *[_type == "product" && category == $category && stockQuantity > 0] | order(createdAt desc) {
     _id,
     name,
     slug,
     price,
     discountPrice,
+    stockQuantity,
     category,
     description,
     isFeatured,
@@ -33,9 +34,9 @@ export const productsByCategoryQuery = `
   }
 `;
 
-// ✅ Fetch the 12 most recent available products (New Arrivals)
+// ✅ New Arrivals - IN STOCK ONLY
 export const newArrivalsQuery = `
-  *[_type == "product" && status == "available"] | order(_createdAt desc)[0...4]{
+  *[_type == "product" && stockQuantity > 0] | order(_createdAt desc)[0...12]{
     _id,
     name,
     slug,
@@ -43,20 +44,22 @@ export const newArrivalsQuery = `
     sizes,
     colors,
     discountPrice,
+    stockQuantity,
     category,
     description,
     "mainImageUrl": mainImage.asset->url
   }
 `;
 
-// 🔍 Search by name - AVAILABLE ONLY
+// 🔍 Search by name - IN STOCK ONLY
 export const searchProductsQuery = `
-  *[_type == "product" && name match $search + "*" && status == "available"] | order(createdAt desc) {
+  *[_type == "product" && name match $search + "*" && stockQuantity > 0] | order(createdAt desc) {
     _id,
     name,
     slug,
     price,
     discountPrice,
+    stockQuantity,
     category,
     sizes,
     colors,
@@ -65,63 +68,63 @@ export const searchProductsQuery = `
   }
 `;
 
-// 🧭 Paginated products - AVAILABLE ONLY
+// 🧭 Paginated products - IN STOCK ONLY
 export const paginatedProductsQuery = `
-  *[_type == "product" && status == "available"] | order(createdAt desc) [$start...$end] {
+  *[_type == "product" && stockQuantity > 0] | order(createdAt desc) [$start...$end] {
     _id,
     name,
     slug,
     price,
     discountPrice,
+    stockQuantity,
     sizes,
     colors,
     category,
     gender,
-    status,
     isFeatured,
     description,
     "mainImageUrl": mainImage.asset->url
   }
 `;
 
-// Count available products with optional category filter
-export const productCountQuery = `count(*[_type == "product" && status == "available" $categoryFilter])`;
+// Count in-stock products with optional category filter
+export const productCountQuery = `count(*[_type == "product" && stockQuantity > 0 $categoryFilter])`;
 
-// Categories with product count - AVAILABLE ONLY
+// Categories with product count - IN STOCK ONLY
 export const categoriesWithCountQuery = `
-  *[_type == "product" && status == "available"] {
+  *[_type == "product" && stockQuantity > 0] {
     category
   } | {
     "name": category,
-    "products": count(*[_type == "product" && category == ^.category && status == "available"])
+    "products": count(*[_type == "product" && category == ^.category && stockQuantity > 0])
   }
 `;
 
-// Genders with product count - AVAILABLE ONLY
+// Genders with product count - IN STOCK ONLY
 export const gendersWithCountQuery = `
-  *[_type == "product" && status == "available"] {
+  *[_type == "product" && stockQuantity > 0] {
     gender
   } | {
     "name": gender,
-    "products": count(*[_type == "product" && gender == ^.gender && status == "available"])
+    "products": count(*[_type == "product" && gender == ^.gender && stockQuantity > 0])
   }
 `;
 
-// Sizes with count - AVAILABLE ONLY
+// Sizes with count - IN STOCK ONLY
 export const sizesWithCountQuery = `
-  *[_type == "product" && defined(sizes) && status == "available"] {
+  *[_type == "product" && defined(sizes) && stockQuantity > 0] {
     sizes
   }
 `;
 
-// Colors with count - AVAILABLE ONLY
+// Colors with count - IN STOCK ONLY
 export const colorsWithCountQuery = `
-  *[_type == "product" && defined(colors) && status == "available"] {
+  *[_type == "product" && defined(colors) && stockQuantity > 0] {
     colors
   }
 `;
 
-// Query to fetch a single product by slug - AVAILABLE ONLY
+// Query to fetch a single product by slug (includes out of stock for viewing)
 export const PRODUCT_BY_SLUG_QUERY = `
   *[_type == "product" && slug.current == $slug][0]{
     _id,
@@ -136,9 +139,9 @@ export const PRODUCT_BY_SLUG_QUERY = `
     sizes,
     price,
     discountPrice,
+    stockQuantity,
     colors,
     description,
-    status,
     isFeatured,
     createdAt
   }
@@ -157,7 +160,7 @@ export async function getProductBySlug(slug: string): Promise<Product | null> {
   }
 }
 
-// Query to get all AVAILABLE product slugs (for static generation)
+// Query to get all IN-STOCK product slugs (for static generation)
 export const ALL_PRODUCT_SLUGS_QUERY = `
-  *[_type == "product" && status == "available"]{ "slug": slug.current }
+  *[_type == "product" && stockQuantity > 0]{ "slug": slug.current }
 `;

@@ -8,6 +8,7 @@ export type CartItem = {
   price: number;
   discountPrice?: number;
   quantity: number;
+  stockQuantity: number;
   mainImageUrl?: string;
   size?: string;
   color?: string;
@@ -38,25 +39,32 @@ export const cart = createSlice({
         mainImageUrl,
         size,
         color,
+        stockQuantity,
       } = action.payload;
 
       const existingItem = state.items.find((item) => item._id === _id);
 
-      // 🛑 If item already exists, do nothing (no duplicate / price increase)
+      // 🛑 If item already exists, increase quantity (up to stock limit)
       if (existingItem) {
+        const newQuantity = Math.min(
+          existingItem.quantity + quantity,
+          stockQuantity
+        );
+        existingItem.quantity = newQuantity;
         return;
       }
 
-      // ✅ Otherwise, add new item
+      // ✅ Otherwise, add new item (ensure quantity doesn't exceed stock)
       state.items.push({
         _id,
         name,
         price,
-        quantity,
+        quantity: Math.min(quantity, stockQuantity),
         discountPrice,
         mainImageUrl,
         size,
         color,
+        stockQuantity,
       });
     },
 
@@ -72,7 +80,11 @@ export const cart = createSlice({
         (item) => item._id === action.payload._id
       );
       if (existingItem) {
-        existingItem.quantity = action.payload.quantity;
+        // ✅ Ensure quantity doesn't exceed available stock
+        existingItem.quantity = Math.min(
+          Math.max(action.payload.quantity, 1), // Minimum 1
+          existingItem.stockQuantity // Maximum stock
+        );
       }
     },
 
@@ -90,6 +102,10 @@ export const selectTotalPrice = createSelector([selectCartItems], (items) =>
     const priceToUse = item.discountPrice ?? item.price;
     return total + priceToUse * item.quantity;
   }, 0)
+);
+
+export const selectTotalItems = createSelector([selectCartItems], (items) =>
+  items.reduce((total, item) => total + item.quantity, 0)
 );
 
 export const {

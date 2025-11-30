@@ -21,7 +21,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const isAvailable = product.status === "available";
+  const isAvailable = product.stockQuantity > 0;
   const hasDiscount =
     product.discountPrice && product.discountPrice > product.price;
   const discountPercentage = hasDiscount
@@ -30,7 +30,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
       )
     : 0;
 
-  const isSoldOut = product?.status === "sold";
+  const isSoldOut = product.stockQuantity === 0;
 
   // add to cart
   const handleAddToCart = () => {
@@ -41,6 +41,7 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
         price: product.price,
         discountPrice: product.discountPrice,
         mainImageUrl: product.mainImageUrl || "",
+        stockQuantity: product.stockQuantity,
         size: product.sizes?.[0] || null,
         color: product.colors?.[0] || null,
         quantity: 1,
@@ -118,19 +119,26 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
 
           {/* Product Details */}
           <div className="w-full md:w-1/2 lg:w-[60%] px-4">
-            <h2 className="text-3xl font-bold mb-2 text-dark">
+            <h2 className="text-3xl font-bold mb-3 text-dark">
               {product.name}
             </h2>
-            <p className="text-gray-600 mb-5">
-              Status:{" "}
-              <span
-                className={`font-semibold ${
-                  isAvailable ? "text-green" : "text-red"
-                }`}
-              >
-                {isAvailable ? "In Stock" : "Sold Out"}
-              </span>
-            </p>
+            <div className="text-gray-600 mb-5 flex items-center gap-2">
+              <p>Status:</p>
+
+              {product?.stockQuantity === 0 ? (
+                <span className="inline-flex items-center px-3 py-1 text-sm rounded-full font-medium bg-red-light-6 text-red">
+                  Out of Stock
+                </span>
+              ) : product?.stockQuantity <= 3 ? (
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium  bg-green-light-6 text-green">
+                  Only {product.stockQuantity} left!
+                </span>
+              ) : (
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-light-6 text-green">
+                  In Stock
+                </span>
+              )}
+            </div>
 
             <div className="mb-5">
               <span className="text-2xl font-bold mr-2 text-dark">
@@ -194,20 +202,6 @@ const ShopDetails = ({ product }: ShopDetailsProps) => {
                   </div>
                 </div>
               )}
-
-              {/* Quantity */}
-              <div className="flex items-center gap-3">
-                <h3 className="text-lg font-semibold text-slate-500">Qty:</h3>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    className="px-3 py-1 rounded-md border border-slate-100 bg-white text-black shadow-sm transition-all cursor-not-allowed"
-                    disabled
-                  >
-                    1
-                  </button>
-                </div>
-              </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-5">

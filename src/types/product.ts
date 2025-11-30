@@ -8,6 +8,7 @@ export type Product = {
   gender?: "men" | "women" | "unisex";
   sizes?: string[];
   price: number;
+  stockQuantity: number;
   discountPrice?: number;
   colors?: string[];
   description?: string | any[];

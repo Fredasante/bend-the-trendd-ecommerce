@@ -1,11 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
 import { useModalContext } from "@/app/context/QuickViewModalContext";
-import { AppDispatch, useAppSelector } from "@/redux/store";
+import { AppDispatch, useAppSelector, RootState } from "@/redux/store";
 import { addItemToCart } from "@/redux/features/cart-slice";
 import { addItemToWishlist } from "@/redux/features/wishlist-slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
 import { usePreviewSlider } from "@/app/context/PreviewSliderContext";
 import { updateProductDetails } from "@/redux/features/product-details";
@@ -16,18 +15,25 @@ import { toast } from "sonner";
 const QuickViewModal = () => {
   const { isModalOpen, closeModal } = useModalContext();
   const { openPreviewModal } = usePreviewSlider();
-  const [quantity, setQuantity] = useState(1);
 
   // get the product data
   const product = useAppSelector((state) => state.quickViewReducer.value);
+  const cartItems = useSelector((state: RootState) => state.cartReducer.items);
 
   const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || "");
+  const [selectedColor, setSelectedColor] = useState(
+    product?.colors?.[0] || ""
+  );
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const [activePreview, setActivePreview] = useState(0);
+  // Get current cart quantity for this product
+  const cartItem = cartItems.find((item) => item._id === product?._id);
+  const currentCartQuantity = cartItem?.quantity || 0;
 
-  const isSoldOut = product?.status === "sold";
+  // Check stock status
+  const isSoldOut = product?.stockQuantity === 0;
+  const canAddToCart = currentCartQuantity < (product?.stockQuantity || 0);
 
   // preview modal
   const handlePreviewSlider = () => {
@@ -35,8 +41,18 @@ const QuickViewModal = () => {
     openPreviewModal();
   };
 
-  // add to cart
+  // add to cart with stock validation
   const handleAddToCart = () => {
+    if (isSoldOut) {
+      toast.error("This item is out of stock");
+      return;
+    }
+
+    if (!canAddToCart) {
+      toast.error(`Only ${product.stockQuantity} available in stock`);
+      return;
+    }
+
     dispatch(
       addItemToCart({
         _id: product._id,
@@ -44,9 +60,10 @@ const QuickViewModal = () => {
         price: product.price,
         discountPrice: product.discountPrice,
         mainImageUrl: product.mainImageUrl || "",
-        size: product.sizes?.[0] || null,
-        color: product.colors?.[0] || null,
-        quantity,
+        size: selectedSize,
+        color: selectedColor,
+        quantity: 1,
+        stockQuantity: product.stockQuantity,
       })
     );
     toast.success("Added to cart!");
@@ -74,6 +91,9 @@ const QuickViewModal = () => {
     if (product?.sizes && product.sizes.length > 0) {
       setSelectedSize(product.sizes[0]);
     }
+    if (product?.colors && product.colors.length > 0) {
+      setSelectedColor(product.colors[0]);
+    }
   }, [product]);
 
   useEffect(() => {
@@ -90,7 +110,6 @@ const QuickViewModal = () => {
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      setQuantity(1);
     };
   }, [isModalOpen, closeModal]);
 
@@ -100,7 +119,7 @@ const QuickViewModal = () => {
         isModalOpen ? "z-99999" : "hidden"
       } fixed top-0 left-0 overflow-y-auto no-scrollbar w-full h-screen sm:py-20 xl:py-25 2xl:py-[230px] bg-dark/70 sm:px-8 px-4 py-5`}
     >
-      <div className="flex items-center justify-center ">
+      <div className="flex items-center justify-center">
         <div className="w-full max-w-[1100px] rounded-xl shadow-3 bg-white p-7.5 relative modal-content">
           <button
             onClick={() => closeModal()}
@@ -142,11 +161,29 @@ const QuickViewModal = () => {
 
             {/* Product Info */}
             <div className="max-w-[445px] w-full">
-              <h3 className="font-semibold text-xl xl:text-heading-5 text-dark mb-4">
+              <h3 className="font-semibold text-xl xl:text-heading-5 text-dark mb-3">
                 {product.name || "Untitled Product"}
               </h3>
 
-              <div>
+              <div className="text-gray-600 mb-5 flex items-center gap-2">
+                <p>Status:</p>
+
+                {product?.stockQuantity === 0 ? (
+                  <span className="inline-flex items-center px-3 py-1 text-sm rounded-full font-medium bg-red-light-6 text-red">
+                    Out of Stock
+                  </span>
+                ) : product?.stockQuantity <= 3 ? (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium  bg-green-light-6 text-green">
+                    Only {product.stockQuantity} left!
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-light-6 text-green">
+                    In Stock
+                  </span>
+                )}
+              </div>
+
+              <div className="mb-4">
                 <span className="flex items-center gap-4">
                   <span className="font-semibold text-dark text-xl lg:text-[23px]">
                     GH₵ {product.discountPrice || product.price || "0.00"}
@@ -159,7 +196,41 @@ const QuickViewModal = () => {
                 </span>
               </div>
 
-              <div className="flex flex-wrap gap-9 md:gap-15 lg:gap-25 mt-6 mb-7.5">
+              {/* Already in cart warning */}
+              {currentCartQuantity > 0 && (
+                <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-md">
+                  <p className="text-sm text-blue-800">
+                    {currentCartQuantity} already in cart
+                    {!canAddToCart && " (Maximum reached)"}
+                  </p>
+                </div>
+              )}
+
+              <div className="flex flex-wrap gap-6 mt-6 mb-7.5">
+                {/* Color Selection */}
+                {product.colors && product.colors.length > 0 && (
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-lg font-semibold text-slate-500 whitespace-nowrap">
+                      Color:
+                    </h3>
+                    <div className="flex space-x-2">
+                      {product.colors.map((color, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setSelectedColor(color)}
+                          className={`w-7 h-7 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all ${
+                            selectedColor === color
+                              ? "ring-2 ring-[#007782]"
+                              : ""
+                          }`}
+                          style={{ backgroundColor: color.toLowerCase() }}
+                          title={color}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
                 {/* Size Selection */}
                 {product.sizes && product.sizes.length > 0 && (
                   <div className="flex items-center gap-3">
@@ -183,30 +254,23 @@ const QuickViewModal = () => {
                     </div>
                   </div>
                 )}
-
-                <div className="flex items-center justify-center gap-2">
-                  <h4 className="font-semibold text-lg text-slate-500">
-                    Quantity:
-                  </h4>
-                  <div className="flex gap-3">
-                    <span className="flex items-center justify-center w-10 h-10 rounded-[5px] border border-gray-3 bg-white font-medium text-dark">
-                      {quantity}
-                    </span>
-                  </div>
-                </div>
               </div>
 
               <div className="flex flex-wrap items-center gap-2.5 sm:gap-4">
                 <button
                   onClick={handleAddToCart}
-                  disabled={isSoldOut}
+                  disabled={isSoldOut || !canAddToCart}
                   className={`inline-flex font-medium text-white py-2.5 px-4.5 sm:py-3 sm:px-7 text-sm sm:text-base rounded-md transition-colors ${
-                    isSoldOut
+                    isSoldOut || !canAddToCart
                       ? "bg-gray-6 cursor-not-allowed opacity-60"
                       : "bg-[#007782] hover:bg-opacity-90"
                   }`}
                 >
-                  {isSoldOut ? "Sold Out" : "Add to Cart"}
+                  {isSoldOut
+                    ? "Sold Out"
+                    : !canAddToCart
+                      ? "Max Quantity"
+                      : "Add to Cart"}
                 </button>
 
                 <button

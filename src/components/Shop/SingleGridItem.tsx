@@ -17,7 +17,7 @@ const SingleGridItem = ({ item }: { item: Product }) => {
   const { openModal } = useModalContext();
   const dispatch = useDispatch<AppDispatch>();
 
-  const isSoldOut = item.status === "sold";
+  const isSoldOut = item.stockQuantity === 0;
 
   // 🟢 Update QuickView
   const handleQuickViewUpdate = () => {

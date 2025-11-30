@@ -41,6 +41,7 @@ export const fetchPaginatedProducts = async ({
       description,
       category,
       gender,
+      stockQuantity,
       sizes,
       status,
       isFeatured,

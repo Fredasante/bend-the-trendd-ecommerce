@@ -134,7 +134,7 @@ export default function OrderSuccessPage() {
 
   return (
     <>
-      <section className="overflow-hidden py-5 md:py-10 lg:py-12 bg-[#fef4f4] mt-33 mb-5 md:mt-45 md:mb-10 lg:mb-15">
+      <section className="overflow-hidden py-5 md:py-10 lg:py-12 bg-[#fef4f4] mt-33 mb-5 md:mt-30 lg:mt-35 md:mb-10 lg:mb-15">
         <div className="max-w-[900px] w-full mx-auto px-4 sm:px-8 xl:px-0">
           {/* Success Banner */}
           <div className="bg-white shadow-1 rounded-[10px] p-6 mt-2 sm:mt-0 sm:p-8 mb-7.5 text-center">

@@ -150,14 +150,14 @@ const Checkout = () => {
 
             const result = await response.json();
 
-            // Update all products in cart to "sold" status
+            // ✅ NEW: Decrease stock quantity for each product
             const updatePromises = cartItems.map((item) =>
-              fetch("/api/products/update-status", {
+              fetch("/api/products/update-stock", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                   productId: item._id,
-                  status: "sold",
+                  quantity: item.quantity, // Decrease by the quantity purchased
                 }),
               })
             );
@@ -169,8 +169,13 @@ const Checkout = () => {
             updateResults.forEach((result, index) => {
               if (result.status === "rejected") {
                 console.error(
-                  `Failed to update product ${cartItems[index]._id}:`,
+                  `Failed to update stock for product ${cartItems[index]._id}:`,
                   result.reason
+                );
+              } else if (result.status === "fulfilled") {
+                console.log(
+                  `Stock updated for ${cartItems[index].name}:`,
+                  result.value
                 );
               }
             });
