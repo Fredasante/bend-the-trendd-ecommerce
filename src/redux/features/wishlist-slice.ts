@@ -5,6 +5,7 @@ export type WishListItem = {
   name: string;
   price: number;
   discountPrice?: number;
+  stockQuantity?: number;
   quantity?: number;
   status?: string;
   mainImageUrl?: string;

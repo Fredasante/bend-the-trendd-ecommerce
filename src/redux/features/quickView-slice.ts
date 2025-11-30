@@ -14,6 +14,7 @@ const initialState: InitialState = {
     discountPrice: undefined,
     category: "",
     status: "available",
+    stockQuantity: 0,
     isFeatured: false,
     mainImageUrl: "",
     gallery: [],

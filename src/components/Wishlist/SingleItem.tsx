@@ -27,6 +27,7 @@ const SingleItem = ({ item }: Props) => {
       addItemToCart({
         ...item,
         quantity: 1,
+        stockQuantity: item.stockQuantity || 0,
       })
     );
   };
@@ -68,7 +69,7 @@ const SingleItem = ({ item }: Props) => {
       </div>
 
       <div className="min-w-[265px] flex items-center gap-1.5">
-        {item.status === "available" ? (
+        {item.stockQuantity > 0 ? (
           <>
             <CheckCircle className="text-green w-5 h-5" />
             <span className="text-green">Available</span>
@@ -76,7 +77,7 @@ const SingleItem = ({ item }: Props) => {
         ) : (
           <>
             <XCircle className="text-red w-5 h-5" />
-            <span className="text-red-dark">Sold</span>
+            <span className="text-red-dark">Out of Stock</span>
           </>
         )}
       </div>
