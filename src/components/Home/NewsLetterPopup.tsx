@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { toast } from "sonner";
 
-// Track if popup has been shown this session (outside component)
-let hasShownPopup = false;
+// Track if popup has been closed this session (outside component)
+let hasClosedThisSession = false;
 
 const NewsletterPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,9 +24,18 @@ const NewsletterPopup = () => {
     }
   }, [isOpen]);
 
-  // Show popup once per page load
+  // Show popup logic
   useEffect(() => {
-    if (!hasShownPopup) {
+    // Check if user has ever submitted (persistent across sessions)
+    let hasEverSubmitted = false;
+    try {
+      hasEverSubmitted = document.cookie.includes("newsletter_submitted=true");
+    } catch (e) {
+      // Cookie access failed, continue
+    }
+
+    // Only show if: not submitted ever AND not closed this session
+    if (!hasEverSubmitted && !hasClosedThisSession) {
       const timer = setTimeout(() => setIsOpen(true), 2000);
       return () => clearTimeout(timer);
     }
@@ -38,7 +47,8 @@ const NewsletterPopup = () => {
 
   const handleClose = () => {
     setIsOpen(false);
-    hasShownPopup = true;
+    // Mark as closed for this session only
+    hasClosedThisSession = true;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,6 +66,17 @@ const NewsletterPopup = () => {
 
       if (data.success) {
         toast.success("Thank you for subscribing!");
+
+        // Set a persistent cookie so they never see popup again
+        try {
+          // Cookie expires in 10 years
+          const expiryDate = new Date();
+          expiryDate.setFullYear(expiryDate.getFullYear() + 10);
+          document.cookie = `newsletter_submitted=true; expires=${expiryDate.toUTCString()}; path=/; SameSite=Lax`;
+        } catch (e) {
+          console.error("Could not set cookie:", e);
+        }
+
         handleClose();
       } else {
         toast.error("Failed to subscribe. Please try again.");
