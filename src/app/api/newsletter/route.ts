@@ -7,6 +7,38 @@ export async function POST(req: Request) {
   try {
     const { firstName, email, interest } = await req.json();
 
+    // Add contact to Loops (for storage only)
+    try {
+      const loopsResponse = await fetch(
+        "https://app.loops.so/api/v1/contacts/create",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${process.env.LOOPS_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            firstName: firstName,
+            userGroup: interest || "general", // Store interest as userGroup or custom field
+            source: "newsletter_signup",
+          }),
+        }
+      );
+
+      const loopsData = await loopsResponse.json();
+
+      if (!loopsResponse.ok) {
+        console.error("Loops error:", loopsData);
+        // Continue even if Loops fails - we still want to send the email
+      } else {
+        console.log("Contact added to Loops:", loopsData);
+      }
+    } catch (loopsError) {
+      console.error("Error adding to Loops:", loopsError);
+      // Continue even if Loops fails
+    }
+
     // Send welcome email using Resend
     const { data, error } = await resend.emails.send({
       from: "Bend The Trendd <onboarding@bendthetrendd.com>",
@@ -31,10 +63,6 @@ export async function POST(req: Request) {
                         <h1 style="margin: 0 0 10px; color: #333333; font-size: 28px; font-weight: bold;">
                           Welcome, ${firstName}! 👋
                         </h1>
-                        
-                        <p style="margin: 0 0 25px; color: #333333; font-size: 18px; font-weight: 600;">
-                          Hey Gorgeous!
-                        </p>
                         
                         <p style="margin: 0 0 25px; color: #333333; font-size: 16px; line-height: 1.6;">
                           Thank you for subscribing to our newsletter! We're thrilled to have you join our community of women who set the tone, not the trend.
@@ -76,9 +104,8 @@ export async function POST(req: Request) {
                           Stay connected with us
                         </p>
                         <p style="margin: 0 0 15px; color: #666666; font-size: 14px;">
-                          <a href="#" style="color: #382423; text-decoration: none; margin: 0 10px;">Instagram</a> |
-                          <a href="#" style="color: #382423; text-decoration: none; margin: 0 10px;">Facebook</a> |
-                          <a href="#" style="color: #382423; text-decoration: none; margin: 0 10px;">Pinterest</a>
+                          <a href="https://www.instagram.com/bend_the_trendd___" style="color: #382423; text-decoration: none; margin: 0 10px;">Instagram</a> |
+                          <a href="https://www.snapchat.com/add/bendthetrendd1" style="color: #382423; text-decoration: none; margin: 0 10px;">Snapchat</a> |
                         </p>
                         <p style="margin: 15px 0 0; color: #999999; font-size: 12px;">
                           You're receiving this email because you subscribed to our newsletter.<br>
@@ -93,7 +120,6 @@ export async function POST(req: Request) {
           </body>
         </html>
       `,
-      // Plain text version for better deliverability
       text: `
 Welcome, ${firstName}! 👋
 
@@ -126,7 +152,11 @@ You're receiving this email because you subscribed to our newsletter.
     }
 
     console.log("Email sent successfully:", data);
-    return NextResponse.json({ success: true, emailId: data?.id });
+    return NextResponse.json({
+      success: true,
+      emailId: data?.id,
+      message: "Email sent and contact stored",
+    });
   } catch (error: any) {
     console.error("Error:", error);
     return NextResponse.json(
