@@ -72,7 +72,6 @@ export default function OrderSuccessPage() {
       return;
     }
 
-    // Fetch order details
     const fetchOrderDetails = async () => {
       try {
         const response = await fetch(`/api/orders/${orderId}`);
@@ -81,6 +80,21 @@ export default function OrderSuccessPage() {
         }
         const data = await response.json();
         setOrderDetails(data);
+
+        // ✨ Send order confirmation emails
+        try {
+          await fetch("/api/emails/order-confirmation", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+          console.log("Order confirmation emails sent");
+        } catch (emailError) {
+          console.error("Failed to send confirmation emails:", emailError);
+          // Don't throw - order page should still load even if emails fail
+        }
       } catch (err) {
         setError("Unable to load order details. Please contact support.");
         console.error(err);
