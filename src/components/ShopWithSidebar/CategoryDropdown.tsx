@@ -11,7 +11,6 @@ const CategoryItem = ({ category, selected, onToggle }) => {
       } group flex items-center justify-between ease-out duration-200 hover:text-[#007782]`}
     >
       <div className="flex items-center gap-2">
-        {/* Radio button style - only one can be selected */}
         <div
           className={`cursor-pointer flex items-center justify-center rounded-full w-4 h-4 border ${
             selected ? "border-[#007782]" : "border-gray-3"
@@ -32,15 +31,18 @@ const CategoryItem = ({ category, selected, onToggle }) => {
   );
 };
 
-const CategoryDropdown = ({ onCategoryChange }) => {
+const CategoryDropdown = ({ onCategoryChange, initialCategory = "" }) => {
   const [toggleDropdown, setToggleDropdown] = useState(true);
   const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(
+    initialCategory || null
+  );
 
   useEffect(() => {
     const loadCategories = async () => {
       const data = await fetchCategories();
+      console.log("Categories loaded in dropdown:", data);
       setCategories(data);
       setLoading(false);
     };
@@ -48,18 +50,19 @@ const CategoryDropdown = ({ onCategoryChange }) => {
     loadCategories();
   }, []);
 
+  // Sync with parent's category changes
+  useEffect(() => {
+    setSelectedCategory(initialCategory || null);
+  }, [initialCategory]);
+
   const handleToggleCategory = (name: string) => {
-    // If clicking the same category, deselect it (show all products)
     const newSelection = selectedCategory === name ? null : name;
     setSelectedCategory(newSelection);
-
-    // Pass single category or empty string for "all"
     onCategoryChange(newSelection || "");
   };
 
   return (
     <div className="bg-white shadow-1 rounded-lg">
-      {/* Header */}
       <div
         onClick={(e) => {
           e.preventDefault();
@@ -93,7 +96,6 @@ const CategoryDropdown = ({ onCategoryChange }) => {
         </button>
       </div>
 
-      {/* Dropdown Body */}
       <div
         className={`flex-col gap-3 py-6 pl-6 pr-5.5 ${
           toggleDropdown ? "flex" : "hidden"

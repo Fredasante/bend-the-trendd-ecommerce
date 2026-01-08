@@ -11,7 +11,9 @@ const SizeDropdown = ({ onSizeChange }) => {
   useEffect(() => {
     const loadSizes = async () => {
       const data = await fetchSizes();
-      setSizes(data);
+      // Filter to only include numeric sizes and sort them properly
+      const numericSizes = data.filter((size) => !isNaN(Number(size.name)));
+      setSizes(numericSizes);
       setLoading(false);
     };
 
@@ -22,7 +24,6 @@ const SizeDropdown = ({ onSizeChange }) => {
     const newSelection = selectedSize === size ? null : size;
     setSelectedSize(newSelection);
     onSizeChange(newSelection || "");
-    // Scroll is now handled in parent component's handleSizeChange
   };
 
   return (

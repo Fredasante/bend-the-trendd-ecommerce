@@ -89,7 +89,7 @@ export async function searchProducts(
     size = "",
     color = "",
     page = 1,
-    perPage = 9,
+    perPage = 18,
   } = filters || {};
 
   const start = (page - 1) * perPage;

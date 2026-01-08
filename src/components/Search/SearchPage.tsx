@@ -25,7 +25,7 @@ export default function SearchPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(9);
+  const [perPage] = useState(18);
   const [totalCount, setTotalCount] = useState(0);
   const [selectedCategory, setSelectedCategory] =
     useState<string>(categoryParam);
@@ -241,11 +241,13 @@ export default function SearchPage() {
                       </button>
                     </div>
                   </div>
-
-                  <CategoryDropdown onCategoryChange={handleCategoryChange} />
+                  <CategoryDropdown
+                    onCategoryChange={handleCategoryChange}
+                    initialCategory={selectedCategory}
+                  />{" "}
                   <GenderDropdown onGenderChange={handleGenderChange} />
                   <SizeDropdown onSizeChange={handleSizeChange} />
-                  <ColorsDropdown onColorChange={handleColorChange} />
+                  {/* <ColorsDropdown onColorChange={handleColorChange} /> */}
                 </div>
               </form>
             </div>

@@ -64,67 +64,106 @@ export const fetchPaginatedProducts = async ({
   }
 };
 
-// categories - only count available products
+// Fixed fetchCategories - simpler approach
 export const fetchCategories = async () => {
   const query = `
-    *[_type == "product" && status == "available"] {
+    *[_type == "product" && defined(category)] {
       category
-    } | {
-      "name": category,
-      "products": count(*[_type == "product" && category == ^.category && status == "available"])
     }
   `;
 
   try {
     const data = await client.fetch(query);
-    // Remove duplicates
-    const unique = Array.from(
-      new Map(data.map((c: any) => [c.name, c])).values()
+    console.log("Raw category data from Sanity:", data);
+
+    if (!data || data.length === 0) {
+      console.log("No products found in Sanity");
+      return [];
+    }
+
+    // Count products per category
+    const categoryMap = new Map<string, number>();
+
+    data.forEach((product: any) => {
+      const category = product.category;
+      if (category) {
+        categoryMap.set(category, (categoryMap.get(category) || 0) + 1);
+      }
+    });
+
+    console.log("Category map:", categoryMap);
+
+    // Convert to array format
+    const categories = Array.from(categoryMap.entries()).map(
+      ([name, count]) => ({
+        name,
+        products: count,
+      })
     );
-    return unique;
+
+    console.log("Final categories:", categories);
+    return categories;
   } catch (error) {
     console.error("Error fetching categories:", error);
     return [];
   }
 };
 
-// genders - only count available products
+// Fixed fetchGenders
 export const fetchGenders = async () => {
   const query = `
-    *[_type == "product" && status == "available"] {
+    *[_type == "product" && defined(gender)] {
       gender
-    } | {
-      "name": gender,
-      "products": count(*[_type == "product" && gender == ^.gender && status == "available"])
     }
   `;
 
   try {
     const data = await client.fetch(query);
-    // Remove duplicates and capitalize names
-    const unique = Array.from(
-      new Map(data.map((g: any) => [g.name, g])).values()
-    ).map((item: any) => ({
-      ...item,
-      name: item.name.charAt(0).toUpperCase() + item.name.slice(1),
+    console.log("Raw gender data from Sanity:", data);
+
+    if (!data || data.length === 0) {
+      console.log("No products found in Sanity");
+      return [];
+    }
+
+    // Count products per gender
+    const genderMap = new Map<string, number>();
+
+    data.forEach((product: any) => {
+      const gender = product.gender;
+      if (gender) {
+        genderMap.set(gender, (genderMap.get(gender) || 0) + 1);
+      }
+    });
+
+    // Convert to array format with capitalized names
+    const genders = Array.from(genderMap.entries()).map(([name, count]) => ({
+      name: name.charAt(0).toUpperCase() + name.slice(1),
+      products: count,
     }));
-    return unique;
+
+    return genders;
   } catch (error) {
     console.error("Error fetching genders:", error);
     return [];
   }
 };
 
-// sizes - only count available products
+// sizes - only count products with stock
 export const fetchSizes = async () => {
   const query = `
-    *[_type == "product" && defined(sizes) && status == "available"] {
+    *[_type == "product" && defined(sizes) && stockQuantity > 0] {
       sizes
     }
   `;
 
   try {
     const data = await client.fetch(query);
+
+    if (!data || data.length === 0) {
+      return [];
+    }
+
     // Flatten and get unique sizes
     const allSizes = data.flatMap((item: any) => item.sizes || []);
     const uniqueSizes = Array.from(new Set(allSizes)).sort(
@@ -142,16 +181,21 @@ export const fetchSizes = async () => {
   }
 };
 
-// colors - only count available products
+// colors - only count products with stock
 export const fetchColors = async () => {
   const query = `
-    *[_type == "product" && defined(colors) && status == "available"] {
+    *[_type == "product" && defined(colors) && stockQuantity > 0] {
       colors
     }
   `;
 
   try {
     const data = await client.fetch(query);
+
+    if (!data || data.length === 0) {
+      return [];
+    }
+
     // Flatten and get unique colors
     const allColors = data.flatMap((item: any) => item.colors || []);
     const uniqueColors = Array.from(new Set(allColors)).sort();
