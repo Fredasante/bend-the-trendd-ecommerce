@@ -1,6 +1,7 @@
 "use client";
 
 import Breadcrumb from "@/components/Common/Breadcrumb";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const FAQ = () => {
@@ -135,9 +136,12 @@ const FAQ = () => {
               Can&apos;t find the answer you&apos;re looking for? Our customer
               support team is here to help!
             </p>
-            <button className="bg-[#202020] text-white font-medium px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-200">
+            <Link
+              href="/contact"
+              className="bg-[#202020] text-white font-medium px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors duration-200"
+            >
               Contact Support
-            </button>
+            </Link>
           </div>
         </div>
       </section>
