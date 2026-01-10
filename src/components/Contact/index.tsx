@@ -93,7 +93,7 @@ const Contact = () => {
           {/* Map */}
           <div className="mt-7.5 bg-white rounded-xl shadow-1 overflow-hidden">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.5197600072015!2d-0.32394842582217004!3d5.637658132824844"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.5197600072015!2d-0.32394842582217004!3d5.637658132824844!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdfa3e7a7a01fc9%3A0x59d55f12d405cfd0!2sBend_the_trendd___!5e0!3m2!1sen!2sgh!4v1763690445472!5m2!1sen!2sgh"
               width="100%"
               height="450"
               style={{ border: 0 }}
@@ -101,7 +101,7 @@ const Contact = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Bend the Trendd Location"
-            />
+            ></iframe>
           </div>
         </div>
       </section>
