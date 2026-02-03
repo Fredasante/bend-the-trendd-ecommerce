@@ -15,7 +15,7 @@ const categories: Category[] = [
   {
     id: "1",
     title: "Accessories",
-    value: "acessories", // Matching your Sanity schema typo
+    value: "acessories",
     image: "/images/categories/accessories.jpg",
   },
   {
@@ -35,6 +35,12 @@ const categories: Category[] = [
     title: "Shoes",
     value: "shoes",
     image: "/images/categories/shoes.jpg",
+  },
+  {
+    id: "5",
+    title: "Supplements",
+    value: "supplements",
+    image: "/images/categories/supplements.jpg",
   },
 ];
 
